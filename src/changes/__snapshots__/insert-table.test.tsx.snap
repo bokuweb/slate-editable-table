@@ -1,0 +1,221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`insert-table insert table 1`] = `
+Object {
+  "document": Object {
+    "data": Object {},
+    "nodes": Array [
+      Object {
+        "data": Object {},
+        "nodes": Array [
+          Object {
+            "marks": Array [],
+            "object": "text",
+            "text": "Lorem ipsum ...",
+          },
+        ],
+        "object": "block",
+        "type": "paragraph",
+      },
+      Object {
+        "data": Object {},
+        "nodes": Array [
+          Object {
+            "data": Object {},
+            "nodes": Array [
+              Object {
+                "data": Object {},
+                "nodes": Array [
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "data": Object {},
+                        "nodes": Array [
+                          Object {
+                            "data": Object {},
+                            "nodes": Array [
+                              Object {
+                                "data": Object {},
+                                "nodes": Array [
+                                  Object {
+                                    "marks": Array [],
+                                    "object": "text",
+                                    "text": "",
+                                  },
+                                ],
+                                "object": "block",
+                                "type": "paragraph",
+                              },
+                            ],
+                            "object": "block",
+                            "type": "table_cell",
+                          },
+                          Object {
+                            "data": Object {},
+                            "nodes": Array [
+                              Object {
+                                "data": Object {},
+                                "nodes": Array [
+                                  Object {
+                                    "marks": Array [],
+                                    "object": "text",
+                                    "text": "",
+                                  },
+                                ],
+                                "object": "block",
+                                "type": "paragraph",
+                              },
+                            ],
+                            "object": "block",
+                            "type": "table_cell",
+                          },
+                        ],
+                        "object": "block",
+                        "type": "table_row",
+                      },
+                      Object {
+                        "data": Object {},
+                        "nodes": Array [
+                          Object {
+                            "data": Object {},
+                            "nodes": Array [
+                              Object {
+                                "data": Object {},
+                                "nodes": Array [
+                                  Object {
+                                    "marks": Array [],
+                                    "object": "text",
+                                    "text": "",
+                                  },
+                                ],
+                                "object": "block",
+                                "type": "paragraph",
+                              },
+                            ],
+                            "object": "block",
+                            "type": "table_cell",
+                          },
+                          Object {
+                            "data": Object {},
+                            "nodes": Array [
+                              Object {
+                                "data": Object {},
+                                "nodes": Array [
+                                  Object {
+                                    "marks": Array [],
+                                    "object": "text",
+                                    "text": "",
+                                  },
+                                ],
+                                "object": "block",
+                                "type": "paragraph",
+                              },
+                            ],
+                            "object": "block",
+                            "type": "table_cell",
+                          },
+                        ],
+                        "object": "block",
+                        "type": "table_row",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "table",
+                  },
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "marks": Array [],
+                        "object": "text",
+                        "text": "0",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "paragraph",
+                  },
+                ],
+                "object": "block",
+                "type": "table_cell",
+              },
+              Object {
+                "data": Object {},
+                "nodes": Array [
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "marks": Array [],
+                        "object": "text",
+                        "text": "1",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "paragraph",
+                  },
+                ],
+                "object": "block",
+                "type": "table_cell",
+              },
+            ],
+            "object": "block",
+            "type": "table_row",
+          },
+          Object {
+            "data": Object {},
+            "nodes": Array [
+              Object {
+                "data": Object {},
+                "nodes": Array [
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "marks": Array [],
+                        "object": "text",
+                        "text": "2",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "paragraph",
+                  },
+                ],
+                "object": "block",
+                "type": "table_cell",
+              },
+              Object {
+                "data": Object {},
+                "nodes": Array [
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "marks": Array [],
+                        "object": "text",
+                        "text": "3",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "paragraph",
+                  },
+                ],
+                "object": "block",
+                "type": "table_cell",
+              },
+            ],
+            "object": "block",
+            "type": "table_row",
+          },
+        ],
+        "object": "block",
+        "type": "table",
+      },
+    ],
+    "object": "document",
+  },
+  "object": "value",
+}
+`;
+
+exports[`insert-table insert table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"><table><tbody><tr><td style=\\"width:auto\\"><p style=\\"margin:0\\"></p></td><td style=\\"width:auto\\"><p style=\\"margin:0\\"></p></td></tr><tr><td style=\\"width:auto\\"><p style=\\"margin:0\\"></p></td><td style=\\"width:auto\\"><p style=\\"margin:0\\"></p></td></tr></tbody></table><p style=\\"margin:0\\">0</p></td><td style=\\"width:auto\\"><p style=\\"margin:0\\">1</p></td></tr><tr><td style=\\"width:auto\\"><p style=\\"margin:0\\">2</p></td><td style=\\"width:auto\\"><p style=\\"margin:0\\">3</p></td></tr></tbody></table>"`;

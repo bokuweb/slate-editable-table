@@ -1,0 +1,29 @@
+defaults: &defaults
+  working_directory: ~/slate-table-plugin
+  docker:
+    - image: bokuweb/node-go-with-browser:latest
+      environment:
+        TZ: Asia/Tokyo
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout    
+      - run:
+          name: Install dependencies
+          command:  |
+            yarn install --pure-lockfile
+            yarn add slate@0.47.4 slate-react@0.22.4
+      - run:
+          name: Lint
+          command: yarn run lint
+      - run:
+          name: Tsc
+          command: yarn run tsc    
+      - run:
+          name: format
+          command:  yarn -s format:ci -l
+      - run:
+          name: Test
+          command: yarn run test
