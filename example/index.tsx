@@ -42,7 +42,6 @@ export class ExampleEditor extends React.Component<Props> {
   };
 
   renderBlock = (props: RenderBlockProps, editor: CoreEditor, next: () => any): any => {
-    console.log('aaasd');
     const { attributes, children, node } = props;
     switch (node.type) {
       case 'paragraph':
@@ -153,8 +152,8 @@ export class ExampleEditor extends React.Component<Props> {
           onChange={this.onChange}
           onSelect={this.onSelect}
           onPaste={this.onDropOrPaste}
-          // renderBlock={this.renderBlock}
-          renderNode={this.renderNode}
+          renderBlock={this.renderBlock}
+          // renderNode={this.renderNode}
           renderMark={this.renderMark}
         />
       </>

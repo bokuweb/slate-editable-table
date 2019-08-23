@@ -29,7 +29,7 @@ export default {
                 nodes: [
                   {
                     object: 'block',
-                    type: 'paragraph',
+                    type: 'table_content',
                     nodes: [Text.create('0').toJSON()],
                   },
                 ],
@@ -44,7 +44,7 @@ export default {
                 nodes: [
                   {
                     object: 'block',
-                    type: 'paragraph',
+                    type: 'table_content',
                     nodes: [Text.create('1').toJSON()],
                   },
                 ],
@@ -64,7 +64,7 @@ export default {
                 nodes: [
                   {
                     object: 'block',
-                    type: 'paragraph',
+                    type: 'table_content',
                     nodes: [Text.create('4').toJSON()],
                   },
                 ],
@@ -84,7 +84,7 @@ export default {
                 nodes: [
                   {
                     object: 'block',
-                    type: 'paragraph',
+                    type: 'table_content',
                     nodes: [Text.create('7').toJSON()],
                   },
                 ],
@@ -95,7 +95,7 @@ export default {
                 nodes: [
                   {
                     object: 'block',
-                    type: 'paragraph',
+                    type: 'table_content',
                     nodes: [Text.create('8').toJSON()],
                   },
                 ],
@@ -106,7 +106,7 @@ export default {
                 nodes: [
                   {
                     object: 'block',
-                    type: 'paragraph',
+                    type: 'table_content',
                     nodes: [Text.create('9').toJSON()],
                   },
                 ],

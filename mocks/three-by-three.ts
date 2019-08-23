@@ -27,7 +27,7 @@ export default {
                 nodes: [
                   {
                     object: 'block',
-                    type: 'paragraph',
+                    type: 'table_content',
                     nodes: [Text.create(`${i}`).toJSON()],
                   },
                 ],
@@ -48,7 +48,7 @@ export default {
                 nodes: [
                   {
                     object: 'block',
-                    type: 'paragraph',
+                    type: 'table_content',
                     nodes: [Text.create(`${i + 3}`).toJSON()],
                   },
                 ],
@@ -69,7 +69,7 @@ export default {
                 nodes: [
                   {
                     object: 'block',
-                    type: 'paragraph',
+                    type: 'table_content',
                     nodes: [Text.create(`${i + 6}`).toJSON()],
                   },
                 ],

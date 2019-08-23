@@ -37,7 +37,7 @@ const Table = (props: TableProps & { attributes: any }) => {
 export function createRenderers(opts: Option = defaultOptions) {
   return (props: any, editor: any, next: () => void): any => {
     switch (props.node.type) {
-      case 'paragraph':
+      case opts.typeContent:
         return (
           <p style={{ margin: 0 }} {...props.attributes}>
             {props.children}

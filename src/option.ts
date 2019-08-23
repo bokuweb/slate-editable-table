@@ -10,6 +10,6 @@ export const defaultOptions = {
   typeCell: 'table_cell',
   typeRow: 'table_row',
   typeTable: 'table',
-  typeContent: 'paragraph',
+  typeContent: 'table_content',
   selectionColor: '#B9D3FC',
 };
