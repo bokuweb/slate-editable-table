@@ -30,7 +30,8 @@ Object {
             "nodes": Array [
               Object {
                 "data": Object {
-                  "rowspan": 2,
+                  "colspan": "1",
+                  "rowspan": "2",
                 },
                 "nodes": Array [
                   Object {
@@ -41,7 +42,7 @@ Object {
                           Object {
                             "marks": Array [],
                             "object": "leaf",
-                            "text": "2",
+                            "text": "0",
                           },
                         ],
                         "object": "text",
@@ -58,7 +59,7 @@ Object {
                           Object {
                             "marks": Array [],
                             "object": "leaf",
-                            "text": "0",
+                            "text": "2",
                           },
                         ],
                         "object": "text",
@@ -141,4 +142,4 @@ Object {
 }
 `;
 
-exports[`merge-below merge below in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td rowspan=\\"2\\" style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`merge-below merge below in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"1\\" rowspan=\\"2\\" style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td></tr></tbody></table>"`;

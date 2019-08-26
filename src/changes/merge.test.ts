@@ -1,7 +1,7 @@
 import { Editor, Value, ValueJSON } from 'slate';
 
 import { EditTable } from '../index';
-import { findCurrentTable } from '../table-map';
+import { findCurrentTable } from '../layout';
 import { mergeCells } from './merge';
 import { createHtml } from './test-helper';
 import value from '../../mocks/two-by-two';
