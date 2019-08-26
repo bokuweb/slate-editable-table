@@ -57,6 +57,7 @@
     "react-dom": "16.8.6",
     "react-json-pretty": "2.1.0",
     "slate": "0.45.1",
+    "slate-html-serializer": "0.8.1",
     "slate-react": "0.21.20",
     "typescript": "3.5.3",
     "url-loader": "2.1.0",

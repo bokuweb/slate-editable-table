@@ -9897,6 +9897,13 @@ slate-hotkeys@^0.2.9:
     is-hotkey "0.1.4"
     slate-dev-environment "^0.2.2"
 
+slate-html-serializer@0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/slate-html-serializer/-/slate-html-serializer-0.8.1.tgz#43d45edbfe8eb9e0e6fb57182f8e900da0fff185"
+  integrity sha512-D6X9RZTWrNwiCGFOJ+Kb4+TLdwP23p1I1U0/1SVi+7w+CUSUhsvlTbG0LGAIuIgXqXbT9TgLLDQ8cB3X1qQjpg==
+  dependencies:
+    type-of "^2.0.1"
+
 slate-plain-serializer@^0.6.38:
   version "0.6.39"
   resolved "https://registry.yarnpkg.com/slate-plain-serializer/-/slate-plain-serializer-0.6.39.tgz#5fb8d4dc530a2e7e0689548d48964ce242c4516a"

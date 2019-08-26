@@ -9,9 +9,14 @@ Object {
         "data": Object {},
         "nodes": Array [
           Object {
-            "marks": Array [],
+            "leaves": Array [
+              Object {
+                "marks": Array [],
+                "object": "leaf",
+                "text": "Lorem ipsum ...",
+              },
+            ],
             "object": "text",
-            "text": "Lorem ipsum ...",
           },
         ],
         "object": "block",
@@ -33,25 +38,35 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "0",
+                          },
+                        ],
                         "object": "text",
-                        "text": "0",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                   Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "1",
+                          },
+                        ],
                         "object": "text",
-                        "text": "1",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
@@ -71,13 +86,18 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "2",
+                          },
+                        ],
                         "object": "text",
-                        "text": "2",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
@@ -90,13 +110,18 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "3",
+                          },
+                        ],
                         "object": "text",
-                        "text": "3",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
@@ -117,7 +142,7 @@ Object {
 }
 `;
 
-exports[`merge merge 0 and 1 in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"1\\" style=\\"width:auto\\"><p style=\\"margin:0\\">0</p><p style=\\"margin:0\\">1</p></td></tr><tr><td style=\\"width:auto\\"><p style=\\"margin:0\\">2</p></td><td style=\\"width:auto\\"><p style=\\"margin:0\\">3</p></td></tr></tbody></table>"`;
+exports[`merge merge 0 and 1 in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"1\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
 
 exports[`merge merge 0 and 2 in 2X2 table 1`] = `
 Object {
@@ -128,9 +153,14 @@ Object {
         "data": Object {},
         "nodes": Array [
           Object {
-            "marks": Array [],
+            "leaves": Array [
+              Object {
+                "marks": Array [],
+                "object": "leaf",
+                "text": "Lorem ipsum ...",
+              },
+            ],
             "object": "text",
-            "text": "Lorem ipsum ...",
           },
         ],
         "object": "block",
@@ -152,25 +182,35 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "0",
+                          },
+                        ],
                         "object": "text",
-                        "text": "0",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                   Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "2",
+                          },
+                        ],
                         "object": "text",
-                        "text": "2",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
@@ -183,13 +223,18 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "1",
+                          },
+                        ],
                         "object": "text",
-                        "text": "1",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
@@ -209,13 +254,18 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "3",
+                          },
+                        ],
                         "object": "text",
-                        "text": "3",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
@@ -236,7 +286,7 @@ Object {
 }
 `;
 
-exports[`merge merge 0 and 2 in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"1\\" rowspan=\\"2\\" style=\\"width:auto\\"><p style=\\"margin:0\\">0</p><p style=\\"margin:0\\">2</p></td><td style=\\"width:auto\\"><p style=\\"margin:0\\">1</p></td></tr><tr><td style=\\"width:auto\\"><p style=\\"margin:0\\">3</p></td></tr></tbody></table>"`;
+exports[`merge merge 0 and 2 in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"1\\" rowspan=\\"2\\" style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
 
 exports[`merge merge all in 2X2 table 1`] = `
 Object {
@@ -247,9 +297,14 @@ Object {
         "data": Object {},
         "nodes": Array [
           Object {
-            "marks": Array [],
+            "leaves": Array [
+              Object {
+                "marks": Array [],
+                "object": "leaf",
+                "text": "Lorem ipsum ...",
+              },
+            ],
             "object": "text",
-            "text": "Lorem ipsum ...",
           },
         ],
         "object": "block",
@@ -264,60 +319,97 @@ Object {
               Object {
                 "data": Object {
                   "colspan": "2",
-                  "rowspan": "1",
+                  "rowspan": "2",
                 },
                 "nodes": Array [
                   Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "0",
+                          },
+                        ],
                         "object": "text",
-                        "text": "0",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                   Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "1",
+                          },
+                        ],
                         "object": "text",
-                        "text": "1",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                   Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "2",
+                          },
+                        ],
                         "object": "text",
-                        "text": "2",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                   Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "3",
+                          },
+                        ],
                         "object": "text",
-                        "text": "3",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
                 "type": "table_cell",
+              },
+            ],
+            "object": "block",
+            "type": "table_row",
+          },
+          Object {
+            "data": Object {},
+            "nodes": Array [
+              Object {
+                "leaves": Array [
+                  Object {
+                    "marks": Array [],
+                    "object": "leaf",
+                    "text": "",
+                  },
+                ],
+                "object": "text",
               },
             ],
             "object": "block",
@@ -334,4 +426,4 @@ Object {
 }
 `;
 
-exports[`merge merge all in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"1\\" style=\\"width:auto\\"><p style=\\"margin:0\\">0</p><p style=\\"margin:0\\">1</p><p style=\\"margin:0\\">2</p><p style=\\"margin:0\\">3</p></td></tr></tbody></table>"`;
+exports[`merge merge all in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"2\\" style=\\"width:auto\\"></td></tr><tr></tr></tbody></table>"`;

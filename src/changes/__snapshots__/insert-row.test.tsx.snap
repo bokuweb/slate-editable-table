@@ -9,9 +9,14 @@ Object {
         "data": Object {},
         "nodes": Array [
           Object {
-            "marks": Array [],
+            "leaves": Array [
+              Object {
+                "marks": Array [],
+                "object": "leaf",
+                "text": "Lorem ipsum ...",
+              },
+            ],
             "object": "text",
-            "text": "Lorem ipsum ...",
           },
         ],
         "object": "block",
@@ -30,13 +35,18 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "0",
+                          },
+                        ],
                         "object": "text",
-                        "text": "0",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
@@ -49,58 +59,18 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "1",
+                          },
+                        ],
                         "object": "text",
-                        "text": "1",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
-                  },
-                ],
-                "object": "block",
-                "type": "table_cell",
-              },
-            ],
-            "object": "block",
-            "type": "table_row",
-          },
-          Object {
-            "data": Object {},
-            "nodes": Array [
-              Object {
-                "data": Object {},
-                "nodes": Array [
-                  Object {
-                    "data": Object {},
-                    "nodes": Array [
-                      Object {
-                        "marks": Array [],
-                        "object": "text",
-                        "text": "",
-                      },
-                    ],
-                    "object": "block",
-                    "type": "paragraph",
-                  },
-                ],
-                "object": "block",
-                "type": "table_cell",
-              },
-              Object {
-                "data": Object {},
-                "nodes": Array [
-                  Object {
-                    "data": Object {},
-                    "nodes": Array [
-                      Object {
-                        "marks": Array [],
-                        "object": "text",
-                        "text": "",
-                      },
-                    ],
-                    "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
@@ -120,13 +90,18 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "",
+                          },
+                        ],
                         "object": "text",
-                        "text": "2",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
@@ -139,13 +114,73 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "marks": Array [],
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "",
+                          },
+                        ],
                         "object": "text",
-                        "text": "3",
                       },
                     ],
                     "object": "block",
-                    "type": "paragraph",
+                    "type": "table_content",
+                  },
+                ],
+                "object": "block",
+                "type": "table_cell",
+              },
+            ],
+            "object": "block",
+            "type": "table_row",
+          },
+          Object {
+            "data": Object {},
+            "nodes": Array [
+              Object {
+                "data": Object {},
+                "nodes": Array [
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "2",
+                          },
+                        ],
+                        "object": "text",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "table_content",
+                  },
+                ],
+                "object": "block",
+                "type": "table_cell",
+              },
+              Object {
+                "data": Object {},
+                "nodes": Array [
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "3",
+                          },
+                        ],
+                        "object": "text",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "table_content",
                   },
                 ],
                 "object": "block",
@@ -166,4 +201,4 @@ Object {
 }
 `;
 
-exports[`insert-row insert row to 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"><p style=\\"margin:0\\">0</p></td><td style=\\"width:auto\\"><p style=\\"margin:0\\">1</p></td></tr><tr><td style=\\"width:auto\\"><p style=\\"margin:0\\"></p></td><td style=\\"width:auto\\"><p style=\\"margin:0\\"></p></td></tr><tr><td style=\\"width:auto\\"><p style=\\"margin:0\\">2</p></td><td style=\\"width:auto\\"><p style=\\"margin:0\\">3</p></td></tr></tbody></table>"`;
+exports[`insert-row insert row to 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;

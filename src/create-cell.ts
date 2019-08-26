@@ -2,7 +2,7 @@ import { Block, BlockJSON, Text } from 'slate';
 
 import { Option, defaultOptions } from './option';
 
-export function createCell(opts: Option = defaultOptions, text = '') {
+export function createCell(opts: Option = defaultOptions, text = '', data?: { [k: string]: string }) {
   const { typeCell, typeContent } = opts;
   return Block.fromJSON({
     type: typeCell,
@@ -13,5 +13,6 @@ export function createCell(opts: Option = defaultOptions, text = '') {
         nodes: [Text.create(text).toJSON()],
       },
     ],
+    data,
   } as BlockJSON);
 }
