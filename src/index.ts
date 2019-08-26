@@ -1,6 +1,5 @@
 import { Editor } from 'slate';
 
-import { insertColumn } from './changes/insert-column';
 import * as table from './layout';
 import { removeSelection, addSelectionStyle } from './selection';
 import { canMerge } from './changes/merge';
@@ -15,6 +14,9 @@ import { Option, defaultOptions } from './option';
 import { insertAbove } from './changes/insert-above';
 import { insertBelow } from './changes/insert-below';
 
+import { insertLeft } from './changes/insert-left';
+import { insertRight } from './changes/insert-right';
+
 import { insertTable } from './changes/insert-table';
 import { removeTable } from './changes/remove-table';
 
@@ -27,11 +29,14 @@ export interface EditTableCommands {
   insertAbove: () => EditTableCommands & Editor;
   insertBelow: () => EditTableCommands & Editor;
 
+  insertLeft: () => EditTableCommands & Editor;
+  insertRight: () => EditTableCommands & Editor;
+
   mergeRight: () => EditTableCommands & Editor;
   mergeBelow: () => EditTableCommands & Editor;
   mergeSelection: () => EditTableCommands & Editor;
   removeRow: () => EditTableCommands & Editor;
-  insertColumn: () => EditTableCommands & Editor;
+
   removeColumn: () => EditTableCommands & Editor;
   removeTable: () => EditTableCommands & Editor;
 }
@@ -263,13 +268,17 @@ export function EditTable(opts: Option = defaultOptions) {
 
     commands: {
       insertTable: bindEditor(insertTable),
+      // row
       insertAbove: bindEditor(insertAbove),
       insertBelow: bindEditor(insertBelow),
+      // column
+      insertLeft: bindEditor(insertLeft),
+      insertRight: bindEditor(insertRight),
+
       mergeRight: bindEditor(mergeRight),
       mergeBelow: bindEditor(mergeBelow),
       mergeSelection: bindEditor(mergeSelection),
       removeRow: bindEditor(removeRow),
-      insertColumn: bindEditor(insertColumn),
       removeColumn: bindEditor(removeColumn),
       removeTable: bindEditor(removeTable),
     },
