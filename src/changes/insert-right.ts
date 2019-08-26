@@ -11,10 +11,11 @@ export function insertRight(opts: Option = defaultOptions, editor: Editor, at?: 
 
   const added: { [k: string]: boolean } = {};
   if (table.table[0].length === columnIndex) {
-    table.table.forEach(row => {
+    table.table.forEach((row, i) => {
       const cell = row[columnIndex - 1];
+      const rowKey = table.currentTable.nodes.get(i).key;
       const newCell = createCell(opts, '');
-      editor.insertNodeByKey(cell.rowKey, columnIndex, newCell);
+      editor.insertNodeByKey(rowKey, cell.nodeIndex + 1, newCell);
     });
   } else {
     table.table.forEach(row => {
@@ -22,7 +23,7 @@ export function insertRight(opts: Option = defaultOptions, editor: Editor, at?: 
       if (cell.colspan === 1 || table.table.length === 1) {
         if (added[cell.rowKey]) return;
         const newCell = createCell(opts, '', { rowspan: `${cell.rowspan}` });
-        editor.insertNodeByKey(cell.rowKey, columnIndex, newCell);
+        editor.insertNodeByKey(cell.rowKey, cell.nodeIndex + 1, newCell);
         added[cell.rowKey] = true;
       } else {
         editor.setNodeByKey(cell.key, {

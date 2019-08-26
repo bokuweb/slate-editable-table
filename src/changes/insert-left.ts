@@ -15,7 +15,7 @@ export function insertLeft(opts: Option = defaultOptions, editor: Editor, at?: n
     if (cell.colspan === 1 || table.table.length === 1) {
       if (added[cell.rowKey]) return;
       let newCell = createCell(opts, '', { rowspan: `${cell.rowspan}` });
-      editor.insertNodeByKey(cell.rowKey, columnIndex, newCell);
+      editor.insertNodeByKey(cell.rowKey, cell.nodeIndex, newCell);
       added[cell.rowKey] = true;
     } else {
       editor.setNodeByKey(cell.key, {
