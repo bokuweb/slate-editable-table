@@ -20,6 +20,7 @@ import { createRenderers } from './default-renderers';
 export interface TableEditor extends Editor, EditTableCommands {}
 
 export interface EditTableCommands {
+  hasTablePlugin: () => boolean;
   insertTable: () => TableEditor;
   insertRow: () => TableEditor;
   mergeRight: () => TableEditor;
@@ -251,6 +252,7 @@ export function EditTable(opts: Option = defaultOptions) {
     // For slate-react@0.22.0~
     renderBlock: renderer,
     queries: {
+      hasTablePlugin: () => true,
       isSelectionInTable,
       canSelectedCellsMerge,
     },

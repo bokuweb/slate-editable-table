@@ -8,6 +8,8 @@ export function insertRow(opts: Option = defaultOptions, editor: Editor, at?: nu
   if (!table) return editor;
   const rowIndex = typeof at !== 'undefined' ? at : table.rowIndex + 1;
 
+  console.log(table.table);
+
   table.table[table.rowIndex]
     .filter(cell => cell.rowspan > 1)
     .forEach(cell => {

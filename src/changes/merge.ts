@@ -49,16 +49,16 @@ export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, 
           if (!Block.isBlock(newContentBlock)) return;
           contentNodes.push(newContentBlock);
           if (i != cell.block.nodes.size - 1) return;
-          editor.removeNodeByKey(cell.key);
+          editor = editor.removeNodeByKey(cell.key);
         });
 
         // INFO: Remove unnecessary row.
         // After removing some cells, If row is empty delete row and reduce related cell's rowspan.
         const newRow = editor.value.document.getNode(cell.rowBlock.key);
         if (!Block.isBlock(newRow)) return;
-        if (newRow.nodes.size === 1 && Text.isText(newRow.nodes.get(0))) {
+        if ((newRow.nodes.size === 1 && Text.isText(newRow.nodes.get(0))) || newRow.nodes.size === 0) {
           deletedRowNumber++;
-          editor.removeNodeByKey(newRow.key);
+          editor = editor.removeNodeByKey(newRow.key);
           row.forEach(cell => {
             if (cell.rowspan === 1) return;
             const newCell = editor.value.document.getNode(cell.key);
@@ -74,7 +74,7 @@ export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, 
     });
 
     // INFO: Set merged cell's rowspan and colspan
-    editor.setNodeByKey(leftTopCell.key, {
+    editor = editor.setNodeByKey(leftTopCell.key, {
       type: leftTopCell.block.type,
       data: {
         ...leftTopCell.block.data.toObject(),
@@ -90,7 +90,6 @@ export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, 
         editor.moveToEndOfNode(newLeftTopCell).insertBlock(node);
       }
     });
-
     removeSelection(editor);
   });
   return editor;

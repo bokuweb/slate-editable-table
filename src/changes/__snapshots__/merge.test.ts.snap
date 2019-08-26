@@ -319,7 +319,7 @@ Object {
               Object {
                 "data": Object {
                   "colspan": "2",
-                  "rowspan": "2",
+                  "rowspan": "1",
                 },
                 "nodes": Array [
                   Object {
@@ -398,23 +398,6 @@ Object {
             "object": "block",
             "type": "table_row",
           },
-          Object {
-            "data": Object {},
-            "nodes": Array [
-              Object {
-                "leaves": Array [
-                  Object {
-                    "marks": Array [],
-                    "object": "leaf",
-                    "text": "",
-                  },
-                ],
-                "object": "text",
-              },
-            ],
-            "object": "block",
-            "type": "table_row",
-          },
         ],
         "object": "block",
         "type": "table",
@@ -426,4 +409,4 @@ Object {
 }
 `;
 
-exports[`merge merge all in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"2\\" style=\\"width:auto\\"></td></tr><tr></tr></tbody></table>"`;
+exports[`merge merge all in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"1\\" style=\\"width:auto\\"></td></tr></tbody></table>"`;

@@ -3,7 +3,7 @@ import { Editor as CoreEditor, ValueJSON, Value } from 'slate';
 import { RenderBlockProps } from 'slate-react';
 
 import React from 'react';
-import { EditTable, TableEditor } from '../src/';
+import { EditTable, EditTableCommands } from '../src/';
 
 const tablePlugin = EditTable();
 
@@ -15,7 +15,7 @@ export type Props = {
 };
 
 export class ExampleEditor extends React.Component<Props> {
-  editor!: TableEditor;
+  editor!: Editor & EditTableCommands;
   state: {
     value: Value;
   };
@@ -127,20 +127,18 @@ export class ExampleEditor extends React.Component<Props> {
   render() {
     return (
       <>
-        <button onClick={this.insertColumn}>Insert Column</button>
-        <button onClick={this.insertRow}>Insert Row</button>
-        <button onClick={this.removeColumn}>Remove Column</button>
-        <button onClick={this.removeRow}>Remove Row</button>
-        <button onClick={this.removeTable}>Remove Table</button>
-        <button onClick={this.mergeRight}>merge right</button>
-        <button onClick={this.mergeBelow}>merge bottom</button>
-        <button onClick={this.mergeSelection}>merge selection</button>
-        {/* 
-  // @ts-ignore */}
+        <button onMouseDown={this.insertColumn}>Insert Column</button>
+        <button onMouseDown={this.insertRow}>Insert Row</button>
+        <button onMouseDown={this.removeColumn}>Remove Column</button>
+        <button onMouseDown={this.removeRow}>Remove Row</button>
+        <button onMouseDown={this.removeTable}>Remove Table</button>
+        <button onMouseDown={this.mergeRight}>merge right</button>
+        <button onMouseDown={this.mergeBelow}>merge bottom</button>
+        <button onMouseDown={this.mergeSelection}>merge selection</button>
         <Editor
           ref={e => {
-            if (e) {
-              this.editor = (e as any) as TableEditor;
+            if (hasTablePlugin(e)) {
+              this.editor = e;
             }
           }}
           plugins={plugins}
@@ -159,4 +157,8 @@ export class ExampleEditor extends React.Component<Props> {
       </>
     );
   }
+}
+
+function hasTablePlugin<T>(e: T): e is T & EditTableCommands {
+  return e && e.hasTablePlugin && e.hasTablePlugin();
 }
