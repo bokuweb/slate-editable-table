@@ -56,6 +56,7 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '3',
                 data: {
                   rowspan: 3,
                 },

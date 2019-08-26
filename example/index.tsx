@@ -132,6 +132,10 @@ export class ExampleEditor extends React.Component<Props> {
     this.onChange(this.editor.mergeSelection());
   };
 
+  splitCell = () => {
+    this.onChange(this.editor.splitCell());
+  };
+
   render() {
     return (
       <>
@@ -139,12 +143,13 @@ export class ExampleEditor extends React.Component<Props> {
         <button onMouseDown={this.insertBelow}>Insert Below</button>
         <button onMouseDown={this.insertLeft}>Insert Left</button>
         <button onMouseDown={this.insertRight}>Insert Right</button>
-        <button onMouseDown={this.removeColumn}>Remove Column</button>
-        <button onMouseDown={this.removeRow}>Remove Row</button>
-        <button onMouseDown={this.removeTable}>Remove Table</button>
         <button onMouseDown={this.mergeRight}>merge right</button>
         <button onMouseDown={this.mergeBelow}>merge bottom</button>
         <button onMouseDown={this.mergeSelection}>merge selection</button>
+        <button onMouseDown={this.splitCell}>split cell</button>
+        <button onMouseDown={this.removeColumn}>Remove Column</button>
+        <button onMouseDown={this.removeRow}>Remove Row</button>
+        <button onMouseDown={this.removeTable}>Remove Table</button>
         <Editor
           ref={e => {
             if (hasTablePlugin(e)) {

@@ -19,6 +19,7 @@ import { insertRight } from './changes/insert-right';
 
 import { insertTable } from './changes/insert-table';
 import { removeTable } from './changes/remove-table';
+import { splitCell } from './changes/split-cell';
 
 import { createRenderers } from './default-renderers';
 
@@ -35,8 +36,10 @@ export interface EditTableCommands {
   mergeRight: () => EditTableCommands & Editor;
   mergeBelow: () => EditTableCommands & Editor;
   mergeSelection: () => EditTableCommands & Editor;
-  removeRow: () => EditTableCommands & Editor;
 
+  splitCell: () => EditTableCommands & Editor;
+
+  removeRow: () => EditTableCommands & Editor;
   removeColumn: () => EditTableCommands & Editor;
   removeTable: () => EditTableCommands & Editor;
 }
@@ -278,6 +281,8 @@ export function EditTable(opts: Option = defaultOptions) {
       mergeRight: bindEditor(mergeRight),
       mergeBelow: bindEditor(mergeBelow),
       mergeSelection: bindEditor(mergeSelection),
+
+      splitCell: bindEditor(splitCell),
       removeRow: bindEditor(removeRow),
       removeColumn: bindEditor(removeColumn),
       removeTable: bindEditor(removeTable),
