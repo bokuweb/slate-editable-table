@@ -47,7 +47,7 @@ export function addSelectionStyle() {
       first.appendChild(style);
       const stylesheet = style.sheet as CSSStyleSheet;
       if (stylesheet) {
-        stylesheet.insertRule(`table span::selection { background: none; }`, stylesheet.cssRules.length);
+        stylesheet.insertRule(`table *::selection { background: none; }`, stylesheet.cssRules.length);
       }
     }
   }
