@@ -1,13 +1,13 @@
 import { Editor, Text, Block, Inline } from 'slate';
 
-import { TableMap } from '../table-map';
+import { TableLayout } from '../layout';
 import { Option } from '../option';
 
 export function mergeBelow(opts: Option, editor: Editor) {
-  const currentCell = TableMap.currentCell(editor);
+  const currentCell = TableLayout.currentCell(editor);
   if (!currentCell) return;
   const { key } = currentCell;
-  const table = TableMap.create(editor);
+  const table = TableLayout.create(editor);
   if (!table) return;
   if (table.isLastRow(key) || !currentCell) return;
 

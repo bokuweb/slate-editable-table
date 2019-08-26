@@ -1,12 +1,12 @@
 import { Editor } from 'slate';
-import { getRowIndex, TableMap } from '../table-map';
+import { getRowIndex, TableLayout } from '../layout';
 import { Option, defaultOptions } from '../option';
 import { createRow } from '../create-row';
 
 export function insertAbove(opts: Option = defaultOptions, editor: Editor) {
   const rowIndex = getRowIndex(editor, opts);
   if (rowIndex === null) return editor;
-  const table = TableMap.create(editor);
+  const table = TableLayout.create(editor);
   if (!table) return editor;
 
   if (rowIndex === 0) {

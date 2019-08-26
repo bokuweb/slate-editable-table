@@ -1,11 +1,11 @@
 import { Editor } from 'slate';
-import { TableMap } from '../table-map';
+import { TableLayout } from '../layout';
 
 import { createCell } from '../create-cell';
 import { Option, defaultOptions } from '../option';
 
 export function insertColumn(opts: Option = defaultOptions, editor: Editor, at?: number) {
-  const table = TableMap.create(editor);
+  const table = TableLayout.create(editor);
   if (!table) return editor;
   const columnIndex = typeof at !== 'undefined' ? at : table.columnIndex;
   const added: { [k: string]: boolean } = {};

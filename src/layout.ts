@@ -29,7 +29,7 @@ export type Layout = Cell[][];
 
 // INFO: Deprecated.
 //       Use createLayout and create new function to create cell's Dictionary
-function buildTableMap(nodes: List<Block>) {
+function buildTableLayout(nodes: List<Block>) {
   const layout = createLayout(nodes);
   const keyDict = layout.reduce(
     (acc, row) => {
@@ -45,15 +45,15 @@ function buildTableMap(nodes: List<Block>) {
 }
 
 // Deprecated
-export class TableMap {
+export class TableLayout {
   table: Cell[][] = [];
   keyDict: CellDict;
   currentTable: Block;
   row: Block;
   cell: Block;
 
-  constructor(tableMap: Cell[][], dict: CellDict, table: Block, row: Block, cell: Block) {
-    this.table = tableMap;
+  constructor(TableLayout: Cell[][], dict: CellDict, table: Block, row: Block, cell: Block) {
+    this.table = TableLayout;
     this.keyDict = dict;
     this.currentTable = table;
     this.row = row;
@@ -209,15 +209,15 @@ export class TableMap {
     if (!table) return null;
     const nodes = table && ((table as any).getNode(table.key).nodes as List<Block>);
     if (!nodes) return null;
-    const { layout, keyDict } = buildTableMap(nodes);
+    const { layout, keyDict } = buildTableLayout(nodes);
 
-    const currentCell = TableMap.currentCell(editor, opts);
-    const currentRow = TableMap.currentRow(editor, opts);
-    const currentTable = TableMap.currentTable(editor, opts);
+    const currentCell = TableLayout.currentCell(editor, opts);
+    const currentRow = TableLayout.currentRow(editor, opts);
+    const currentTable = TableLayout.currentTable(editor, opts);
 
     if (!currentCell) return null;
 
-    return new TableMap(layout, keyDict, currentTable, currentRow, currentCell);
+    return new TableLayout(layout, keyDict, currentTable, currentRow, currentCell);
   }
 
   static currentCell(editor: Editor, opts = defaultOptions) {
@@ -233,18 +233,18 @@ export class TableMap {
   }
 
   static findRowBlock(editor: Editor, index: number, opts = defaultOptions): Block | undefined {
-    const table = TableMap.currentTable(editor, opts);
+    const table = TableLayout.currentTable(editor, opts);
     if (!table) return;
     const block = table.nodes.get(index);
     return Block.isBlock(block) ? block : undefined;
   }
 
   static currentRow(editor: Editor, opts = defaultOptions) {
-    return TableMap.findBlock(editor, opts.typeRow);
+    return TableLayout.findBlock(editor, opts.typeRow);
   }
 
   static currentTable(editor: Editor, opts = defaultOptions) {
-    return TableMap.findBlock(editor, opts.typeTable);
+    return TableLayout.findBlock(editor, opts.typeTable);
   }
 
   static isInCell(editor: Editor, opts = defaultOptions) {
@@ -313,7 +313,7 @@ export function findAnchorCell(editor: Editor, opts = defaultOptions): Block | n
 
 export function findStartCell(editor: Editor, opts = defaultOptions): Block | null {
   const { startBlock } = editor.value;
-  return startBlock.type === opts.typeCell ? startBlock : TableMap.findBlock(editor, opts.typeCell);
+  return startBlock.type === opts.typeCell ? startBlock : TableLayout.findBlock(editor, opts.typeCell);
 }
 
 export function findClosestKey(el: HTMLElement): string | null {
@@ -366,7 +366,7 @@ export function createSelectedBlockMap(
   focusKey: string,
   opts = defaultOptions,
 ): { [key: string]: Cell } {
-  const t = TableMap.create(editor, opts);
+  const t = TableLayout.create(editor, opts);
   if (!t) return {};
   const anchor = t.keyDict[anchorKey];
   const focus = t.keyDict[focusKey];
@@ -400,7 +400,7 @@ export function collectSelectionBlocks(
   focusKey: string,
   opts = defaultOptions,
 ): Cell[][] {
-  const t = TableMap.create(editor, opts);
+  const t = TableLayout.create(editor, opts);
   if (!t) return [];
   const anchor = t.keyDict[anchorKey];
   const focus = t.keyDict[focusKey];

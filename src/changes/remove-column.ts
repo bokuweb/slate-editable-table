@@ -1,9 +1,9 @@
 import { Editor } from 'slate';
-import { TableMap } from '../table-map';
+import { TableLayout } from '../layout';
 import { Option } from '../option';
 
 export function removeColumn(opts: Option, editor: Editor, at?: number) {
-  const table = TableMap.create(editor);
+  const table = TableLayout.create(editor);
   if (!table) return editor;
   const columnIndex = typeof at === 'undefined' ? table.columnIndex : at;
 

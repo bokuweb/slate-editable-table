@@ -1,17 +1,17 @@
 import { Editor, Text, Block, Inline } from 'slate';
 
 import {
-  TableMap,
+  TableLayout,
   findLeftTopPosition,
   calculateSelectedCellSize,
   collectSelectionBlocks,
   createSelectedBlockMap,
-} from '../table-map';
+} from '../layout';
 import { Option, defaultOptions } from '../option';
 import { removeSelection } from '../selection';
 
 export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, opts: Option = defaultOptions) {
-  const table = TableMap.create(editor);
+  const table = TableLayout.create(editor);
   if (!table) return;
   const anchorCell = table.findCellBy(anchorKey);
   const focusCell = table.findCellBy(focusKey);

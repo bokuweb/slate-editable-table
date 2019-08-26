@@ -11,7 +11,7 @@ export type Props = {
 
 const tableStyle = {
   borderCollapse: 'collapse' as const,
-  tableLayout: 'fixed' as const,
+  Layout: 'fixed' as const,
   wordBreak: 'break-all' as const,
   userSelect: 'none' as const,
 };

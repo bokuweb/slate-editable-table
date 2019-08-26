@@ -1,7 +1,7 @@
 import { Editor } from 'slate';
 
 import { insertColumn } from './changes/insert-column';
-import * as table from './table-map';
+import * as table from './layout';
 import { removeSelection, addSelectionStyle } from './selection';
 import { canMerge } from './changes/merge';
 
@@ -40,11 +40,11 @@ export function EditTable(opts: Option = defaultOptions) {
   function isSelectionInTable(editor: Editor) {
     const { startBlock } = editor.value;
     if (!startBlock) return false;
-    return table.TableMap.isInCell(editor, opts);
+    return table.TableLayout.isInCell(editor, opts);
   }
 
   function canSelectedCellsMerge(editor: Editor): boolean {
-    const t = table.TableMap.create(editor);
+    const t = table.TableLayout.create(editor);
     if (!t) return false;
     const anchored = table.findAnchorCell(editor, opts);
     const focused = table.findFocusCell(editor, opts);
@@ -67,7 +67,7 @@ export function EditTable(opts: Option = defaultOptions) {
     const { value } = editor;
     const { selection } = value;
     const key = editor.value.focusBlock && editor.value.focusBlock.key;
-    const cell = table.TableMap.currentCell(editor);
+    const cell = table.TableLayout.currentCell(editor);
     if (!cell) return next();
     // INFO: Skip backspace when first node and offset 0
     if (editor.value.focusBlock.type === opts.typeCell) {
@@ -97,7 +97,7 @@ export function EditTable(opts: Option = defaultOptions) {
     isPrevInTable = true;
 
     // HACK: Add ::selection style when more than 2 cells selected.
-    const t = table.TableMap.create(editor, opts);
+    const t = table.TableLayout.create(editor, opts);
     if (!t) {
       removeSelection(editor);
       return next();
@@ -212,7 +212,7 @@ export function EditTable(opts: Option = defaultOptions) {
       const { value } = editor;
       const { selection } = value;
       const key = editor.value.focusBlock && editor.value.focusBlock.key;
-      const cell = table.TableMap.currentCell(editor);
+      const cell = table.TableLayout.currentCell(editor);
       if (!cell) return next();
       // INFO: Skip backspace when first node and offset 0
       event.preventDefault();

@@ -1,14 +1,14 @@
 import { Editor } from 'slate';
 
-import { TableMap } from '../table-map';
+import { TableLayout } from '../layout';
 import { Option } from '../option';
 import { mergeCells } from './merge';
 
 export function mergeRight(opts: Option, editor: Editor) {
-  const currentCell = TableMap.currentCell(editor);
+  const currentCell = TableLayout.currentCell(editor);
   if (!currentCell) return;
   const { key } = currentCell;
-  const table = TableMap.create(editor);
+  const table = TableLayout.create(editor);
   if (!table) return;
   if (table.isLastColumn(key)) return;
 

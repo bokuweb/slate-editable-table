@@ -1,6 +1,6 @@
 import { Editor } from 'slate';
 
-import { findAnchorCell, findFocusCell } from '../table-map';
+import { findAnchorCell, findFocusCell } from '../layout';
 import { mergeCells } from './merge';
 import { Option } from '../option';
 

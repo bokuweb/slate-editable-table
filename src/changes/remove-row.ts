@@ -1,9 +1,9 @@
 import { Editor, Block, BlockJSON, Inline, Text } from 'slate';
-import { TableMap } from '../table-map';
+import { TableLayout } from '../layout';
 import { Option, defaultOptions } from '../option';
 
 export function removeRow(opts: Option = defaultOptions, editor: Editor, at?: number) {
-  const table = TableMap.create(editor);
+  const table = TableLayout.create(editor);
   if (!table) return editor;
   const below = table.findBelow(table.cell.key);
   const { rowIndex, row } = table;
@@ -52,7 +52,7 @@ export function removeRow(opts: Option = defaultOptions, editor: Editor, at?: nu
     editor.replaceNodeByKey(below.rowBlock.key, newBlock);
   }
 
-  const newRow = TableMap.findRowBlock(editor, rowIndex, opts);
+  const newRow = TableLayout.findRowBlock(editor, rowIndex, opts);
   if (!newRow) {
     // TODO: find table when unfocused from table.
     return;
