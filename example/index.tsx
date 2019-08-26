@@ -3,7 +3,7 @@ import { Editor as CoreEditor, ValueJSON, Value } from 'slate';
 import { RenderBlockProps } from 'slate-react';
 
 import React from 'react';
-import { EditTable, EditTableCommands } from '../src/';
+import { EditTable, EditTableCommands, hasTablePlugin } from '../src/';
 
 const tablePlugin = EditTable();
 
@@ -100,8 +100,12 @@ export class ExampleEditor extends React.Component<Props> {
     this.onChange(this.editor.insertColumn());
   };
 
-  insertRow = () => {
-    this.onChange(this.editor.insertRow());
+  insertAbove = () => {
+    this.onChange(this.editor.insertAbove());
+  };
+
+  insertBelow = () => {
+    this.onChange(this.editor.insertBelow());
   };
 
   removeColumn = () => {
@@ -128,7 +132,8 @@ export class ExampleEditor extends React.Component<Props> {
     return (
       <>
         <button onMouseDown={this.insertColumn}>Insert Column</button>
-        <button onMouseDown={this.insertRow}>Insert Row</button>
+        <button onMouseDown={this.insertAbove}>Insert Above</button>
+        <button onMouseDown={this.insertBelow}>Insert Below</button>
         <button onMouseDown={this.removeColumn}>Remove Column</button>
         <button onMouseDown={this.removeRow}>Remove Row</button>
         <button onMouseDown={this.removeTable}>Remove Table</button>
@@ -157,8 +162,4 @@ export class ExampleEditor extends React.Component<Props> {
       </>
     );
   }
-}
-
-function hasTablePlugin<T>(e: T): e is T & EditTableCommands {
-  return e && e.hasTablePlugin && e.hasTablePlugin();
 }

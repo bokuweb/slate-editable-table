@@ -87,7 +87,7 @@ export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, 
     contentNodes.forEach(node => {
       const newLeftTopCell = editor.value.document.getNode(leftTopCell.key);
       if (Block.isBlock(newLeftTopCell)) {
-        editor.moveToEndOfNode(newLeftTopCell).insertBlock(node);
+        editor = editor.moveToEndOfNode(newLeftTopCell).insertBlock(node);
       }
     });
     removeSelection(editor);

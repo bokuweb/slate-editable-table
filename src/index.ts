@@ -11,25 +11,29 @@ import { mergeBelow } from './changes/merge-below';
 import { mergeRight } from './changes/merge-right';
 import { mergeSelection } from './changes/merge-selection';
 import { Option, defaultOptions } from './option';
-import { insertRow } from './changes/insert-row';
+
+import { insertAbove } from './changes/insert-above';
+import { insertBelow } from './changes/insert-below';
+
 import { insertTable } from './changes/insert-table';
 import { removeTable } from './changes/remove-table';
 
 import { createRenderers } from './default-renderers';
 
-export interface TableEditor extends Editor, EditTableCommands {}
-
 export interface EditTableCommands {
-  hasTablePlugin: () => boolean;
-  insertTable: () => TableEditor;
-  insertRow: () => TableEditor;
-  mergeRight: () => TableEditor;
-  mergeBelow: () => TableEditor;
-  mergeSelection: () => TableEditor;
-  removeRow: () => TableEditor;
-  insertColumn: () => TableEditor;
-  removeColumn: () => TableEditor;
-  removeTable: () => TableEditor;
+  insertTable: () => EditTableCommands & Editor;
+
+  insertRow: () => EditTableCommands & Editor;
+  insertAbove: () => EditTableCommands & Editor;
+  insertBelow: () => EditTableCommands & Editor;
+
+  mergeRight: () => EditTableCommands & Editor;
+  mergeBelow: () => EditTableCommands & Editor;
+  mergeSelection: () => EditTableCommands & Editor;
+  removeRow: () => EditTableCommands & Editor;
+  insertColumn: () => EditTableCommands & Editor;
+  removeColumn: () => EditTableCommands & Editor;
+  removeTable: () => EditTableCommands & Editor;
 }
 
 export function EditTable(opts: Option = defaultOptions) {
@@ -259,7 +263,8 @@ export function EditTable(opts: Option = defaultOptions) {
 
     commands: {
       insertTable: bindEditor(insertTable),
-      insertRow: bindEditor(insertRow),
+      insertAbove: bindEditor(insertAbove),
+      insertBelow: bindEditor(insertBelow),
       mergeRight: bindEditor(mergeRight),
       mergeBelow: bindEditor(mergeBelow),
       mergeSelection: bindEditor(mergeSelection),
@@ -269,4 +274,8 @@ export function EditTable(opts: Option = defaultOptions) {
       removeTable: bindEditor(removeTable),
     },
   };
+}
+
+export function hasTablePlugin<T extends any>(e: T): e is T & EditTableCommands {
+  return e && e.hasTablePlugin && e.hasTablePlugin();
 }

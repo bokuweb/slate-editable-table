@@ -44,6 +44,7 @@ function buildTableMap(nodes: List<Block>) {
   return { layout, keyDict };
 }
 
+// Deprecated
 export class TableMap {
   table: Cell[][] = [];
   keyDict: CellDict;
@@ -269,6 +270,16 @@ export function findCurrentTable(editor: Editor, opts = defaultOptions): Block |
   return table;
 }
 
+export function findCurrentRow(editor: Editor, opts = defaultOptions): Block | null {
+  const { value } = editor;
+  return (
+    (value.document.getClosest(value.startBlock.key, p => {
+      if (!Block.isBlock(p)) return false;
+      return p.type === opts.typeRow;
+    }) as Block) || null
+  );
+}
+
 export function findBlock(editor: Editor, type: string): Block | null {
   const { value } = editor;
   const b = value.document.getClosest(value.startBlock.key, p => {
@@ -371,6 +382,16 @@ export function createSelectedBlockMap(
     },
     {} as { [key: string]: Cell },
   );
+}
+
+export function getRowIndex(editor: Editor, opts = defaultOptions): number | null {
+  const t = findCurrentTable(editor, opts);
+  const row = findCurrentRow(editor, opts);
+  if (!t) return null;
+  const rows = t.nodes;
+  const i = rows.findIndex(x => x === row);
+  if (i < 0) return null;
+  return i;
 }
 
 export function collectSelectionBlocks(
