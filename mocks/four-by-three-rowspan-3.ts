@@ -23,6 +23,7 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '0',
                 nodes: [
                   {
                     object: 'block',
@@ -34,6 +35,7 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '1',
                 nodes: [
                   {
                     object: 'block',
@@ -45,6 +47,7 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '2',
                 nodes: [
                   {
                     object: 'block',
@@ -77,6 +80,7 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '4',
                 data: {},
                 nodes: [
                   {
@@ -89,6 +93,7 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '5',
                 data: {},
                 nodes: [
                   {
@@ -101,6 +106,7 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '6',
                 nodes: [
                   {
                     object: 'block',
@@ -118,6 +124,7 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '7',
                 nodes: [
                   {
                     object: 'block',
@@ -129,6 +136,7 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '8',
                 nodes: [
                   {
                     object: 'block',
@@ -140,6 +148,7 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '9',
                 nodes: [
                   {
                     object: 'block',
