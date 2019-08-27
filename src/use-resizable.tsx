@@ -154,24 +154,36 @@ function createResizedValues(rows: Row[], boundary: number, diffX: number): Resi
 }
 
 function createRowData(table: HTMLTableElement) {
-  return getRows(table).map(row => {
-    const { children } = Array.from(row.children).reduce(
+  const t = getRows(table);
+  const acc: { cell: HTMLTableCellElement; width: number }[][] = [];
+  for (let y = 0; y < t.length; y++) {
+    const row = t[y];
+    for (let x = 0; x < row.children.length; x++) {
+      const cell = row.children[x] as HTMLTableCellElement;
+      if (!acc[y]) acc[y] = [];
+      // skip
+      let cx = x;
+      while (acc[y][cx]) {
+        cx++;
+      }
+      acc[y][cx] = { cell, width: cell.offsetWidth };
+      for (let cy = 0; cy < cell.rowSpan - 1; cy++) {
+        if (!acc[y + cy + 1]) acc[y + cy + 1] = [];
+        acc[y + cy + 1][cx] = { cell, width: cell.offsetWidth };
+      }
+    }
+  }
+  return t.map((row, y) => {
+    const { children } = acc[y].reduce(
       (acc, cell) => {
-        const w = (cell as HTMLTableCellElement).offsetWidth;
-        acc.children.push({
-          x: acc.x,
-          width: w,
-          ref: cell as HTMLTableCellElement,
-        });
+        const w = cell.width;
+        acc.children.push({ x: acc.x, width: w, ref: cell.cell });
         acc.x += w;
         return acc;
       },
       { children: [] as Cell[], x: 0 },
     );
-    return {
-      ref: row,
-      children,
-    };
+    return { ref: row, children };
   });
 }
 
