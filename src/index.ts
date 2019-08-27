@@ -2,24 +2,24 @@ import { Editor } from 'slate';
 
 import * as table from './layout';
 import { removeSelection, addSelectionStyle } from './selection';
-import { canMerge } from './changes/merge';
+import { canMerge } from './mutations/merge';
 
-import { removeRow } from './changes/remove-row';
-import { removeColumn } from './changes/remove-column';
-import { mergeBelow } from './changes/merge-below';
-import { mergeRight } from './changes/merge-right';
-import { mergeSelection } from './changes/merge-selection';
+import { removeRow } from './mutations/remove-row';
+import { removeColumn } from './mutations/remove-column';
+import { mergeBelow } from './mutations/merge-below';
+import { mergeRight } from './mutations/merge-right';
+import { mergeSelection } from './mutations/merge-selection';
 import { Option, defaultOptions } from './option';
 
-import { insertAbove } from './changes/insert-above';
-import { insertBelow } from './changes/insert-below';
+import { insertAbove } from './mutations/insert-above';
+import { insertBelow } from './mutations/insert-below';
 
-import { insertLeft } from './changes/insert-left';
-import { insertRight } from './changes/insert-right';
+import { insertLeft } from './mutations/insert-left';
+import { insertRight } from './mutations/insert-right';
 
-import { insertTable } from './changes/insert-table';
-import { removeTable } from './changes/remove-table';
-import { splitCell } from './changes/split-cell';
+import { insertTable } from './mutations/insert-table';
+import { removeTable } from './mutations/remove-table';
+import { splitCell } from './mutations/split-cell';
 
 import { createRenderers } from './default-renderers';
 

@@ -4,7 +4,7 @@ import { TableLayout } from '../layout';
 import { createCell } from '../create-cell';
 import { Option, defaultOptions } from '../option';
 
-export function splitCell(opts: Option = defaultOptions, editor: Editor, at?: number) {
+export function splitCell(opts: Option = defaultOptions, editor: Editor) {
   const table = TableLayout.create(editor);
   if (!table) return editor;
   const current = table.cell;

@@ -1,4 +1,4 @@
-import { Editor, Value, ValueJSON, Block } from 'slate';
+import { Editor, Value, Block } from 'slate';
 import { EditTable } from '../index';
 import { findCurrentTable, TableLayout } from '../layout';
 import { mergeCells } from './merge';
