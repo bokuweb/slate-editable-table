@@ -45,7 +45,7 @@ describe('insert-below', function() {
     expect(table.currentTable.nodes.size).toBe(4);
     const expectLength = [3, 2, 1, 3];
     table.currentTable.nodes.forEach((row, i) => {
-      if (!Block.isBlock(row)) throw new Error('Failed to split cell');
+      if (!Block.isBlock(row) || typeof i === 'undefined') throw new Error('Failed to split cell');
       expect(row.nodes.size).toBe(expectLength[i]);
     });
   });

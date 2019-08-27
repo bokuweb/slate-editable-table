@@ -75,9 +75,9 @@ export default {
           {
             object: 'block',
             type: 'table_row',
-            nodes: [...Array(3).keys()].map(i => {
-              return {
-                key: `${i + 6}`,
+            nodes: [
+              {
+                key: `6`,
                 object: 'block',
                 type: 'table_cell',
                 data: {
@@ -87,11 +87,41 @@ export default {
                   {
                     object: 'block',
                     type: 'table_content',
-                    nodes: [Text.create(`${i + 6}`).toJSON()],
+                    nodes: [Text.create(`6`).toJSON()],
                   },
                 ],
-              };
-            }),
+              },
+              {
+                key: `7`,
+                object: 'block',
+                type: 'table_cell',
+                data: {
+                  width: '200',
+                },
+                nodes: [
+                  {
+                    object: 'block',
+                    type: 'table_content',
+                    nodes: [Text.create(`7`).toJSON()],
+                  },
+                ],
+              },
+              {
+                key: `8`,
+                object: 'block',
+                type: 'table_cell',
+                data: {
+                  width: '200',
+                },
+                nodes: [
+                  {
+                    object: 'block',
+                    type: 'table_content',
+                    nodes: [Text.create(`8`).toJSON()],
+                  },
+                ],
+              },
+            ],
           },
         ],
       },

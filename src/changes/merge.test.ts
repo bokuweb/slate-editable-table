@@ -6,6 +6,7 @@ import { createHtml } from './test-helper';
 
 import twoByTow from '../../mocks/two-by-two';
 import fourByThreeRowspan3 from '../../mocks/four-by-three-rowspan-3';
+import threeByThreeRowColspan2 from '../../mocks/three-by-three-colspan-rowspan-2';
 
 describe('merge', function() {
   const plugin = EditTable();
@@ -64,6 +65,28 @@ describe('merge', function() {
     if (!table) throw new Error('Failed to split cell');
     expect(table.currentTable.nodes.size).toBe(3);
     const expectLength = [3, 2, 2];
+    table.currentTable.nodes.forEach((row, i) => {
+      if (!Block.isBlock(row) || typeof i === 'undefined') throw new Error('Failed to split cell');
+      expect(row.nodes.size).toBe(expectLength[i]);
+    });
+  });
+
+  it('merge 2 column at 3X3 row/colspan2 table', function() {
+    const editor = new Editor({ value: Value.fromJSON(threeByThreeRowColspan2), plugins: [plugin] });
+    const cursorBlock = editor.value.document.getDescendant('0');
+    if (!cursorBlock) throw new Error('Failed to find block');
+    editor.moveTo(cursorBlock.key);
+    const t = findCurrentTable(editor);
+    if (!t) throw new Error('Failed to find block');
+    const newEditor = mergeCells(editor, '0', '7');
+    if (!newEditor) throw new Error('Failed to find editor');
+    expect(newEditor.value.toJSON()).toMatchSnapshot();
+    expect(createHtml(newEditor.value)).toMatchSnapshot();
+
+    const table = TableLayout.create(editor);
+    if (!table) throw new Error('Failed to split cell');
+    expect(table.currentTable.nodes.size).toBe(3);
+    const expectLength = [2, 1, 1];
     table.currentTable.nodes.forEach((row, i) => {
       if (!Block.isBlock(row) || typeof i === 'undefined') throw new Error('Failed to split cell');
       expect(row.nodes.size).toBe(expectLength[i]);

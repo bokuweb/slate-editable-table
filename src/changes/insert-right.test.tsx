@@ -45,7 +45,7 @@ describe('insert-right', function() {
     expect(table.currentTable.nodes.size).toBe(3);
     const expectLength = [2, 1, 4];
     table.currentTable.nodes.forEach((row, i) => {
-      if (!Block.isBlock(row)) throw new Error('Failed to split cell');
+      if (!Block.isBlock(row) || typeof i === 'undefined') throw new Error('Failed to split cell');
       expect(row.nodes.size).toBe(expectLength[i]);
     });
   });
@@ -65,7 +65,7 @@ describe('insert-right', function() {
     expect(table.currentTable.nodes.size).toBe(3);
     const expectLength = [3, 2, 4];
     table.currentTable.nodes.forEach((row, i) => {
-      if (!Block.isBlock(row)) throw new Error('Failed to split cell');
+      if (!Block.isBlock(row) || typeof i === 'undefined') throw new Error('Failed to split cell');
       expect(row.nodes.size).toBe(expectLength[i]);
     });
   });
