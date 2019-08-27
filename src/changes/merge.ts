@@ -6,6 +6,7 @@ import {
   calculateSelectedCellSize,
   collectSelectionBlocks,
   createSelectedBlockMap,
+  Cell,
 } from '../layout';
 import { Option, defaultOptions } from '../option';
 import { removeSelection } from '../selection';
@@ -94,29 +95,18 @@ export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, 
   return editor;
 }
 
-export function canMerge(editor: Editor, anchorKey: string, focusKey: string, opts: Option) {
-  const selectedBlocks = collectSelectionBlocks(editor, anchorKey, focusKey, opts);
-  const isWidthValid = selectedBlocks
-    .map(row => {
-      const x = row[0].col;
-      const width = row.reduce((acc, cell) => {
-        return acc + cell.colspan;
-      }, 0);
-      return { x, width };
-    })
-    .every((c, _, arr) => c.x === arr[0].x && c.width === arr[0].width);
+function isValidHeight(selectedBlocks: Cell[][]) {
   const stored: { [k: string]: boolean } = {};
-
   const verticalLayout = selectedBlocks.reduce(
     (acc, row, rowIndex) => {
       row.forEach((cell, colIndex) => {
-        if (stored[cell.key]) return;
+        if (stored[cell.key + cell.col]) return;
         if (rowIndex === 0) {
           acc[colIndex] = { y: cell.row, height: cell.rowspan };
         } else {
           acc[colIndex] = { ...acc[colIndex], height: ((acc[colIndex] && acc[colIndex].height) || 0) + cell.rowspan };
         }
-        stored[cell.key] = true;
+        stored[cell.key + cell.col] = true;
       });
       return acc;
     },
@@ -131,5 +121,24 @@ export function canMerge(editor: Editor, anchorKey: string, focusKey: string, op
     },
     { isHeightValid: true, prev: {} as { y: number; height: number } },
   );
-  return isWidthValid && isHeightValid;
+  return isHeightValid;
+}
+
+export function canMerge(editor: Editor, anchorKey: string, focusKey: string, opts: Option) {
+  const selectedBlocks = collectSelectionBlocks(editor, anchorKey, focusKey, opts);
+  const a = selectedBlocks.map(row => {
+    const x = row[0].col;
+    const { width } = row.reduce(
+      (acc, cell) => {
+        if (acc.stored[cell.key]) return acc;
+        return { width: acc.width + cell.colspan, stored: { ...acc.stored, [cell.key]: true } };
+      },
+      { width: 0, stored: {} as { [k: string]: boolean } },
+    );
+    return { x, width };
+  });
+  const isWidthValid = a.every((c, _, arr) => c.x === arr[0].x && c.width === arr[0].width);
+
+  if (!isWidthValid) return false;
+  return isValidHeight(selectedBlocks);
 }
