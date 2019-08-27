@@ -21,9 +21,8 @@ export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, 
 
   const [row, col] = findLeftTopPosition(anchorCell, focusCell);
   const leftTopCell = table.table[row][col];
-
   if (!canMerge(editor, anchorCell.key, focusCell.key, opts)) {
-    return;
+    return editor;
   }
 
   // INFO: Count deleted row number
@@ -106,15 +105,18 @@ export function canMerge(editor: Editor, anchorKey: string, focusKey: string, op
       return { x, width };
     })
     .every((c, _, arr) => c.x === arr[0].x && c.width === arr[0].width);
+  const stored: { [k: string]: boolean } = {};
 
   const verticalLayout = selectedBlocks.reduce(
     (acc, row, rowIndex) => {
       row.forEach((cell, colIndex) => {
+        if (stored[cell.key]) return;
         if (rowIndex === 0) {
           acc[colIndex] = { y: cell.row, height: cell.rowspan };
         } else {
-          acc[colIndex] = { ...acc[colIndex], height: (acc[colIndex] && acc[colIndex].height) || 0 + cell.rowspan };
+          acc[colIndex] = { ...acc[colIndex], height: ((acc[colIndex] && acc[colIndex].height) || 0) + cell.rowspan };
         }
+        stored[cell.key] = true;
       });
       return acc;
     },
