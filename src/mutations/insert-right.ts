@@ -7,12 +7,12 @@ import { Option, defaultOptions } from '../option';
 export function insertRight(opts: Option = defaultOptions, editor: Editor, at?: number) {
   const table = TableLayout.create(editor);
   if (!table) return editor;
-  const columnIndex = (typeof at !== 'undefined' ? at : table.columnIndex) + 1;
+  const columnIndex = typeof at !== 'undefined' ? at : table.columnIndex;
 
   const added: { [k: string]: boolean } = {};
   if (table.table[0].length === columnIndex) {
     table.table.forEach((row, i) => {
-      const cell = row[columnIndex - 1];
+      const cell = row[columnIndex];
       const rowKey = table.currentTable.nodes.get(i).key;
       const newCell = createCell(opts, '');
       editor.insertNodeByKey(rowKey, cell.nodeIndex + 1, newCell);
