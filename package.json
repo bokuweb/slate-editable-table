@@ -66,5 +66,9 @@
   "peerDependencies": {
     "slate": ">= 0.45.0",
     "slate-react": ">= 0.21.20"
+  },
+  "dependencies": {
+    "@types/uuid": "^3.4.5",
+    "uuid": "^3.3.3"
   }
 }

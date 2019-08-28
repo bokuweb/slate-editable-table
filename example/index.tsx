@@ -96,6 +96,10 @@ export class ExampleEditor extends React.Component<Props> {
     this.onChange(this.editor.removeTable());
   };
 
+  insertTable = () => {
+    this.onChange(this.editor.insertTable());
+  };
+
   insertLeft = () => {
     this.onChange(this.editor.insertLeft());
   };
@@ -139,6 +143,7 @@ export class ExampleEditor extends React.Component<Props> {
   render() {
     return (
       <>
+        <button onMouseDown={this.insertTable}>Insert Table</button>
         <button onMouseDown={this.insertAbove}>Insert Above</button>
         <button onMouseDown={this.insertBelow}>Insert Below</button>
         <button onMouseDown={this.insertLeft}>Insert Left</button>

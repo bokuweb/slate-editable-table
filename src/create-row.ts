@@ -5,9 +5,8 @@ import { Option, defaultOptions } from './option';
 
 export function createRow(opts: Option = defaultOptions, columns: number) {
   const cellNodes = Range(0, columns)
-    .map(() => createCell(opts, '').toJSON())
+    .map(() => createCell(opts).toJSON())
     .toArray();
-
   return Block.fromJSON({
     object: 'block',
     type: opts.typeRow,

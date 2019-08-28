@@ -62,6 +62,12 @@ export function EditTable(opts: Option = defaultOptions) {
     return canMerge(editor, anchored.key, focused.key, opts);
   }
 
+  function bindEditorWithoutSelectionCheck(fn: (...args: any) => any) {
+    return function(editor: Editor, ...args: any[]) {
+      return fn(...[opts, editor].concat(args));
+    };
+  }
+
   function bindEditor(fn: (...args: any) => any) {
     return function(editor: Editor, ...args: any[]) {
       if (!isSelectionInTable(editor)) {
@@ -270,7 +276,7 @@ export function EditTable(opts: Option = defaultOptions) {
     },
 
     commands: {
-      insertTable: bindEditor(insertTable),
+      insertTable: bindEditorWithoutSelectionCheck(insertTable),
       // row
       insertAbove: bindEditor(insertAbove),
       insertBelow: bindEditor(insertBelow),

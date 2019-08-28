@@ -370,6 +370,7 @@ export function createSelectedBlockMap(
   if (!t) return {};
   const anchor = t.keyDict[anchorKey];
   const focus = t.keyDict[focusKey];
+  if (!anchor || !focus) return {};
   const { start, end } = createSelectedCellRange(anchor, focus);
   return t.table.reduce(
     (acc, row, rowIndex) => {
