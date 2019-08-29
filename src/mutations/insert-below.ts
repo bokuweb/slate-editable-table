@@ -15,14 +15,16 @@ export function insertBelow(opts: Option = defaultOptions, editor: Editor) {
       .moveToEndOfNode(newRow.nodes.get(table.columnIndex));
   } else {
     table.table[rowIndex + 1]
-      .filter(cell => cell.rowspan > 1)
+      .filter(cell => cell.rowspan > 1 && !cell.isTopOfMergedCell)
       .forEach(cell => {
         editor.setNodeByKey(cell.key, {
           type: cell.block.type,
           data: { ...cell.block.data.toObject(), rowspan: cell.rowspan + 1 },
         });
       });
-    const newRowLength = table.table[rowIndex + 1].filter(cell => cell.rowspan === 1).length;
+    const newRowLength = table.table[rowIndex + 1].filter(cell => {
+      return cell.rowspan === 1 || cell.isTopOfMergedCell;
+    }).length;
     const newRow = createRow(opts, newRowLength);
 
     return editor

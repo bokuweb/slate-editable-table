@@ -24,28 +24,14 @@ export default {
                 object: 'block',
                 type: 'table_cell',
                 data: {
-                  width: '200',
+                  colspan: '4',
                 },
+                key: '0',
                 nodes: [
                   {
                     object: 'block',
                     type: 'table_content',
                     nodes: [Text.create('0').toJSON()],
-                  },
-                ],
-              },
-              {
-                object: 'block',
-                type: 'table_cell',
-                data: {
-                  colspan: '2',
-                  rowspan: '2',
-                },
-                nodes: [
-                  {
-                    object: 'block',
-                    type: 'table_content',
-                    nodes: [Text.create('1').toJSON()],
                   },
                 ],
               },
@@ -58,8 +44,45 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '1',
+                nodes: [
+                  {
+                    object: 'block',
+                    type: 'table_content',
+                    nodes: [Text.create('1').toJSON()],
+                  },
+                ],
+              },
+              {
+                object: 'block',
+                type: 'table_cell',
+                key: '2',
+                nodes: [
+                  {
+                    object: 'block',
+                    type: 'table_content',
+                    nodes: [Text.create('2').toJSON()],
+                  },
+                ],
+              },
+              {
+                object: 'block',
+                type: 'table_cell',
+                key: '3',
+                nodes: [
+                  {
+                    object: 'block',
+                    type: 'table_content',
+                    nodes: [Text.create('3').toJSON()],
+                  },
+                ],
+              },
+              {
+                object: 'block',
+                type: 'table_cell',
+                key: '4',
                 data: {
-                  width: '200',
+                  rowspan: 3,
                 },
                 nodes: [
                   {
@@ -78,9 +101,33 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
-                data: {
-                  width: '200',
-                },
+                key: '5',
+                data: {},
+                nodes: [
+                  {
+                    object: 'block',
+                    type: 'table_content',
+                    nodes: [Text.create('5').toJSON()],
+                  },
+                ],
+              },
+              {
+                object: 'block',
+                type: 'table_cell',
+                key: '6',
+                data: {},
+                nodes: [
+                  {
+                    object: 'block',
+                    type: 'table_content',
+                    nodes: [Text.create('6').toJSON()],
+                  },
+                ],
+              },
+              {
+                object: 'block',
+                type: 'table_cell',
+                key: '7',
                 nodes: [
                   {
                     object: 'block',
@@ -89,9 +136,16 @@ export default {
                   },
                 ],
               },
+            ],
+          },
+          {
+            object: 'block',
+            type: 'table_row',
+            nodes: [
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '8',
                 nodes: [
                   {
                     object: 'block',
@@ -103,11 +157,24 @@ export default {
               {
                 object: 'block',
                 type: 'table_cell',
+                key: '9',
                 nodes: [
                   {
                     object: 'block',
                     type: 'table_content',
                     nodes: [Text.create('9').toJSON()],
+                  },
+                ],
+              },
+              {
+                object: 'block',
+                type: 'table_cell',
+                key: '10',
+                nodes: [
+                  {
+                    object: 'block',
+                    type: 'table_content',
+                    nodes: [Text.create('10').toJSON()],
                   },
                 ],
               },

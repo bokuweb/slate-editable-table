@@ -1,4 +1,4 @@
-import { Editor } from 'slate';
+import { Editor, Block } from 'slate';
 
 import * as table from './layout';
 import { removeSelection, addSelectionStyle } from './selection';
@@ -24,6 +24,8 @@ import { splitCell } from './mutations/split-cell';
 import { createRenderers } from './default-renderers';
 
 export interface EditTableCommands {
+  isSelectionInTable: () => boolean;
+  findCurrentTable: () => Block | null;
   insertTable: () => EditTableCommands & Editor;
 
   insertRow: () => EditTableCommands & Editor;
@@ -273,6 +275,7 @@ export function EditTable(opts: Option = defaultOptions) {
       hasTablePlugin: () => true,
       isSelectionInTable,
       canSelectedCellsMerge,
+      findCurrentTable: (editor: Editor) => table.findCurrentTable(editor, opts),
     },
 
     commands: {
