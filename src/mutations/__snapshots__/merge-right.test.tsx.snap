@@ -32,6 +32,7 @@ Object {
                 "data": Object {
                   "colspan": "2",
                   "rowspan": "1",
+                  "width": "0",
                 },
                 "nodes": Array [
                   Object {
@@ -142,4 +143,4 @@ Object {
 }
 `;
 
-exports[`merge-right merge right in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"1\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`merge-right merge right in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"1\\" style=\\"width:0px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;

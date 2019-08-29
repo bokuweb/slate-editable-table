@@ -12,6 +12,7 @@ export type ResizableProps = {
 export type Cell = {
   x: number;
   width: number;
+  colspan: number;
   ref: HTMLElement;
 };
 
@@ -83,11 +84,8 @@ export const useResizableTable = (props: ResizableProps) => {
             const onMouseMove = (e: MouseEvent) => {
               if (!isResizing) return;
               let diffX = e.pageX - pageX;
-              // if (typeof props.maxWidth !== 'undefined') {
-              //   const d = +props.maxWidth - table.offsetWidth;
-              //   diffX = d < diffX ? d : diffX;
-              // }
               const resizedValues = createResizedValues(rows, boundary, diffX);
+              console.log(rows, resizedValues);
               props.onResize && props.onResize(e, resizedValues);
             };
 
@@ -148,12 +146,20 @@ export const useResizableTable = (props: ResizableProps) => {
 };
 
 function createResizedValues(rows: Row[], boundary: number, diffX: number): ResizeValue {
+  console.log(diffX, boundary);
   return (rows || []).reduce(
     (acc, row) => {
       let hasCurrent = false;
       let hasNext = false;
       row.children.forEach(cell => {
         if (!cell.ref.dataset || !cell.ref.dataset.key) return acc;
+
+        // If col merged and move inner slider, keep width.
+        if (cell.colspan >= 2 && boundary < cell.x + cell.width && boundary > cell.x) {
+          acc[cell.ref.dataset.key] = cell.width;
+          return acc;
+        }
+
         if (cell.x < boundary && cell.x + cell.width >= boundary) {
           if (!hasCurrent) {
             hasCurrent = true;
@@ -199,7 +205,8 @@ function createRowData(table: HTMLTableElement) {
     const { children } = acc[y].reduce(
       (acc, cell) => {
         const w = cell.width;
-        acc.children.push({ x: acc.x, width: w, ref: cell.cell });
+        const colspan = cell.cell.colSpan || 1;
+        acc.children.push({ x: acc.x, width: w, colspan, ref: cell.cell });
         acc.x += w;
         return acc;
       },

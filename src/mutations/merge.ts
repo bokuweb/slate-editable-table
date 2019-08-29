@@ -43,7 +43,7 @@ export function mergeCells(
     const contentNodes: Block[] = [];
     let firstRow: number | null = null;
     let newWidth = 0;
-    table.table.forEach((row, i) => {
+    table.table.forEach(row => {
       row.forEach(cell => {
         if (!blocks[cell.key]) return;
         // calculate new width
@@ -52,6 +52,7 @@ export function mergeCells(
           if (firstRow === null) {
             firstRow = cell.row;
           }
+          // Calculate only first row.
           if (firstRow === cell.row) {
             newWidth = newWidth + ~~cell.block.data.get('width') / (cell.block.data.get('colspan') || 1);
           }

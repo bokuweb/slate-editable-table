@@ -39,6 +39,17 @@ const Table = React.memo((props: TableProps & { attributes: any }) => {
   );
 });
 
+function updateWidth(editor: Editor, value: ResizeValue) {
+  Object.keys(value).forEach(k => {
+    const n = editor.value.document.getNode(k);
+    if (!Block.isBlock(n)) return;
+    editor.setNodeByKey(k, {
+      type: n.type,
+      data: { ...n.data.toObject(), width: value[k] },
+    });
+  });
+}
+
 export function createRenderers(opts: Option = defaultOptions) {
   return (props: any, editor: any, next: () => void): any => {
     switch (props.node.type) {
@@ -57,26 +68,11 @@ export function createRenderers(opts: Option = defaultOptions) {
         return (
           <Table
             onInit={values => {
-              console.log(values);
-              Object.keys(values).forEach(k => {
-                const n = editor.value.document.getNode(k);
-                if (!Block.isBlock(n)) return;
-                editor.setNodeByKey(k, {
-                  type: n.type,
-                  data: { ...n.data.toObject(), width: values[k] },
-                });
-              });
+              updateWidth(editor, values);
             }}
             onResize={(e, values) => {
               editor.blur();
-              Object.keys(values).forEach(k => {
-                const n = editor.value.document.getNode(k);
-                if (!Block.isBlock(n)) return;
-                editor.setNodeByKey(k, {
-                  type: n.type,
-                  data: { ...n.data.toObject(), width: values[k] },
-                });
-              });
+              updateWidth(editor, values);
             }}
             maxWidth={maxWidth}
             attributes={props.attributes}

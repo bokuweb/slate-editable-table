@@ -32,13 +32,17 @@ Object {
                 "data": Object {},
                 "nodes": Array [
                   Object {
-                    "data": Object {},
+                    "data": Object {
+                      "maxWidth": undefined,
+                    },
                     "nodes": Array [
                       Object {
                         "data": Object {},
                         "nodes": Array [
                           Object {
-                            "data": Object {},
+                            "data": Object {
+                              "width": "120",
+                            },
                             "nodes": Array [
                               Object {
                                 "data": Object {},
@@ -62,7 +66,9 @@ Object {
                             "type": "table_cell",
                           },
                           Object {
-                            "data": Object {},
+                            "data": Object {
+                              "width": "120",
+                            },
                             "nodes": Array [
                               Object {
                                 "data": Object {},
@@ -93,7 +99,9 @@ Object {
                         "data": Object {},
                         "nodes": Array [
                           Object {
-                            "data": Object {},
+                            "data": Object {
+                              "width": "120",
+                            },
                             "nodes": Array [
                               Object {
                                 "data": Object {},
@@ -117,7 +125,9 @@ Object {
                             "type": "table_cell",
                           },
                           Object {
-                            "data": Object {},
+                            "data": Object {
+                              "width": "120",
+                            },
                             "nodes": Array [
                               Object {
                                 "data": Object {},
@@ -263,4 +273,4 @@ Object {
 }
 `;
 
-exports[`insert-table insert table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`insert-table insert table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"><table><tbody><tr><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td></tr><tr><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td></tr></tbody></table></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
