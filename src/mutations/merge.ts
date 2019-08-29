@@ -11,7 +11,12 @@ import {
 import { Option, defaultOptions } from '../option';
 import { removeSelection } from '../selection';
 
-export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, opts: Option = defaultOptions) {
+export function mergeCells(
+  editor: Editor,
+  anchorKey: string,
+  focusKey: string,
+  opts: Required<Option> = defaultOptions,
+) {
   const table = TableLayout.create(editor);
   if (!table) return;
   const anchorCell = table.findCellBy(anchorKey);
@@ -36,9 +41,22 @@ export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, 
   editor.withoutNormalizing(() => {
     const blocks = createSelectedBlockMap(editor, anchorCell.key, focusCell.key);
     const contentNodes: Block[] = [];
-    table.table.forEach(row => {
+    let firstRow: number | null = null;
+    let newWidth = 0;
+    table.table.forEach((row, i) => {
       row.forEach(cell => {
         if (!blocks[cell.key]) return;
+        // calculate new width
+        const n = editor.value.document.getNode(cell.key);
+        if (Block.isBlock(n)) {
+          if (firstRow === null) {
+            firstRow = cell.row;
+          }
+          if (firstRow === cell.row) {
+            newWidth = newWidth + ~~cell.block.data.get('width') / (cell.block.data.get('colspan') || 1);
+          }
+        }
+
         if (cell.key === leftTopCell.key) return;
         // INFO: Collect all content and remove cells
         cell.block.nodes.forEach((content: Block | Inline | Text | undefined, i) => {
@@ -72,12 +90,12 @@ export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, 
         }
       });
     });
-
     // INFO: Set merged cell's rowspan and colspan
     editor = editor.setNodeByKey(leftTopCell.key, {
       type: leftTopCell.block.type,
       data: {
         ...leftTopCell.block.data.toObject(),
+        width: String(newWidth),
         colspan: String(size.width),
         rowspan: String(size.height - deletedRowNumber),
       },
@@ -124,7 +142,7 @@ function isValidHeight(selectedBlocks: Cell[][]) {
   return isHeightValid;
 }
 
-export function canMerge(editor: Editor, anchorKey: string, focusKey: string, opts: Option) {
+export function canMerge(editor: Editor, anchorKey: string, focusKey: string, opts: Required<Option>) {
   const selectedBlocks = collectSelectionBlocks(editor, anchorKey, focusKey, opts);
   const a = selectedBlocks.map(row => {
     const x = row[0].col;

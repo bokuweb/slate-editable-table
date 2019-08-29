@@ -4,7 +4,7 @@ import { TableLayout } from '../layout';
 import { Option } from '../option';
 import { mergeCells } from './merge';
 
-export function mergeBelow(opts: Option, editor: Editor) {
+export function mergeBelow(opts: Required<Option>, editor: Editor) {
   const currentCell = TableLayout.currentCell(editor);
   if (!currentCell) return;
   const { key } = currentCell;

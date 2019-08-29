@@ -2,7 +2,7 @@ import { Editor } from 'slate';
 import { TableLayout } from '../layout';
 import { Option } from '../option';
 
-export function removeColumn(opts: Option, editor: Editor, at?: number) {
+export function removeColumn(opts: Required<Option>, editor: Editor, at?: number) {
   const table = TableLayout.create(editor);
   if (!table) return editor;
   const columnIndex = typeof at === 'undefined' ? table.columnIndex : at;

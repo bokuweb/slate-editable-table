@@ -4,7 +4,7 @@ import { TableLayout } from '../layout';
 import { createCell } from '../create-cell';
 import { Option, defaultOptions } from '../option';
 
-export function insertLeft(opts: Option = defaultOptions, editor: Editor, at?: number) {
+export function insertLeft(opts: Required<Option> = defaultOptions, editor: Editor, at?: number) {
   const table = TableLayout.create(editor);
   if (!table) return editor;
   const columnIndex = typeof at !== 'undefined' ? at : table.columnIndex;

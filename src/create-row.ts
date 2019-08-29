@@ -3,13 +3,14 @@ import { Block } from 'slate';
 import { createCell } from './create-cell';
 import { Option, defaultOptions } from './option';
 
-export function createRow(opts: Option = defaultOptions, columns: number) {
+export function createRow(opts: Required<Option> = defaultOptions, columns: number, cellWidth: number = 120) {
   const cellNodes = Range(0, columns)
-    .map(() => createCell(opts).toJSON())
+    .map(() => createCell(opts, ' ', { width: `${cellWidth}` }).toJSON())
     .toArray();
   return Block.fromJSON({
     object: 'block',
     type: opts.typeRow,
     nodes: cellNodes,
+    data: {},
   });
 }

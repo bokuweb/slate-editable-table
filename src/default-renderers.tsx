@@ -18,21 +18,26 @@ const tableStyle = {
 
 type TableProps = {
   children: React.ReactNode;
+  maxWidth?: string;
+  onInit: (data: ResizeValue) => void;
   onResize: (e: MouseEvent, data: ResizeValue) => void;
-  onHandleMouseOver: () => void;
+  onHandleMouseOver?: () => void;
 };
 
-const Table = (props: TableProps & { attributes: any }) => {
+const Table = React.memo((props: TableProps & { attributes: any }) => {
+  const maxWidth = typeof props.maxWidth === 'undefined' ? 'auto' : props.maxWidth + 'px';
   const { ref } = useResizableTable({
+    maxWidth: props.maxWidth,
     onResize: props.onResize,
+    onInit: props.onInit,
     onHandleHover: props.onHandleMouseOver,
   });
   return (
-    <table style={tableStyle} {...props.attributes} ref={ref}>
+    <table style={{ ...tableStyle, maxWidth }} {...props.attributes} ref={ref}>
       {props.children}
     </table>
   );
-};
+});
 
 export function createRenderers(opts: Option = defaultOptions) {
   return (props: any, editor: any, next: () => void): any => {
@@ -48,8 +53,20 @@ export function createRenderers(opts: Option = defaultOptions) {
       case 'subheading':
         return <h2 {...props.attributes}>{props.children}</h2>;
       case opts.typeTable:
+        const maxWidth = props.node.data.get('maxWidth') as string | undefined;
         return (
           <Table
+            onInit={values => {
+              console.log(values);
+              Object.keys(values).forEach(k => {
+                const n = editor.value.document.getNode(k);
+                if (!Block.isBlock(n)) return;
+                editor.setNodeByKey(k, {
+                  type: n.type,
+                  data: { ...n.data.toObject(), width: values[k] },
+                });
+              });
+            }}
             onResize={(e, values) => {
               editor.blur();
               Object.keys(values).forEach(k => {
@@ -61,9 +78,7 @@ export function createRenderers(opts: Option = defaultOptions) {
                 });
               });
             }}
-            onHandleMouseOver={() => {
-              // editor.blur();
-            }}
+            maxWidth={maxWidth}
             attributes={props.attributes}
           >
             <tbody {...props.attributes}>{props.children}</tbody>

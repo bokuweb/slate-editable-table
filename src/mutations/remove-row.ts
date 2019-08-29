@@ -2,7 +2,7 @@ import { Editor, Block, BlockJSON, Inline, Text } from 'slate';
 import { TableLayout } from '../layout';
 import { Option, defaultOptions } from '../option';
 
-export function removeRow(opts: Option = defaultOptions, editor: Editor, at?: number) {
+export function removeRow(opts: Required<Option> = defaultOptions, editor: Editor, at?: number) {
   const table = TableLayout.create(editor);
   if (!table) return editor;
   const below = table.findBelow(table.cell.key);

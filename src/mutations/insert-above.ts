@@ -3,7 +3,7 @@ import { getRowIndex, TableLayout } from '../layout';
 import { Option, defaultOptions } from '../option';
 import { createRow } from '../create-row';
 
-export function insertAbove(opts: Option = defaultOptions, editor: Editor) {
+export function insertAbove(opts: Required<Option> = defaultOptions, editor: Editor) {
   const rowIndex = getRowIndex(editor, opts);
   if (rowIndex === null) return editor;
   const table = TableLayout.create(editor);

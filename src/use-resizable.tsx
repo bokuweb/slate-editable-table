@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 export type ResizableProps = {
+  maxWidth?: string;
+  onInit?: (v: ResizeValue) => void;
   onResizeStart?: (e: Event) => void;
   onResize?: (e: MouseEvent, v: ResizeValue) => void;
   onResizeStop?: (e: MouseEvent, v: ResizeValue) => void;
@@ -26,6 +28,22 @@ const handlerSelector = '[data-resize-handle]';
 
 export const useResizableTable = (props: ResizableProps) => {
   const ref = React.useRef<HTMLTableElement | null>(null);
+
+  React.useEffect(() => {
+    if (!ref.current) return;
+    const table = ref.current;
+    const cells = Array.from(table.querySelectorAll('th, td')) as HTMLElement[];
+    const size = cells.reduce(
+      (acc, cell) => {
+        if (!cell.dataset || !cell.dataset.key) return acc;
+        acc[cell.dataset.key] = cell.offsetWidth;
+        return acc;
+      },
+      {} as { [key: string]: number },
+    );
+    props.onInit && props.onInit(size);
+  }, []);
+
   React.useEffect(() => {
     if (!ref.current) return;
     const table = ref.current;
@@ -64,7 +82,11 @@ export const useResizableTable = (props: ResizableProps) => {
 
             const onMouseMove = (e: MouseEvent) => {
               if (!isResizing) return;
-              var diffX = e.pageX - pageX;
+              let diffX = e.pageX - pageX;
+              // if (typeof props.maxWidth !== 'undefined') {
+              //   const d = +props.maxWidth - table.offsetWidth;
+              //   diffX = d < diffX ? d : diffX;
+              // }
               const resizedValues = createResizedValues(rows, boundary, diffX);
               props.onResize && props.onResize(e, resizedValues);
             };
@@ -139,7 +161,7 @@ function createResizedValues(rows: Row[], boundary: number, diffX: number): Resi
             return acc;
           }
         }
-        if (hasCurrent && !hasNext /* && diffX > 0 */) {
+        if (hasCurrent && !hasNext) {
           hasNext = true;
           acc[cell.ref.dataset.key] = cell.width - diffX;
           return acc;

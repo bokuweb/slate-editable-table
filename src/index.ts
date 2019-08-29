@@ -3,7 +3,7 @@ import { Editor, Block } from 'slate';
 import * as table from './layout';
 import { removeSelection, addSelectionStyle } from './selection';
 import { canMerge } from './mutations/merge';
-
+import { TableOption } from './create-table';
 import { removeRow } from './mutations/remove-row';
 import { removeColumn } from './mutations/remove-column';
 import { mergeBelow } from './mutations/merge-below';
@@ -26,7 +26,7 @@ import { createRenderers } from './default-renderers';
 export interface EditTableCommands {
   isSelectionInTable: () => boolean;
   findCurrentTable: () => Block | null;
-  insertTable: () => EditTableCommands & Editor;
+  insertTable: (col?: number, row?: number, tableOption?: TableOption) => EditTableCommands & Editor;
 
   insertRow: () => EditTableCommands & Editor;
   insertAbove: () => EditTableCommands & Editor;
@@ -46,7 +46,9 @@ export interface EditTableCommands {
   removeTable: () => EditTableCommands & Editor;
 }
 
-export function EditTable(opts: Option = defaultOptions) {
+export function EditTable(options: Option = defaultOptions) {
+  const opts = { ...defaultOptions, ...options };
+
   function isSelectionInTable(editor: Editor) {
     const { startBlock } = editor.value;
     if (!startBlock) return false;

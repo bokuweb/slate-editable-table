@@ -1,9 +1,9 @@
 export type Option = {
-  typeCell: string;
-  typeRow: string;
-  typeTable: string;
-  typeContent: string;
-  selectionColor: string;
+  typeCell?: string;
+  typeRow?: string;
+  typeTable?: string;
+  typeContent?: string;
+  selectionColor?: string;
 };
 
 export const defaultOptions = {
