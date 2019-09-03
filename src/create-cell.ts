@@ -5,6 +5,7 @@ export function createCell(opts: Option = defaultOptions, text = ' ', data?: { [
   const { typeCell, typeContent } = opts;
   return Block.fromJSON({
     type: typeCell,
+    object: 'block',
     nodes: [
       {
         object: 'block',

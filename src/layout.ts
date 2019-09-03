@@ -419,15 +419,13 @@ export function collectSelectionBlocks(
 export function createLayout(rows: List<Block | Text | Inline>): Layout {
   const rowLength = rows.size;
   const colLength = Math.max(
-    ...Array.from(
-      rows.map(node => {
-        if (!Block.isBlock(node)) return 0;
-        return node.nodes.reduce((acc: number = 0, n: Block | Text | Inline | undefined) => {
-          if (!Block.isBlock(n)) return acc;
-          return acc + ((n.data && Number(n.data.get('colspan'))) || 1);
-        }, 0);
-      }),
-    ),
+    ...Array.from(rows.toArray()).map(node => {
+      if (!Block.isBlock(node)) return 0;
+      return node.nodes.reduce((acc: number = 0, n: Block | Text | Inline | undefined) => {
+        if (!Block.isBlock(n)) return acc;
+        return acc + ((n.data && Number(n.data.get('colspan'))) || 1);
+      }, 0);
+    }),
   );
 
   const layout: Layout = [];
