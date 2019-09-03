@@ -5,10 +5,10 @@ import { Option } from '../option';
 import { mergeCells } from './merge';
 
 export function mergeRight(opts: Required<Option>, editor: Editor) {
-  const currentCell = TableLayout.currentCell(editor);
+  const currentCell = TableLayout.currentCell(editor, opts);
   if (!currentCell) return;
   const { key } = currentCell;
-  const table = TableLayout.create(editor);
+  const table = TableLayout.create(editor, opts);
   if (!table) return;
   if (table.isLastColumn(key)) return;
 

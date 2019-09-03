@@ -1,12 +1,12 @@
 import { Editor } from 'slate';
 import { TableLayout, getRowIndex } from '../layout';
-import { Option } from '../option';
+import { Option, defaultOptions } from '../option';
 import { createRow } from '../create-row';
 
 export function insertBelow(opts: Required<Option>, editor: Editor) {
   const rowIndex = getRowIndex(editor, opts);
   if (rowIndex === null) return editor;
-  const table = TableLayout.create(editor);
+  const table = TableLayout.create(editor, defaultOptions);
   if (!table) return editor;
   if (rowIndex + 1 === table.table.length) {
     const newRow = createRow(opts, table.table[0].length);

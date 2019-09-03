@@ -12,7 +12,7 @@ import { Option } from '../option';
 import { removeSelection } from '../selection';
 
 export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, opts: Required<Option>) {
-  const table = TableLayout.create(editor);
+  const table = TableLayout.create(editor, opts);
   if (!table) return;
   const anchorCell = table.findCellBy(anchorKey);
   const focusCell = table.findCellBy(focusKey);
@@ -34,7 +34,7 @@ export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, 
   //       This is because it does not work properly when insertBlock in loop..
   //       I'll do some investigation later... :sob:
   editor.withoutNormalizing(() => {
-    const blocks = createSelectedBlockMap(editor, anchorCell.key, focusCell.key);
+    const blocks = createSelectedBlockMap(editor, anchorCell.key, focusCell.key, opts);
     const contentNodes: Block[] = [];
     let firstRow: number | null = null;
     let newWidth = 0;

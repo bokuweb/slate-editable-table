@@ -12,7 +12,7 @@ export type Option = {
   defaultColumnWidth?: number;
 };
 
-export const defaultOptions: Option = {
+export const defaultOptions: Required<Option> = {
   typeCell: 'table_cell',
   typeRow: 'table_row',
   typeTable: 'table',

@@ -2,7 +2,7 @@ import { Block, Node, Text, Inline } from 'slate';
 import { Editor } from 'slate';
 import { List } from 'immutable';
 
-import { defaultOptions } from './option';
+import { defaultOptions, Option } from './option';
 
 type CellPosition = {
   row: number;
@@ -203,7 +203,7 @@ export class TableLayout {
     return this.lastRow.some(r => r.key === key);
   }
 
-  static create(editor: Editor, opts = defaultOptions) {
+  static create(editor: Editor, opts: Required<Option>) {
     if (!editor) return null;
     const table = findCurrentTable(editor, opts);
     if (!table) return null;
@@ -220,7 +220,7 @@ export class TableLayout {
     return new TableLayout(layout, keyDict, currentTable, currentRow, currentCell);
   }
 
-  static currentCell(editor: Editor, opts = defaultOptions) {
+  static currentCell(editor: Editor, opts: Required<Option>) {
     return findStartCell(editor, opts);
   }
 
@@ -232,18 +232,18 @@ export class TableLayout {
     }) as Block;
   }
 
-  static findRowBlock(editor: Editor, index: number, opts = defaultOptions): Block | undefined {
+  static findRowBlock(editor: Editor, index: number, opts: Required<Option>): Block | undefined {
     const table = TableLayout.currentTable(editor, opts);
     if (!table) return;
     const block = table.nodes.get(index);
     return Block.isBlock(block) ? block : undefined;
   }
 
-  static currentRow(editor: Editor, opts = defaultOptions) {
+  static currentRow(editor: Editor, opts: Required<Option>) {
     return TableLayout.findBlock(editor, opts.typeRow);
   }
 
-  static currentTable(editor: Editor, opts = defaultOptions) {
+  static currentTable(editor: Editor, opts: Required<Option>) {
     return TableLayout.findBlock(editor, opts.typeTable);
   }
 
@@ -303,7 +303,7 @@ export function findFocusCell(editor: Editor, opts = defaultOptions): Block | nu
 // INFO: We can not get expected block with Value.anchorBlock.
 //       We need to do some investigation about it.
 //       For now find anchor cell with window.getSelection.
-export function findAnchorCell(editor: Editor, opts = defaultOptions): Block | null {
+export function findAnchorCell(editor: Editor, opts: Required<Option>): Block | null {
   const selection = window.getSelection();
   if (!selection) return null;
   const anchored = selection.anchorNode as HTMLElement;
@@ -311,7 +311,7 @@ export function findAnchorCell(editor: Editor, opts = defaultOptions): Block | n
   return findCellBlockByElement(editor, anchored, opts);
 }
 
-export function findStartCell(editor: Editor, opts = defaultOptions): Block | null {
+export function findStartCell(editor: Editor, opts: Required<Option>): Block | null {
   const { startBlock } = editor.value;
   return startBlock.type === opts.typeCell ? startBlock : TableLayout.findBlock(editor, opts.typeCell);
 }
@@ -364,7 +364,7 @@ export function createSelectedBlockMap(
   editor: Editor,
   anchorKey: string,
   focusKey: string,
-  opts = defaultOptions,
+  opts: Required<Option>,
 ): { [key: string]: Cell } {
   const t = TableLayout.create(editor, opts);
   if (!t) return {};
@@ -385,7 +385,7 @@ export function createSelectedBlockMap(
   );
 }
 
-export function getRowIndex(editor: Editor, opts = defaultOptions): number | null {
+export function getRowIndex(editor: Editor, opts: Required<Option>): number | null {
   const t = findCurrentTable(editor, opts);
   const row = findCurrentRow(editor, opts);
   if (!t) return null;
@@ -399,7 +399,7 @@ export function collectSelectionBlocks(
   editor: Editor,
   anchorKey: string,
   focusKey: string,
-  opts = defaultOptions,
+  opts: Required<Option>,
 ): Cell[][] {
   const t = TableLayout.create(editor, opts);
   if (!t) return [];

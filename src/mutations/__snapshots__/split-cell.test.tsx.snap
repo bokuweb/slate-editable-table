@@ -207,7 +207,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": 15,
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -310,7 +312,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": 15,
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -348,7 +352,7 @@ Object {
 }
 `;
 
-exports[`split-cell split 1x3 cell at 3x4 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td colSpan=\\"1\\" rowspan=\\"1\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`split-cell split 1x3 cell at 3x4 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td colSpan=\\"1\\" rowspan=\\"1\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:15px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:15px\\"></td></tr></tbody></table>"`;
 
 exports[`split-cell split 2X2 cell at 3x3 table 1`] = `
 Object {
@@ -407,7 +411,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": 15,
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -464,7 +470,9 @@ Object {
             "data": Object {},
             "nodes": Array [
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": 15,
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -488,7 +496,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": 15,
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -637,4 +647,4 @@ Object {
 }
 `;
 
-exports[`split-cell split 2X2 cell at 3x3 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"1\\" rowspan=\\"1\\" style=\\"width:200px\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td></tr></tbody></table>"`;
+exports[`split-cell split 2X2 cell at 3x3 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"1\\" rowspan=\\"1\\" style=\\"width:200px\\"></td><td style=\\"width:15px\\"></td><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td></tr></tbody></table>"`;

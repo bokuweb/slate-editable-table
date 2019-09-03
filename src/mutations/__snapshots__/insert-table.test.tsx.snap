@@ -41,7 +41,7 @@ Object {
                         "nodes": Array [
                           Object {
                             "data": Object {
-                              "width": "120",
+                              "width": "15",
                             },
                             "nodes": Array [
                               Object {
@@ -67,7 +67,7 @@ Object {
                           },
                           Object {
                             "data": Object {
-                              "width": "120",
+                              "width": "15",
                             },
                             "nodes": Array [
                               Object {
@@ -100,7 +100,7 @@ Object {
                         "nodes": Array [
                           Object {
                             "data": Object {
-                              "width": "120",
+                              "width": "15",
                             },
                             "nodes": Array [
                               Object {
@@ -126,7 +126,7 @@ Object {
                           },
                           Object {
                             "data": Object {
-                              "width": "120",
+                              "width": "15",
                             },
                             "nodes": Array [
                               Object {
@@ -273,4 +273,4 @@ Object {
 }
 `;
 
-exports[`insert-table insert table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"><table><tbody><tr><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td></tr><tr><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td></tr></tbody></table></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`insert-table insert table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"><table><tbody><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td></tr><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td></tr></tbody></table></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;

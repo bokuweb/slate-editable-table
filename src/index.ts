@@ -58,7 +58,7 @@ export function EditTable(options: Option = defaultOptions) {
   }
 
   function canSelectedCellsMerge(editor: Editor): boolean {
-    const t = table.TableLayout.create(editor);
+    const t = table.TableLayout.create(editor, opts);
     if (!t) return false;
     const anchored = table.findAnchorCell(editor, opts);
     const focused = table.findFocusCell(editor, opts);
@@ -88,7 +88,7 @@ export function EditTable(options: Option = defaultOptions) {
     const { value } = editor;
     const { selection } = value;
     const key = editor.value.focusBlock && editor.value.focusBlock.key;
-    const cell = table.TableLayout.currentCell(editor);
+    const cell = table.TableLayout.currentCell(editor, opts);
     if (!cell) return next();
     // INFO: Skip backspace when first node and offset 0
     if (editor.value.focusBlock.type === opts.typeCell) {
@@ -159,7 +159,7 @@ export function EditTable(options: Option = defaultOptions) {
     // HACK: Add ::selection style when greater than 1 cells selected.
     addSelectionStyle();
 
-    const blocks = table.createSelectedBlockMap(editor, anchorCellBlock.key, focusCellBlock.key);
+    const blocks = table.createSelectedBlockMap(editor, anchorCellBlock.key, focusCellBlock.key, opts);
     t.table.forEach(row => {
       row.forEach(cell => {
         if (blocks[cell.key]) {
@@ -232,7 +232,7 @@ export function EditTable(options: Option = defaultOptions) {
       const { value } = editor;
       const { selection } = value;
       const key = editor.value.focusBlock && editor.value.focusBlock.key;
-      const cell = table.TableLayout.currentCell(editor);
+      const cell = table.TableLayout.currentCell(editor, opts);
       if (!cell) return next();
       // INFO: Skip backspace when first node and offset 0
       event.preventDefault();

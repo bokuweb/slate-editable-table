@@ -2,6 +2,7 @@ import { Editor, Value, ValueJSON, Block } from 'slate';
 import { EditTable, hasTablePlugin } from '../index';
 import { createHtml } from './test-helper';
 import { TableLayout } from '../layout';
+import { defaultOptions } from '../option';
 
 import mock1 from '../../mocks/three-by-three-colspan-rowspan-2';
 import mock2 from '../../mocks/four-by-three-rowspan-3';
@@ -17,7 +18,7 @@ describe('split-cell', function() {
     const actual = editor.splitCell().value;
     expect(actual.toJSON()).toMatchSnapshot();
     expect(createHtml(actual)).toMatchSnapshot();
-    const table = TableLayout.create(editor);
+    const table = TableLayout.create(editor, defaultOptions);
     if (!table) throw new Error('Failed to split cell');
     expect(table.currentTable.nodes.size).toBe(3);
     table.currentTable.nodes.forEach(row => {
@@ -35,7 +36,7 @@ describe('split-cell', function() {
     const actual = editor.splitCell().value;
     expect(actual.toJSON()).toMatchSnapshot();
     expect(createHtml(actual)).toMatchSnapshot();
-    const table = TableLayout.create(editor);
+    const table = TableLayout.create(editor, defaultOptions);
     if (!table) throw new Error('Failed to split cell');
     expect(table.currentTable.nodes.size).toBe(3);
     table.currentTable.nodes.forEach(row => {

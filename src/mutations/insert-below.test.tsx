@@ -2,6 +2,7 @@ import { Editor, Value, Block } from 'slate';
 import { EditTable, hasTablePlugin } from '../index';
 import { createHtml } from './test-helper';
 import { TableLayout } from '../layout';
+import { defaultOptions } from '../option';
 
 import twoByTwo from '../../mocks/two-by-two';
 import fourByFourMerged from '../../mocks/four-by-four-rowspan-3-and-colspan4';
@@ -40,7 +41,7 @@ describe('insert-below', function() {
     expect(actual.toJSON()).toMatchSnapshot();
     expect(createHtml(actual)).toMatchSnapshot();
 
-    const table = TableLayout.create(editor);
+    const table = TableLayout.create(editor, defaultOptions);
     if (!table) throw new Error('Failed to split cell');
     expect(table.currentTable.nodes.size).toBe(5);
     const expectLength = [1, 4, 4, 3, 3];
@@ -60,7 +61,7 @@ describe('insert-below', function() {
     expect(actual.toJSON()).toMatchSnapshot();
     expect(createHtml(actual)).toMatchSnapshot();
 
-    const table = TableLayout.create(editor);
+    const table = TableLayout.create(editor, defaultOptions);
     if (!table) throw new Error('Failed to split cell');
     expect(table.currentTable.nodes.size).toBe(5);
     const expectLength = [1, 4, 3, 3, 4];

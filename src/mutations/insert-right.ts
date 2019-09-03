@@ -2,10 +2,10 @@ import { Editor } from 'slate';
 import { TableLayout } from '../layout';
 
 import { createCell } from '../create-cell';
-import { Option, defaultOptions } from '../option';
+import { Option } from '../option';
 
 export function insertRight(opts: Required<Option>, editor: Editor, at?: number) {
-  const table = TableLayout.create(editor);
+  const table = TableLayout.create(editor, opts);
   if (!table) return editor;
   const columnIndex = typeof at !== 'undefined' ? at : table.columnIndex;
 

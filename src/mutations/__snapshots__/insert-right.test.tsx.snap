@@ -55,6 +55,7 @@ Object {
               Object {
                 "data": Object {
                   "rowspan": "1",
+                  "width": 15,
                 },
                 "nodes": Array [
                   Object {
@@ -136,6 +137,7 @@ Object {
               Object {
                 "data": Object {
                   "rowspan": "1",
+                  "width": 15,
                 },
                 "nodes": Array [
                   Object {
@@ -198,7 +200,7 @@ Object {
 }
 `;
 
-exports[`insert-right insert column at the left end of the 2x2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`insert-right insert column at the left end of the 2x2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
 
 exports[`insert-right insert column at the left end of the 3x3 table 1`] = `
 Object {
@@ -351,6 +353,7 @@ Object {
               Object {
                 "data": Object {
                   "rowspan": "1",
+                  "width": 15,
                 },
                 "nodes": Array [
                   Object {
@@ -441,7 +444,7 @@ Object {
 }
 `;
 
-exports[`insert-right insert column at the left end of the 3x3 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"3\\" rowspan=\\"2\\" style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:auto\\"></td><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td></tr></tbody></table>"`;
+exports[`insert-right insert column at the left end of the 3x3 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"3\\" rowspan=\\"2\\" style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td></tr></tbody></table>"`;
 
 exports[`insert-right insert column at the right end of the 2x2 table 1`] = `
 Object {
@@ -522,6 +525,7 @@ Object {
               Object {
                 "data": Object {
                   "rowspan": "1",
+                  "width": 15,
                 },
                 "nodes": Array [
                   Object {
@@ -603,6 +607,7 @@ Object {
               Object {
                 "data": Object {
                   "rowspan": "1",
+                  "width": 15,
                 },
                 "nodes": Array [
                   Object {
@@ -641,7 +646,7 @@ Object {
 }
 `;
 
-exports[`insert-right insert column at the right end of the 2x2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`insert-right insert column at the right end of the 2x2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td></tr></tbody></table>"`;
 
 exports[`insert-right insert column at the right end of the 3x3 table 1`] = `
 Object {
@@ -728,6 +733,7 @@ Object {
               Object {
                 "data": Object {
                   "rowspan": "1",
+                  "width": 15,
                 },
                 "nodes": Array [
                   Object {
@@ -787,6 +793,7 @@ Object {
               Object {
                 "data": Object {
                   "rowspan": "1",
+                  "width": 15,
                 },
                 "nodes": Array [
                   Object {
@@ -898,6 +905,7 @@ Object {
               Object {
                 "data": Object {
                   "rowspan": "1",
+                  "width": 15,
                 },
                 "nodes": Array [
                   Object {
@@ -936,4 +944,4 @@ Object {
 }
 `;
 
-exports[`insert-right insert column at the right end of the 3x3 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"2\\" style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`insert-right insert column at the right end of the 3x3 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"2\\" style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td></tr><tr><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td></tr><tr><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td></tr></tbody></table>"`;

@@ -6,7 +6,7 @@ import { createRow } from '../create-row';
 export function insertAbove(opts: Required<Option>, editor: Editor) {
   const rowIndex = getRowIndex(editor, opts);
   if (rowIndex === null) return editor;
-  const table = TableLayout.create(editor);
+  const table = TableLayout.create(editor, opts);
   if (!table) return editor;
 
   if (rowIndex === 0) {

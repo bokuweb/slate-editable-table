@@ -3,7 +3,7 @@ import { TableLayout } from '../layout';
 import { Option, defaultOptions } from '../option';
 
 export function removeRow(opts: Required<Option> = defaultOptions, editor: Editor, at?: number) {
-  const table = TableLayout.create(editor);
+  const table = TableLayout.create(editor, opts);
   if (!table) return editor;
   const below = table.findBelow(table.cell.key);
   const { rowIndex, row } = table;

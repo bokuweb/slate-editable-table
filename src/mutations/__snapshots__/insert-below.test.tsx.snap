@@ -326,7 +326,7 @@ Object {
             "nodes": Array [
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -352,7 +352,7 @@ Object {
               },
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -378,7 +378,7 @@ Object {
               },
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -404,7 +404,7 @@ Object {
               },
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -443,7 +443,7 @@ Object {
 }
 `;
 
-exports[`insert-below insert row at the bottom of the 4x4 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p><table><tbody><tr><td colSpan=\\"4\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td rowspan=\\"3\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td></tr></tbody></table>"`;
+exports[`insert-below insert row at the bottom of the 4x4 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p><table><tbody><tr><td colSpan=\\"4\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td rowspan=\\"3\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td></tr></tbody></table>"`;
 
 exports[`insert-below insert row at the top of the 4x4 table 1`] = `
 Object {
@@ -508,7 +508,7 @@ Object {
             "nodes": Array [
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -534,7 +534,7 @@ Object {
               },
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -560,7 +560,7 @@ Object {
               },
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -586,7 +586,7 @@ Object {
               },
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -888,7 +888,7 @@ Object {
 }
 `;
 
-exports[`insert-below insert row at the top of the 4x4 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p><table><tbody><tr><td colSpan=\\"4\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td rowspan=\\"3\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`insert-below insert row at the top of the 4x4 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p><table><tbody><tr><td colSpan=\\"4\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td rowspan=\\"3\\" style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
 
 exports[`insert-below insert row to bottom of 2X2 table 1`] = `
 Object {
@@ -1030,7 +1030,7 @@ Object {
             "nodes": Array [
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -1056,7 +1056,7 @@ Object {
               },
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -1095,7 +1095,7 @@ Object {
 }
 `;
 
-exports[`insert-below insert row to bottom of 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td></tr></tbody></table>"`;
+exports[`insert-below insert row to bottom of 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td></tr></tbody></table>"`;
 
 exports[`insert-below insert row to top of 2X2 table 1`] = `
 Object {
@@ -1182,7 +1182,7 @@ Object {
             "nodes": Array [
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -1208,7 +1208,7 @@ Object {
               },
               Object {
                 "data": Object {
-                  "width": "120",
+                  "width": "15",
                 },
                 "nodes": Array [
                   Object {
@@ -1302,4 +1302,4 @@ Object {
 }
 `;
 
-exports[`insert-below insert row to top of 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:120px\\"></td><td style=\\"width:120px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`insert-below insert row to top of 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;

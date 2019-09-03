@@ -1,7 +1,7 @@
 import { Range } from 'immutable';
 import { Block } from 'slate';
 import { createRow } from './create-row';
-import { Option, defaultOptions } from './option';
+import { Option } from './option';
 
 export type TableOption = {
   columnWidth: number;

@@ -2,10 +2,10 @@ import { Editor } from 'slate';
 import { TableLayout } from '../layout';
 
 import { createCell } from '../create-cell';
-import { Option, defaultOptions } from '../option';
+import { Option } from '../option';
 
-export function splitCell(opts: Option = defaultOptions, editor: Editor) {
-  const table = TableLayout.create(editor);
+export function splitCell(opts: Required<Option>, editor: Editor) {
+  const table = TableLayout.create(editor, opts);
   if (!table) return editor;
   const current = table.cell;
   const cell = table.findCellBy(current.key);

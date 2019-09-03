@@ -62,7 +62,7 @@ describe('merge', function() {
     expect(newEditor.value.toJSON()).toMatchSnapshot();
     expect(createHtml(newEditor.value)).toMatchSnapshot();
 
-    const table = TableLayout.create(editor);
+    const table = TableLayout.create(editor, defaultOptions);
     if (!table) throw new Error('Failed to split cell');
     expect(table.currentTable.nodes.size).toBe(3);
     const expectLength = [3, 2, 2];
@@ -84,7 +84,7 @@ describe('merge', function() {
     expect(newEditor.value.toJSON()).toMatchSnapshot();
     expect(createHtml(newEditor.value)).toMatchSnapshot();
 
-    const table = TableLayout.create(editor);
+    const table = TableLayout.create(editor, defaultOptions);
     if (!table) throw new Error('Failed to split cell');
     expect(table.currentTable.nodes.size).toBe(3);
     const expectLength = [2, 1, 1];
