@@ -8,15 +8,10 @@ import {
   createSelectedBlockMap,
   Cell,
 } from '../layout';
-import { Option, defaultOptions } from '../option';
+import { Option } from '../option';
 import { removeSelection } from '../selection';
 
-export function mergeCells(
-  editor: Editor,
-  anchorKey: string,
-  focusKey: string,
-  opts: Required<Option> = defaultOptions,
-) {
+export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, opts: Required<Option>) {
   const table = TableLayout.create(editor);
   if (!table) return;
   const anchorCell = table.findCellBy(anchorKey);

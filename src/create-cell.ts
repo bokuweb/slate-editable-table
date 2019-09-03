@@ -12,6 +12,9 @@ export function createCell(opts: Option = defaultOptions, text = ' ', data?: { [
         nodes: [Text.create(text).toJSON()],
       },
     ],
-    data,
+    data: {
+      width: opts.defaultColumnWidth,
+      ...data,
+    },
   } as BlockJSON);
 }

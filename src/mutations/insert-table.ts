@@ -1,14 +1,8 @@
 import { Editor } from 'slate';
 import { createTable, TableOption } from '../create-table';
-import { Option, defaultOptions } from '../option';
+import { Option } from '../option';
 
-export function insertTable(
-  opts: Required<Option> = defaultOptions,
-  editor: Editor,
-  columns = 2,
-  rows = 2,
-  tableOption?: TableOption,
-) {
+export function insertTable(opts: Required<Option>, editor: Editor, columns = 2, rows = 2, tableOption?: TableOption) {
   const { value } = editor;
 
   if (!value.selection.start.key) return false;

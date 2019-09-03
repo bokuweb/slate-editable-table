@@ -20,24 +20,39 @@ type TableProps = {
   children: React.ReactNode;
   maxWidth?: string;
   onInit: (data: ResizeValue) => void;
+  onUpdate: (data: ResizeValue) => void;
   onResize: (e: MouseEvent, data: ResizeValue) => void;
   onHandleMouseOver?: () => void;
 };
 
-const Table = React.memo((props: TableProps & { attributes: any }) => {
-  const maxWidth = typeof props.maxWidth === 'undefined' ? 'auto' : props.maxWidth + 'px';
-  const { ref } = useResizableTable({
-    maxWidth: props.maxWidth,
-    onResize: props.onResize,
-    onInit: props.onInit,
-    onHandleHover: props.onHandleMouseOver,
-  });
-  return (
-    <table style={{ ...tableStyle, maxWidth }} {...props.attributes} ref={ref}>
-      {props.children}
-    </table>
-  );
-});
+export interface TableHandler {
+  update: () => void;
+}
+
+export const InnerTable = React.forwardRef<TableHandler, TableProps & { attributes: any; style?: React.CSSProperties }>(
+  (props, tableRef) => {
+    const maxWidth = typeof props.maxWidth === 'undefined' ? 'auto' : props.maxWidth + 'px';
+    const { ref, update } = useResizableTable({
+      maxWidth: props.maxWidth,
+      onResize: props.onResize,
+      onInit: props.onInit,
+      onUpdate: props.onUpdate,
+      onHandleHover: props.onHandleMouseOver,
+    });
+    React.useImperativeHandle(tableRef, () => ({
+      update: () => {
+        update();
+      },
+    }));
+    return (
+      <table style={{ ...tableStyle, maxWidth }} {...props.attributes} ref={ref}>
+        {props.children}
+      </table>
+    );
+  },
+);
+
+const Table = React.memo(InnerTable);
 
 function updateWidth(editor: Editor, value: ResizeValue) {
   Object.keys(value).forEach(k => {
@@ -50,7 +65,7 @@ function updateWidth(editor: Editor, value: ResizeValue) {
   });
 }
 
-export function createRenderers(opts: Option = defaultOptions) {
+export function createRenderers(opts: Option = defaultOptions, ref: any) {
   return (props: any, editor: any, next: () => void): any => {
     switch (props.node.type) {
       case opts.typeContent:
@@ -67,7 +82,12 @@ export function createRenderers(opts: Option = defaultOptions) {
         const maxWidth = props.node.data.get('maxWidth') as string | undefined;
         return (
           <Table
+            ref={ref}
             onInit={values => {
+              updateWidth(editor, values);
+            }}
+            onUpdate={values => {
+              console.log(values);
               updateWidth(editor, values);
             }}
             onResize={(e, values) => {
@@ -75,13 +95,18 @@ export function createRenderers(opts: Option = defaultOptions) {
               updateWidth(editor, values);
             }}
             maxWidth={maxWidth}
+            style={opts.tableStyle}
             attributes={props.attributes}
           >
             <tbody {...props.attributes}>{props.children}</tbody>
           </Table>
         );
       case opts.typeRow:
-        return <tr {...props.attributes}>{props.children}</tr>;
+        return (
+          <tr {...props.attributes} style={opts.rowStyle}>
+            {props.children}
+          </tr>
+        );
       case opts.typeCell:
         const width =
           typeof props.node.data.get('width') === 'undefined' ? 'auto' : props.node.data.get('width') + 'px';
@@ -91,7 +116,7 @@ export function createRenderers(opts: Option = defaultOptions) {
             colSpan={props.node.data.get('colspan')}
             rowSpan={props.node.data.get('rowspan')}
             style={{
-              textAlign: props.node.data.get('align'),
+              ...opts.cellStyle,
               width,
               backgroundColor: props.node.data.get('selectionColor'),
             }}

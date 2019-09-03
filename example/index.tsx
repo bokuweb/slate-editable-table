@@ -97,7 +97,7 @@ export class ExampleEditor extends React.Component<Props> {
   };
 
   insertTable = () => {
-    this.onChange(this.editor.insertTable(3, 3, { cellWidth: 200, maxWidth: 500 }));
+    this.onChange(this.editor.insertTable(3, 3, { columnWidth: 200, maxWidth: 500 }));
   };
 
   insertLeft = () => {

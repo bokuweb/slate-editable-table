@@ -4,7 +4,7 @@ import { TableLayout } from '../layout';
 import { createCell } from '../create-cell';
 import { Option, defaultOptions } from '../option';
 
-export function insertRight(opts: Required<Option> = defaultOptions, editor: Editor, at?: number) {
+export function insertRight(opts: Required<Option>, editor: Editor, at?: number) {
   const table = TableLayout.create(editor);
   if (!table) return editor;
   const columnIndex = typeof at !== 'undefined' ? at : table.columnIndex;

@@ -1,4 +1,5 @@
 import { Editor, Block } from 'slate';
+import * as React from 'react';
 
 import * as table from './layout';
 import { removeSelection, addSelectionStyle } from './selection';
@@ -21,7 +22,7 @@ import { insertTable } from './mutations/insert-table';
 import { removeTable } from './mutations/remove-table';
 import { splitCell } from './mutations/split-cell';
 
-import { createRenderers } from './default-renderers';
+import { createRenderers, TableHandler } from './default-renderers';
 
 export interface EditTableCommands {
   isSelectionInTable: () => boolean;
@@ -47,7 +48,8 @@ export interface EditTableCommands {
 }
 
 export function EditTable(options: Option = defaultOptions) {
-  const opts = { ...defaultOptions, ...options };
+  const opts = { ...defaultOptions, ...options } as Required<Option>;
+  const ref = React.createRef<TableHandler>();
 
   function isSelectionInTable(editor: Editor) {
     const { startBlock } = editor.value;
@@ -77,6 +79,7 @@ export function EditTable(options: Option = defaultOptions) {
       if (!isSelectionInTable(editor)) {
         return editor;
       }
+      ref.current && ref.current.update();
       return fn(...[opts, editor].concat(args));
     };
   }
@@ -182,7 +185,6 @@ export function EditTable(options: Option = defaultOptions) {
       return next();
     }
     const { value } = editor;
-
     // INFO: It is needed to prevent replace some <td /> s when some cells selected.
     if (value.startBlock !== value.endBlock) {
       event.preventDefault();
@@ -263,7 +265,7 @@ export function EditTable(options: Option = defaultOptions) {
     next();
   }
 
-  const renderer = createRenderers(opts);
+  const renderer = createRenderers(opts, ref);
 
   return {
     onKeyDown,

@@ -4,18 +4,13 @@ import { createRow } from './create-row';
 import { Option, defaultOptions } from './option';
 
 export type TableOption = {
-  cellWidth: number;
+  columnWidth: number;
   maxWidth: number;
 };
 
-export function createTable(
-  opts: Required<Option> = defaultOptions,
-  columns: number,
-  rows: number,
-  tableOptions?: TableOption,
-) {
+export function createTable(opts: Required<Option>, columns: number, rows: number, tableOptions?: TableOption) {
   const rowNodes = Range(0, rows)
-    .map(() => createRow(opts, columns, tableOptions && tableOptions.cellWidth).toJSON())
+    .map(() => createRow(opts, columns, tableOptions && tableOptions.columnWidth).toJSON())
     .toArray();
 
   return Block.fromJSON({

@@ -3,6 +3,7 @@ import * as React from 'react';
 export type ResizableProps = {
   maxWidth?: string;
   onInit?: (v: ResizeValue) => void;
+  onUpdate?: (v: ResizeValue) => void;
   onResizeStart?: (e: Event) => void;
   onResize?: (e: MouseEvent, v: ResizeValue) => void;
   onResizeStop?: (e: MouseEvent, v: ResizeValue) => void;
@@ -30,11 +31,11 @@ const handlerSelector = '[data-resize-handle]';
 export const useResizableTable = (props: ResizableProps) => {
   const ref = React.useRef<HTMLTableElement | null>(null);
 
-  React.useEffect(() => {
+  const createSize = () => {
     if (!ref.current) return;
     const table = ref.current;
     const cells = Array.from(table.querySelectorAll('th, td')) as HTMLElement[];
-    const size = cells.reduce(
+    return cells.reduce(
       (acc, cell) => {
         if (!cell.dataset || !cell.dataset.key) return acc;
         acc[cell.dataset.key] = cell.offsetWidth;
@@ -42,8 +43,23 @@ export const useResizableTable = (props: ResizableProps) => {
       },
       {} as { [key: string]: number },
     );
-    props.onInit && props.onInit(size);
+  };
+
+  React.useEffect(() => {
+    if (!ref.current) return;
+    const size = createSize();
+    if (size) {
+      props.onInit && props.onInit(size);
+    }
   }, []);
+
+  const update = () => {
+    if (!ref.current) return;
+    const size = createSize();
+    if (size) {
+      props.onUpdate && props.onUpdate(size);
+    }
+  };
 
   React.useEffect(() => {
     if (!ref.current) return;
@@ -85,7 +101,6 @@ export const useResizableTable = (props: ResizableProps) => {
               if (!isResizing) return;
               let diffX = e.pageX - pageX;
               const resizedValues = createResizedValues(rows, boundary, diffX);
-              console.log(rows, resizedValues);
               props.onResize && props.onResize(e, resizedValues);
             };
 
@@ -142,11 +157,10 @@ export const useResizableTable = (props: ResizableProps) => {
       table.removeEventListener('mouseout', onTableMouseOut);
     };
   }, []);
-  return { ref };
+  return { ref, update };
 };
 
 function createResizedValues(rows: Row[], boundary: number, diffX: number): ResizeValue {
-  console.log(diffX, boundary);
   return (rows || []).reduce(
     (acc, row) => {
       let hasCurrent = false;
@@ -293,6 +307,5 @@ function createDiv(height: number | string, offset: number) {
   div.style.height = height + 'px';
   div.dataset.resizeHandle = 'true';
   div.style.zIndex = '1';
-  // div.style.backgroundColor = 'red';
   return div;
 }

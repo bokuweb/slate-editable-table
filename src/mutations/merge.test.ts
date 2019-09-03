@@ -3,6 +3,7 @@ import { EditTable } from '../index';
 import { findCurrentTable, TableLayout } from '../layout';
 import { mergeCells } from './merge';
 import { createHtml } from './test-helper';
+import { defaultOptions, Option } from '../option';
 
 import twoByTow from '../../mocks/two-by-two';
 import fourByThreeRowspan3 from '../../mocks/four-by-three-rowspan-3';
@@ -17,7 +18,7 @@ describe('merge', function() {
     editor.moveTo(cursorBlock.key);
     const t = findCurrentTable(editor);
     if (!t) throw new Error('Failed to find block');
-    const newEditor = mergeCells(editor, '0', '1');
+    const newEditor = mergeCells(editor, '0', '1', defaultOptions as Required<Option>);
     if (!newEditor) throw new Error('Failed to find editor');
     expect(newEditor.value.toJSON()).toMatchSnapshot();
     expect(createHtml(newEditor.value)).toMatchSnapshot();
@@ -30,7 +31,7 @@ describe('merge', function() {
     editor.moveTo(cursorBlock.key);
     const t = findCurrentTable(editor);
     if (!t) throw new Error('Failed to find block');
-    const newEditor = mergeCells(editor, '0', '2');
+    const newEditor = mergeCells(editor, '0', '2', defaultOptions as Required<Option>);
     if (!newEditor) throw new Error('Failed to find editor');
     expect(newEditor.value.toJSON()).toMatchSnapshot();
     expect(createHtml(newEditor.value)).toMatchSnapshot();
@@ -43,7 +44,7 @@ describe('merge', function() {
     editor.moveTo(cursorBlock.key);
     const t = findCurrentTable(editor);
     if (!t) throw new Error('Failed to find block');
-    const newEditor = mergeCells(editor, '0', '3');
+    const newEditor = mergeCells(editor, '0', '3', defaultOptions as Required<Option>);
     if (!newEditor) throw new Error('Failed to find editor');
     expect(newEditor.value.toJSON()).toMatchSnapshot();
     expect(createHtml(newEditor.value)).toMatchSnapshot();
@@ -56,7 +57,7 @@ describe('merge', function() {
     editor.moveTo(cursorBlock.key);
     const t = findCurrentTable(editor);
     if (!t) throw new Error('Failed to find block');
-    const newEditor = mergeCells(editor, '3', '9');
+    const newEditor = mergeCells(editor, '3', '9', defaultOptions as Required<Option>);
     if (!newEditor) throw new Error('Failed to find editor');
     expect(newEditor.value.toJSON()).toMatchSnapshot();
     expect(createHtml(newEditor.value)).toMatchSnapshot();
@@ -78,7 +79,7 @@ describe('merge', function() {
     editor.moveTo(cursorBlock.key);
     const t = findCurrentTable(editor);
     if (!t) throw new Error('Failed to find block');
-    const newEditor = mergeCells(editor, '0', '7');
+    const newEditor = mergeCells(editor, '0', '7', defaultOptions as Required<Option>);
     if (!newEditor) throw new Error('Failed to find editor');
     expect(newEditor.value.toJSON()).toMatchSnapshot();
     expect(createHtml(newEditor.value)).toMatchSnapshot();
