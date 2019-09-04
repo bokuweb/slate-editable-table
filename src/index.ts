@@ -22,12 +22,17 @@ import { insertTable } from './mutations/insert-table';
 import { removeTable } from './mutations/remove-table';
 import { splitCell } from './mutations/split-cell';
 
+import { createPropsStore } from './store';
+
 import { createRenderers, TableHandler } from './default-renderers';
 
 export interface EditTableCommands {
   isSelectionInTable: () => boolean;
   findCurrentTable: () => Block | null;
   insertTable: (col?: number, row?: number, tableOption?: TableOption) => EditTableCommands & Editor;
+
+  disableResizing: () => void;
+  enableResizing: () => void;
 
   insertRow: () => EditTableCommands & Editor;
   insertAbove: () => EditTableCommands & Editor;
@@ -50,6 +55,7 @@ export interface EditTableCommands {
 export function EditTable(options: Option = defaultOptions) {
   const opts = { ...defaultOptions, ...options } as Required<Option>;
   const ref = React.createRef<TableHandler>();
+  const store = createPropsStore();
 
   function isSelectionInTable(editor: Editor) {
     const { startBlock } = editor.value;
@@ -266,7 +272,7 @@ export function EditTable(options: Option = defaultOptions) {
     next();
   }
 
-  const renderer = createRenderers(opts, ref);
+  const renderer = createRenderers(opts, ref, store);
 
   return {
     onKeyDown,
@@ -284,6 +290,9 @@ export function EditTable(options: Option = defaultOptions) {
     },
 
     commands: {
+      disableResizing: bindEditorWithoutSelectionCheck(() => store.setDisableResizing(true)),
+      enableResizing: bindEditorWithoutSelectionCheck(() => store.setDisableResizing(false)),
+
       insertTable: bindEditorWithoutSelectionCheck(insertTable),
       // row
       insertAbove: bindEditor(insertAbove),

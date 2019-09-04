@@ -63,7 +63,7 @@ export const useResizableTable = (props: ResizableProps) => {
   };
 
   React.useEffect(() => {
-    if (!ref.current || !!props.disableResizing) return;
+    if (!ref.current) return;
     const table = ref.current;
     let isResizing = false;
 
@@ -154,11 +154,16 @@ export const useResizableTable = (props: ResizableProps) => {
     table.addEventListener('mouseover', onTableMouseOver);
     table.addEventListener('mouseout', onTableMouseOut);
 
+    if (!!props.disableResizing) {
+      table.removeEventListener('mouseover', onTableMouseOver);
+      table.removeEventListener('mouseout', onTableMouseOut);
+    }
+
     return () => {
       table.removeEventListener('mouseover', onTableMouseOver);
       table.removeEventListener('mouseout', onTableMouseOut);
     };
-  }, []);
+  }, [props.disableResizing]);
   return { ref, update };
 };
 

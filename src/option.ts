@@ -10,7 +10,6 @@ export type Option = {
   rowStyle?: React.CSSProperties;
   tableStyle?: React.CSSProperties;
   defaultColumnWidth?: number;
-  disableResizing?: boolean;
 };
 
 export const defaultOptions: Required<Option> = {
@@ -23,5 +22,4 @@ export const defaultOptions: Required<Option> = {
   rowStyle: {},
   tableStyle: {},
   defaultColumnWidth: 15,
-  disableResizing: false,
 };

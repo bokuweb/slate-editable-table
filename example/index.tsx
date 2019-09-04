@@ -5,7 +5,7 @@ import { RenderBlockProps } from 'slate-react';
 import React from 'react';
 import { EditTable, EditTableCommands, hasTablePlugin } from '../src/';
 
-const tablePlugin = EditTable({ disableResizing: false });
+const tablePlugin = EditTable();
 
 const plugins = [tablePlugin];
 
@@ -140,6 +140,14 @@ export class ExampleEditor extends React.Component<Props> {
     this.onChange(this.editor.splitCell());
   };
 
+  enableResizing = () => {
+    this.editor.enableResizing();
+  };
+
+  disableResizing = () => {
+    this.editor.disableResizing();
+  };
+
   render() {
     return (
       <>
@@ -155,6 +163,8 @@ export class ExampleEditor extends React.Component<Props> {
         <button onMouseDown={this.removeColumn}>Remove Column</button>
         <button onMouseDown={this.removeRow}>Remove Row</button>
         <button onMouseDown={this.removeTable}>Remove Table</button>
+        <button onMouseDown={this.disableResizing}>disable resizing</button>
+        <button onMouseDown={this.enableResizing}>enable resizing</button>
         <Editor
           ref={e => {
             if (hasTablePlugin(e)) {
