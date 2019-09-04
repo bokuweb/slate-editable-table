@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Editor, Block } from 'slate';
 import { Option } from './option';
+import { Store } from './store';
 import { useResizableTable, ResizeValue } from './use-resizable';
 
 export type Props = {
@@ -20,6 +21,7 @@ type TableProps = {
   children: React.ReactNode;
   maxWidth?: string;
   disableResizing: boolean;
+  store: Store;
   onInit: (data: ResizeValue) => void;
   onUpdate: (data: ResizeValue) => void;
   onResize: (e: MouseEvent, data: ResizeValue) => void;
@@ -32,14 +34,19 @@ export interface TableHandler {
 
 export const InnerTable = React.forwardRef<TableHandler, TableProps & { attributes: any; style?: React.CSSProperties }>(
   (props, tableRef) => {
+    const [disableResizing, forceUpdate] = React.useState(false);
     const maxWidth = typeof props.maxWidth === 'undefined' ? 'auto' : props.maxWidth + 'px';
     const { ref, update } = useResizableTable({
-      disableResizing: props.disableResizing,
+      disableResizing,
       maxWidth: props.maxWidth,
       onResize: props.onResize,
       onInit: props.onInit,
       onUpdate: props.onUpdate,
       onHandleHover: props.onHandleMouseOver,
+    });
+
+    props.store.subscribeDisableResizing(v => {
+      forceUpdate(v);
     });
     React.useImperativeHandle(tableRef, () => ({
       update: () => {
@@ -67,7 +74,7 @@ function updateWidth(editor: Editor, value: ResizeValue) {
   });
 }
 
-export function createRenderers(opts: Required<Option>, ref: any) {
+export function createRenderers(opts: Required<Option>, ref: any, store: Store) {
   return (props: any, editor: any, next: () => void): any => {
     switch (props.node.type) {
       case opts.typeContent:
@@ -85,6 +92,7 @@ export function createRenderers(opts: Required<Option>, ref: any) {
         return (
           <Table
             ref={ref}
+            store={store}
             onInit={values => {
               updateWidth(editor, values);
             }}
@@ -96,7 +104,7 @@ export function createRenderers(opts: Required<Option>, ref: any) {
               editor.blur();
               updateWidth(editor, values);
             }}
-            disableResizing={opts.disableResizing}
+            disableResizing={false}
             maxWidth={maxWidth}
             style={opts.tableStyle}
             attributes={props.attributes}
