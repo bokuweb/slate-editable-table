@@ -79,6 +79,7 @@ export function EditTable(options: Option = defaultOptions) {
       if (!isSelectionInTable(editor)) {
         return editor;
       }
+      // update table size
       ref.current && ref.current.update();
       return fn(...[opts, editor].concat(args));
     };

@@ -5,7 +5,7 @@ import { RenderBlockProps } from 'slate-react';
 import React from 'react';
 import { EditTable, EditTableCommands, hasTablePlugin } from '../src/';
 
-const tablePlugin = EditTable();
+const tablePlugin = EditTable({ disableResizing: false });
 
 const plugins = [tablePlugin];
 

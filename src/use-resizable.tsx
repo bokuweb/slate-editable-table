@@ -2,6 +2,7 @@ import * as React from 'react';
 
 export type ResizableProps = {
   maxWidth?: string;
+  disableResizing?: boolean;
   onInit?: (v: ResizeValue) => void;
   onUpdate?: (v: ResizeValue) => void;
   onResizeStart?: (e: Event) => void;
@@ -62,7 +63,7 @@ export const useResizableTable = (props: ResizableProps) => {
   };
 
   React.useEffect(() => {
-    if (!ref.current) return;
+    if (!ref.current || !!props.disableResizing) return;
     const table = ref.current;
     let isResizing = false;
 
@@ -90,6 +91,7 @@ export const useResizableTable = (props: ResizableProps) => {
               e.preventDefault();
               if (!e.target || !(e instanceof MouseEvent)) return;
               removeHandles(table, e.target as HTMLElement);
+              if (!!props.disableResizing) return;
               isResizing = true;
               rows = createRowData(table);
               pageX = e.pageX;
