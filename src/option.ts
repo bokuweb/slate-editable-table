@@ -18,7 +18,7 @@ export const defaultOptions: Required<Option> = {
   typeTable: 'table',
   typeContent: 'table_content',
   selectionColor: '#B9D3FC',
-  cellStyle: { padding: '4px' },
+  cellStyle: { padding: '3px' },
   rowStyle: {},
   tableStyle: {},
   defaultColumnWidth: 15,

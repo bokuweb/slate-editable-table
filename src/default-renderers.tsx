@@ -11,10 +11,10 @@ export type Props = {
 };
 
 const tableStyle = {
-  borderCollapse: 'collapse' as const,
+  // borderCollapse: 'collapse' as const,
+  borderSpacing: 0,
   Layout: 'fixed' as const,
-  wordBreak: 'break-all' as const,
-  userSelect: 'none' as const,
+  wordBreak: 'break-word' as const,
 };
 
 type TableProps = {
@@ -54,7 +54,7 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
       },
     }));
     return (
-      <table style={{ ...tableStyle, maxWidth }} {...props.attributes} ref={ref}>
+      <table style={{ ...props.style, ...tableStyle, maxWidth }} {...props.attributes} ref={ref}>
         {props.children}
       </table>
     );
@@ -106,7 +106,7 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Store) 
             }}
             disableResizing={false}
             maxWidth={maxWidth}
-            style={opts.tableStyle}
+            style={{ borderRight: `solid 1px #000`, ...opts.tableStyle }}
             attributes={props.attributes}
           >
             <tbody {...props.attributes}>{props.children}</tbody>
@@ -128,6 +128,7 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Store) 
             rowSpan={props.node.data.get('rowspan')}
             style={{
               ...opts.cellStyle,
+              borderBottom: `solid 1px #000`,
               width,
               backgroundColor: props.node.data.get('selectionColor'),
             }}
