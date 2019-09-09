@@ -24,7 +24,7 @@ import { splitCell } from './mutations/split-cell';
 
 import { createPropsStore } from './store';
 
-import { createRenderers, TableHandler } from './default-renderers';
+import { createRenderers, TableHandler } from './renderers';
 
 export interface EditTableCommands {
   isSelectionInTable: () => boolean;
@@ -80,6 +80,17 @@ export function EditTable(options: Option = defaultOptions) {
     };
   }
 
+  function bindEditorWithStore(fn: (...args: any) => any) {
+    return function(editor: Editor, ...args: any[]) {
+      if (!isSelectionInTable(editor)) {
+        return editor;
+      }
+      // update table size
+      ref.current && ref.current.update();
+      return fn(...[opts, editor, store].concat(args));
+    };
+  }
+
   function bindEditor(fn: (...args: any) => any) {
     return function(editor: Editor, ...args: any[]) {
       if (!isSelectionInTable(editor)) {
@@ -121,7 +132,6 @@ export function EditTable(options: Option = defaultOptions) {
       return next();
     }
     const { value } = editor;
-    console.log(value.startBlock, value.endBlock);
     // INFO: It is needed to prevent replace some <td /> s when some cells selected.
     if (value.startBlock !== value.endBlock) {
       event.preventDefault();
@@ -232,7 +242,7 @@ export function EditTable(options: Option = defaultOptions) {
 
       mergeRight: bindEditor(mergeRight),
       mergeBelow: bindEditor(mergeBelow),
-      mergeSelection: bindEditor(mergeSelection),
+      mergeSelection: bindEditorWithStore(mergeSelection),
 
       splitCell: bindEditor(splitCell),
       removeRow: bindEditor(removeRow),
