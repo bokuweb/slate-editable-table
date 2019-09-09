@@ -13,7 +13,6 @@ export type Props = {
 };
 
 const tableStyle = {
-  // borderCollapse: 'collapse' as const,
   borderSpacing: 0,
   Layout: 'fixed' as const,
   wordBreak: 'break-word' as const,
@@ -128,7 +127,6 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Store) 
             {...props.attributes}
             style={opts.rowStyle}
             onDrag={e => {
-              console.log(e);
               e.preventDefault();
             }}
           >

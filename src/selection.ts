@@ -6,10 +6,8 @@ export function removeSelection(editor: Editor) {
   const editors = document.querySelectorAll('[data-slate-editor]');
   Array.from(editors).forEach(e => {
     const tables = e.querySelectorAll('table');
-    console.log(tables);
     tables.forEach(table => {
       const { key } = table.dataset;
-      console.log(key);
       if (!key) return;
       const tableBlock = editor.value.document.getNode(key);
       if (!Block.isBlock(tableBlock)) return;
