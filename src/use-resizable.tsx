@@ -313,5 +313,6 @@ function createDiv(height: number | string, offset: number) {
   div.style.height = height + 'px';
   div.dataset.resizeHandle = 'true';
   div.style.zIndex = '1';
+  div.contentEditable = 'false';
   return div;
 }
