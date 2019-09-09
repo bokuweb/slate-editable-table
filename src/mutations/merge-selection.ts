@@ -2,9 +2,9 @@ import { Editor } from 'slate';
 
 import { mergeCells } from './merge';
 import { Option } from '../option';
-import { Store } from '../store';
+import { ComponentStore } from '../store';
 
-export function mergeSelection(opts: Required<Option>, editor: Editor, store: Store) {
+export function mergeSelection(opts: Required<Option>, editor: Editor, store: ComponentStore) {
   const anchorCellBlock = store.getAnchorCellBlock();
   const focusCellBlock = store.getFocusCellBlock();
   if (!anchorCellBlock || !focusCellBlock) return;
