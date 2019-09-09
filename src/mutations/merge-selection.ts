@@ -1,12 +1,12 @@
 import { Editor } from 'slate';
 
-import { findAnchorCell, findFocusCell } from '../layout';
 import { mergeCells } from './merge';
 import { Option } from '../option';
+import { Store } from '../store';
 
-export function mergeSelection(opts: Required<Option>, editor: Editor) {
-  const anchorCellBlock = findAnchorCell(editor, opts);
-  const focusCellBlock = findFocusCell(editor, opts);
+export function mergeSelection(opts: Required<Option>, editor: Editor, store: Store) {
+  const anchorCellBlock = store.getAnchorCellBlock();
+  const focusCellBlock = store.getFocusCellBlock();
   if (!anchorCellBlock || !focusCellBlock) return;
   if (anchorCellBlock.key === focusCellBlock.key) return;
   mergeCells(editor, anchorCellBlock.key, focusCellBlock.key, opts);

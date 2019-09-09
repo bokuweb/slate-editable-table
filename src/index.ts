@@ -2,7 +2,7 @@ import { Editor, Block } from 'slate';
 import * as React from 'react';
 
 import * as table from './layout';
-import { removeSelection, addSelectionStyle } from './selection';
+import { removeSelection } from './selection';
 import { canMerge } from './mutations/merge';
 import { TableOption } from './create-table';
 import { removeRow } from './mutations/remove-row';
@@ -24,7 +24,7 @@ import { splitCell } from './mutations/split-cell';
 
 import { createPropsStore } from './store';
 
-import { createRenderers, TableHandler } from './default-renderers';
+import { createRenderers, TableHandler } from './renderers';
 
 export interface EditTableCommands {
   isSelectionInTable: () => boolean;
@@ -58,9 +58,9 @@ export function EditTable(options: Option = defaultOptions) {
   const store = createPropsStore();
 
   function isSelectionInTable(editor: Editor) {
-    const { startBlock } = editor.value;
-    if (!startBlock) return false;
-    return table.TableLayout.isInCell(editor, opts);
+    const { startBlock, endBlock } = editor.value;
+    if (!startBlock || !endBlock) return false;
+    return table.isInCell(editor, startBlock, opts) || table.isInCell(editor, endBlock, opts);
   }
 
   function canSelectedCellsMerge(editor: Editor): boolean {
@@ -77,6 +77,17 @@ export function EditTable(options: Option = defaultOptions) {
   function bindEditorWithoutSelectionCheck(fn: (...args: any) => any) {
     return function(editor: Editor, ...args: any[]) {
       return fn(...[opts, editor].concat(args));
+    };
+  }
+
+  function bindEditorWithStore(fn: (...args: any) => any) {
+    return function(editor: Editor, ...args: any[]) {
+      if (!isSelectionInTable(editor)) {
+        return editor;
+      }
+      // update table size
+      ref.current && ref.current.update();
+      return fn(...[opts, editor, store].concat(args));
     };
   }
 
@@ -113,77 +124,6 @@ export function EditTable(options: Option = defaultOptions) {
     event.preventDefault();
   }
 
-  let isPrevInTable = false;
-  function onSelect(event: any, editor: any, next: () => any): any {
-    if (!isSelectionInTable(editor)) {
-      if (isPrevInTable) {
-        removeSelection(editor);
-      }
-      isPrevInTable = false;
-      return next();
-    }
-    isPrevInTable = true;
-
-    // HACK: Add ::selection style when more than 2 cells selected.
-    const t = table.TableLayout.create(editor, opts);
-    if (!t) {
-      removeSelection(editor);
-      return next();
-    }
-
-    const selection = window.getSelection();
-    if (!selection) return next();
-
-    const anchored = selection.anchorNode as HTMLElement;
-    const focused = selection.focusNode as HTMLElement;
-    if (!anchored || !focused) return next();
-    if (anchored === focused) {
-      removeSelection(editor);
-      return next();
-    }
-    const anchorCellBlock = table.findCellBlockByElement(editor, anchored, opts);
-    const focusCellBlock = table.findCellBlockByElement(editor, focused, opts);
-    if (!anchorCellBlock) {
-      removeSelection(editor);
-    }
-    if (!anchorCellBlock || !focusCellBlock) return next();
-
-    const range = selection.getRangeAt(0);
-    if (range.startContainer === range.endContainer && range.startOffset === range.endOffset) return next();
-
-    if (anchorCellBlock.key === focusCellBlock.key) {
-      t.table.forEach(row => {
-        row.forEach(cell => {
-          editor.setNodeByKey(cell.key, {
-            type: cell.block.type,
-            data: { ...cell.block.data.toObject(), selectColor: null },
-          });
-        });
-      });
-      return next();
-    }
-
-    // HACK: Add ::selection style when greater than 1 cells selected.
-    addSelectionStyle();
-
-    const blocks = table.createSelectedBlockMap(editor, anchorCellBlock.key, focusCellBlock.key, opts);
-    t.table.forEach(row => {
-      row.forEach(cell => {
-        if (blocks[cell.key]) {
-          editor.setNodeByKey(cell.key, {
-            type: cell.block.type,
-            data: { ...cell.block.data.toObject(), selectionColor: opts.selectionColor },
-          });
-        } else {
-          editor.setNodeByKey(cell.key, {
-            type: cell.block.type,
-            data: { ...cell.block.data.toObject(), selectionColor: null },
-          });
-        }
-      });
-    });
-    next();
-  }
   /**
    * User is pressing a key in the editor
    */
@@ -276,7 +216,6 @@ export function EditTable(options: Option = defaultOptions) {
 
   return {
     onKeyDown,
-    onSelect,
     onBlur,
     // For old version
     renderNode: renderer,
@@ -303,7 +242,7 @@ export function EditTable(options: Option = defaultOptions) {
 
       mergeRight: bindEditor(mergeRight),
       mergeBelow: bindEditor(mergeBelow),
-      mergeSelection: bindEditor(mergeSelection),
+      mergeSelection: bindEditorWithStore(mergeSelection),
 
       splitCell: bindEditor(splitCell),
       removeRow: bindEditor(removeRow),
