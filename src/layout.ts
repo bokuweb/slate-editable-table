@@ -496,3 +496,13 @@ export function createLayout(rows: List<Block | Text | Inline>): Layout {
 function notNull<T>(item: T | null): item is T {
   return item !== null;
 }
+
+export function isInCell(editor: Editor, block: Block, opts = defaultOptions) {
+  return block.type === opts.typeCell ||
+    editor.value.document.getClosest(block.key, p => {
+      if (!Block.isBlock(p)) return false;
+      return p.type === opts.typeCell;
+    })
+    ? true
+    : false;
+}

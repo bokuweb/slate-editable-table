@@ -3,6 +3,8 @@ import { Editor, Block } from 'slate';
 import { Option } from './option';
 import { Store } from './store';
 import { useResizableTable, ResizeValue } from './use-resizable';
+import { removeSelection, addSelectionStyle } from './selection';
+import * as table from './layout';
 
 export type Props = {
   node: Block;
@@ -54,7 +56,7 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
       },
     }));
     return (
-      <table style={{ ...props.style, ...tableStyle, maxWidth }} {...props.attributes} ref={ref}>
+      <table style={{ ...props.style, ...tableStyle, maxWidth }} ref={ref} {...props.attributes}>
         {props.children}
       </table>
     );
@@ -75,6 +77,8 @@ function updateWidth(editor: Editor, value: ResizeValue) {
 }
 
 export function createRenderers(opts: Required<Option>, ref: any, store: Store) {
+  let anchorCellBlock: Block | null = null;
+  let selectStart = false;
   return (props: any, editor: any, next: () => void): any => {
     switch (props.node.type) {
       case opts.typeContent:
@@ -97,7 +101,6 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Store) 
               updateWidth(editor, values);
             }}
             onUpdate={values => {
-              console.log(values);
               updateWidth(editor, values);
             }}
             onResize={(e, values) => {
@@ -109,7 +112,7 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Store) 
             style={{ borderRight: `solid 1px #000`, ...opts.tableStyle }}
             attributes={props.attributes}
           >
-            <tbody {...props.attributes}>{props.children}</tbody>
+            <tbody>{props.children}</tbody>
           </Table>
         );
       case opts.typeRow:
@@ -124,6 +127,49 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Store) 
         return (
           <td
             {...props.attributes}
+            onClick={e => {
+              if (!(e.target instanceof HTMLElement)) return;
+              removeSelection(editor);
+            }}
+            onMouseDown={e => {
+              if (!(e.target instanceof HTMLElement)) return;
+              selectStart = true;
+              anchorCellBlock = table.findCellBlockByElement(editor, e.target, opts);
+              window.addEventListener('mouseup', () => {
+                selectStart = false;
+              });
+            }}
+            onMouseOver={e => {
+              if (anchorCellBlock === null) return;
+              if (!(e.target instanceof HTMLElement)) return;
+              if (!selectStart) return;
+              const t = table.TableLayout.create(editor, opts);
+              if (!t) {
+                removeSelection(editor);
+                return;
+              }
+              const focusCellBlock = table.findCellBlockByElement(editor, e.target, opts);
+              if (!focusCellBlock) return;
+              // HACK: Add ::selection style when greater than 1 cells selected.
+              addSelectionStyle();
+
+              const blocks = table.createSelectedBlockMap(editor, anchorCellBlock.key, focusCellBlock.key, opts);
+              t.table.forEach(row => {
+                row.forEach(cell => {
+                  if (blocks[cell.key]) {
+                    editor.setNodeByKey(cell.key, {
+                      type: cell.block.type,
+                      data: { ...cell.block.data.toObject(), selectionColor: opts.selectionColor },
+                    });
+                  } else {
+                    editor.setNodeByKey(cell.key, {
+                      type: cell.block.type,
+                      data: { ...cell.block.data.toObject(), selectionColor: null },
+                    });
+                  }
+                });
+              });
+            }}
             colSpan={props.node.data.get('colspan')}
             rowSpan={props.node.data.get('rowspan')}
             style={{
