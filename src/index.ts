@@ -22,7 +22,7 @@ import { insertTable } from './mutations/insert-table';
 import { removeTable } from './mutations/remove-table';
 import { splitCell } from './mutations/split-cell';
 
-import { createPropsStore } from './store';
+import { ComponentStore } from './store';
 
 import { createRenderers, TableHandler } from './renderers';
 
@@ -55,7 +55,7 @@ export interface EditTableCommands {
 export function EditTable(options: Option = defaultOptions) {
   const opts = { ...defaultOptions, ...options } as Required<Option>;
   const ref = React.createRef<TableHandler>();
-  const store = createPropsStore();
+  const store = new ComponentStore();
 
   function isSelectionInTable(editor: Editor) {
     const { startBlock, endBlock } = editor.value;
@@ -229,8 +229,12 @@ export function EditTable(options: Option = defaultOptions) {
     },
 
     commands: {
-      disableResizing: bindEditorWithoutSelectionCheck(() => store.setDisableResizing(true)),
-      enableResizing: bindEditorWithoutSelectionCheck(() => store.setDisableResizing(false)),
+      disableResizing: bindEditorWithoutSelectionCheck((_, editor) => {
+        store.setDisableResizing(editor, true);
+      }),
+      enableResizing: bindEditorWithoutSelectionCheck((_, editor) => {
+        store.setDisableResizing(editor, false);
+      }),
 
       insertTable: bindEditorWithoutSelectionCheck(insertTable),
       // row

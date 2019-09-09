@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Editor, Block } from 'slate';
 import { Option } from './option';
-import { Store } from './store';
+import { ComponentStore } from './store';
 import { useResizableTable, ResizeValue } from './use-resizable';
 import { removeSelection, addSelectionStyle } from './selection';
 import * as table from './layout';
@@ -13,7 +13,6 @@ export type Props = {
 };
 
 const tableStyle = {
-  // borderCollapse: 'collapse' as const,
   borderSpacing: 0,
   Layout: 'fixed' as const,
   wordBreak: 'break-word' as const,
@@ -22,8 +21,8 @@ const tableStyle = {
 type TableProps = {
   children: React.ReactNode;
   maxWidth?: string;
-  disableResizing: boolean;
-  store: Store;
+  store: ComponentStore;
+  editor: Editor;
   onInit: (data: ResizeValue) => void;
   onUpdate: (data: ResizeValue) => void;
   onResize: (e: MouseEvent, data: ResizeValue) => void;
@@ -47,14 +46,18 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
       onHandleHover: props.onHandleMouseOver,
     });
 
-    props.store.subscribeDisableResizing(v => {
-      forceUpdate(v);
-    });
+    React.useEffect(() => {
+      props.store.subscribeDisableResizing(props.editor, v => {
+        forceUpdate(v);
+      });
+    }, []);
+
     React.useImperativeHandle(tableRef, () => ({
       update: () => {
         update();
       },
     }));
+
     return (
       <table
         style={{ ...props.style, ...tableStyle, maxWidth }}
@@ -83,7 +86,7 @@ function updateWidth(editor: Editor, value: ResizeValue) {
   });
 }
 
-export function createRenderers(opts: Required<Option>, ref: any, store: Store) {
+export function createRenderers(opts: Required<Option>, ref: any, store: ComponentStore) {
   let anchorCellBlock: Block | null = null;
   let selectStart = false;
   return (props: any, editor: any, next: () => void): any => {
@@ -103,6 +106,7 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Store) 
         return (
           <Table
             ref={ref}
+            editor={editor}
             store={store}
             onInit={values => {
               updateWidth(editor, values);
@@ -114,7 +118,6 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Store) 
               editor.blur();
               updateWidth(editor, values);
             }}
-            disableResizing={false}
             maxWidth={maxWidth}
             style={{ borderRight: `solid 1px #000`, ...opts.tableStyle }}
             attributes={props.attributes}
@@ -128,7 +131,6 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Store) 
             {...props.attributes}
             style={opts.rowStyle}
             onDrag={e => {
-              console.log(e);
               e.preventDefault();
             }}
           >

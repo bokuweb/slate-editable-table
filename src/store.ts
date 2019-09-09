@@ -1,27 +1,25 @@
-import { Block } from 'slate';
+import { Block, Editor } from 'slate';
 
-export type Store = {
-  subscribeDisableResizing: (f: (v: boolean) => void) => void;
-  setDisableResizing: (v: boolean) => void;
-  setAnchorCellBlock: (b: Block | null) => void;
-  getAnchorCellBlock: () => Block | null;
-  setFocusCellBlock: (b: Block | null) => void;
-  getFocusCellBlock: () => Block | null;
-};
+export class ComponentStore {
+  disableMap = new Map<Editor, boolean>();
+  emitterMap = new Map<Editor, Array<(v: boolean) => void>>();
+  anchorCellBlock: Block | null = null;
+  focusCellBlock: Block | null = null;
 
-export const createPropsStore = () => {
-  // eslint-disable-next-line
-  let emitter = (v: boolean) => {};
-  let anchorCellBlock: Block | null = null;
-  let focusCellBlock: Block | null = null;
-  return {
-    subscribeDisableResizing: (f: (v: boolean) => void) => (emitter = f),
-    setDisableResizing: (v: boolean) => {
-      emitter(v);
-    },
-    setAnchorCellBlock: (b: Block | null) => (anchorCellBlock = b),
-    getAnchorCellBlock: () => anchorCellBlock,
-    setFocusCellBlock: (b: Block | null) => (focusCellBlock = b),
-    getFocusCellBlock: () => focusCellBlock,
+  subscribeDisableResizing = (editor: Editor, f: (v: boolean) => void) => {
+    const emitters = this.emitterMap.get(editor) || [];
+    this.emitterMap.set(editor, [...emitters, f]);
+    f(this.disableMap.get(editor) || false);
   };
-};
+  setDisableResizing = (editor: Editor, v: boolean) => {
+    this.disableMap.set(editor, v);
+    const emittters = this.emitterMap.get(editor) || [];
+    emittters.forEach(e => {
+      e(v);
+    });
+  };
+  setAnchorCellBlock = (b: Block | null) => (this.anchorCellBlock = b);
+  getAnchorCellBlock = () => this.anchorCellBlock;
+  setFocusCellBlock = (b: Block | null) => (this.focusCellBlock = b);
+  getFocusCellBlock = () => this.focusCellBlock;
+}
