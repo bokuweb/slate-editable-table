@@ -127,22 +127,31 @@ export function EditTable(options: Option = defaultOptions) {
   /**
    * User is pressing a key in the editor
    */
-  function onKeyDown(event: any, editor: any, next: () => any): any {
+  function onKeyDown(event: KeyboardEvent, editor: Editor, next: () => any): any {
+    const { value } = editor;
+    const { document, selection } = value;
+    const { start, isCollapsed, end } = selection;
+
+    // if (start.key === '__table_spacing__') {
+    //   return next();
+    // }
+    console.log(isSelectionInTable(editor));
     if (!isSelectionInTable(editor)) {
       return next();
     }
-    const { value } = editor;
+    console.log('===');
     // INFO: It is needed to prevent replace some <td /> s when some cells selected.
     if (value.startBlock !== value.endBlock) {
       event.preventDefault();
-      return next();
+      // return next();
+      return;
     }
 
-    const { document, selection } = value;
-    const { start, isCollapsed } = selection;
     if (!start || !start.key) return next();
     const startNode = document.getDescendant(start.key);
     if (!startNode) return next();
+
+    console.log(start.key, end.key);
     if (
       startNode.text === '' &&
       value.startBlock.type === opts.typeCell &&
