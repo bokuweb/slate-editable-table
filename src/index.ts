@@ -151,7 +151,7 @@ export function EditTable(options: Option = defaultOptions) {
       ) {
         event.preventDefault();
         if (selection.end.offset === value.startText.text.length - 1) {
-          editor.deleteForward();
+          editor.deleteForward(1);
         }
         return;
       }
@@ -175,6 +175,11 @@ export function EditTable(options: Option = defaultOptions) {
 
     // When next block is table check keydown with table logic.
     if (!isSelectionInTable(editor)) {
+      // if (event.ctrlKey && event.key === 'h') {
+      //event.preventDefault();
+      // editor.deleteBackward();
+      //  return;
+      //}
       return next();
     }
     // editor.moveToEndOfPreviousBlock();
