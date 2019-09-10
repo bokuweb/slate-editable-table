@@ -5,7 +5,7 @@ import { Option } from './option';
 
 export function createRow(opts: Required<Option>, columns: number, columnWidth: number = opts.defaultColumnWidth) {
   const cellNodes = Range(0, columns)
-    .map(() => createCell(opts, ' ', { width: `${columnWidth}` }).toJSON())
+    .map(() => createCell(opts, '', { width: `${columnWidth}` }).toJSON())
     .toArray();
   return Block.fromJSON({
     object: 'block',
