@@ -167,7 +167,7 @@ export function EditTable(options: Option = defaultOptions) {
       ) {
         event.preventDefault();
         if (selection.start.offset === 1) {
-          editor.deleteBackward();
+          editor.deleteBackward(1);
         }
         return;
       }
