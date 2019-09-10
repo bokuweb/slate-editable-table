@@ -26,6 +26,8 @@ import { ComponentStore } from './store';
 
 import { createRenderers, TableHandler } from './renderers';
 
+import { createSchema } from './schema';
+
 export interface EditTableCommands {
   isSelectionInTable: () => boolean;
   findCurrentTable: () => Block | null;
@@ -127,22 +129,35 @@ export function EditTable(options: Option = defaultOptions) {
   /**
    * User is pressing a key in the editor
    */
-  function onKeyDown(event: any, editor: any, next: () => any): any {
+  function onKeyDown(event: KeyboardEvent, editor: Editor, next: () => any): any {
+    const { value } = editor;
+    const { document, selection } = value;
+    const { start, isCollapsed } = selection;
+
+    if (event.key === 'Delete' || (event.ctrlKey && event.key === 'd')) {
+      if (
+        editor.value.startBlock.type !== opts.typeContent &&
+        editor.moveToStartOfNextBlock().value.startBlock.type === opts.typeContent
+      ) {
+        event.preventDefault();
+        editor.moveToEndOfPreviousBlock();
+        return;
+      }
+    }
+    // When next block is table check keydown with table logic.
     if (!isSelectionInTable(editor)) {
       return next();
     }
-    const { value } = editor;
+    // editor.moveToEndOfPreviousBlock();
     // INFO: It is needed to prevent replace some <td /> s when some cells selected.
     if (value.startBlock !== value.endBlock) {
       event.preventDefault();
-      return next();
+      return;
     }
-
-    const { document, selection } = value;
-    const { start, isCollapsed } = selection;
     if (!start || !start.key) return next();
     const startNode = document.getDescendant(start.key);
     if (!startNode) return next();
+
     if (
       startNode.text === '' &&
       value.startBlock.type === opts.typeCell &&
@@ -213,8 +228,11 @@ export function EditTable(options: Option = defaultOptions) {
   }
 
   const renderer = createRenderers(opts, ref, store);
+  const { schema /*, normalizeNode */ } = createSchema(opts);
 
   return {
+    schema,
+    // normalizeNode,
     onKeyDown,
     onBlur,
     // For old version
