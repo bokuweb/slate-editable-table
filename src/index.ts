@@ -129,7 +129,8 @@ export function EditTable(options: Option = defaultOptions) {
   /**
    * User is pressing a key in the editor
    */
-  function onKeyDown(event: KeyboardEvent, editor: Editor, next: () => any): any {
+  function onKeyDown(event: Event, editor: Editor, next: () => any): any {
+    if (!(event instanceof KeyboardEvent)) return next();
     const { value } = editor;
     const { document, selection } = value;
     const { start, isCollapsed } = selection;
