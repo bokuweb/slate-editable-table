@@ -78,6 +78,11 @@ export default {
           },
         ],
       },
+      {
+        object: 'block',
+        type: 'paragraph',
+        nodes: [Text.create('Lorem ipsum ...').toJSON()],
+      },
     ],
   },
 } as ValueJSON;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Editor, Block } from 'slate';
+import { Editor, Block, Text } from 'slate';
 import { Option } from './option';
 import { ComponentStore } from './store';
 import { useResizableTable, ResizeValue } from './use-resizable';
@@ -58,14 +58,16 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
       },
     }));
 
+    const onDragStart = React.useCallback((e: React.DragEvent) => {
+      e.preventDefault();
+    }, []);
+
     return (
       <table
         style={{ ...props.style, ...tableStyle, maxWidth }}
         ref={ref}
         {...props.attributes}
-        onDragStart={e => {
-          e.preventDefault();
-        }}
+        onDragStart={onDragStart}
       >
         {props.children}
       </table>
