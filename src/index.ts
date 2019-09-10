@@ -129,14 +129,14 @@ export function EditTable(options: Option = defaultOptions) {
   /**
    * User is pressing a key in the editor
    */
-  function onKeyDown(event: Event, editor: Editor, next: () => any): any {
-    if (!(event instanceof KeyboardEvent)) return next();
+  function onKeyDown(event: any, editor: Editor, next: () => any): any {
     const { value } = editor;
     const { document, selection } = value;
     const { start, isCollapsed } = selection;
 
     if (event.key === 'Delete' || (event.ctrlKey && event.key === 'd')) {
       if (
+        selection.end.offset == value.startText.text.length &&
         editor.value.startBlock.type !== opts.typeContent &&
         editor.moveToStartOfNextBlock().value.startBlock.type === opts.typeContent
       ) {
@@ -145,6 +145,18 @@ export function EditTable(options: Option = defaultOptions) {
         return;
       }
     }
+    if (event.key === 'Backspace' || (event.ctrlKey && event.key === 'h')) {
+      if (
+        selection.start.offset == 0 &&
+        editor.value.startBlock.type !== opts.typeContent &&
+        editor.moveToEndOfPreviousBlock().value.startBlock.type === opts.typeContent
+      ) {
+        event.preventDefault();
+        editor.moveToStartOfNextBlock();
+        return;
+      }
+    }
+
     // When next block is table check keydown with table logic.
     if (!isSelectionInTable(editor)) {
       return next();
@@ -181,8 +193,6 @@ export function EditTable(options: Option = defaultOptions) {
     }
     if (event.ctrlKey && event.key === 'd') {
       event.preventDefault();
-      const { value } = editor;
-      const { selection } = value;
       // INFO: Delete forward when it is not end of node
       if (selection.end.offset != value.startText.text.length) {
         editor.deleteForward(1);
