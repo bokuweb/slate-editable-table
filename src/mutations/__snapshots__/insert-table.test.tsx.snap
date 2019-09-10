@@ -13,6 +13,150 @@ Object {
               Object {
                 "marks": Array [],
                 "object": "leaf",
+                "text": "",
+              },
+            ],
+            "object": "text",
+          },
+        ],
+        "object": "block",
+        "type": "paragraph",
+      },
+      Object {
+        "data": Object {
+          "maxWidth": undefined,
+        },
+        "nodes": Array [
+          Object {
+            "data": Object {},
+            "nodes": Array [
+              Object {
+                "data": Object {
+                  "width": "15",
+                },
+                "nodes": Array [
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "",
+                          },
+                        ],
+                        "object": "text",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "table_content",
+                  },
+                ],
+                "object": "block",
+                "type": "table_cell",
+              },
+              Object {
+                "data": Object {
+                  "width": "15",
+                },
+                "nodes": Array [
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "",
+                          },
+                        ],
+                        "object": "text",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "table_content",
+                  },
+                ],
+                "object": "block",
+                "type": "table_cell",
+              },
+            ],
+            "object": "block",
+            "type": "table_row",
+          },
+          Object {
+            "data": Object {},
+            "nodes": Array [
+              Object {
+                "data": Object {
+                  "width": "15",
+                },
+                "nodes": Array [
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "",
+                          },
+                        ],
+                        "object": "text",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "table_content",
+                  },
+                ],
+                "object": "block",
+                "type": "table_cell",
+              },
+              Object {
+                "data": Object {
+                  "width": "15",
+                },
+                "nodes": Array [
+                  Object {
+                    "data": Object {},
+                    "nodes": Array [
+                      Object {
+                        "leaves": Array [
+                          Object {
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "",
+                          },
+                        ],
+                        "object": "text",
+                      },
+                    ],
+                    "object": "block",
+                    "type": "table_content",
+                  },
+                ],
+                "object": "block",
+                "type": "table_cell",
+              },
+            ],
+            "object": "block",
+            "type": "table_row",
+          },
+        ],
+        "object": "block",
+        "type": "table",
+      },
+      Object {
+        "data": Object {},
+        "nodes": Array [
+          Object {
+            "leaves": Array [
+              Object {
+                "marks": Array [],
+                "object": "leaf",
                 "text": "Lorem ipsum ...",
               },
             ],
@@ -32,131 +176,21 @@ Object {
                 "data": Object {},
                 "nodes": Array [
                   Object {
-                    "data": Object {
-                      "maxWidth": undefined,
-                    },
+                    "data": Object {},
                     "nodes": Array [
                       Object {
-                        "data": Object {},
-                        "nodes": Array [
+                        "leaves": Array [
                           Object {
-                            "data": Object {
-                              "width": "15",
-                            },
-                            "nodes": Array [
-                              Object {
-                                "data": Object {},
-                                "nodes": Array [
-                                  Object {
-                                    "leaves": Array [
-                                      Object {
-                                        "marks": Array [],
-                                        "object": "leaf",
-                                        "text": "",
-                                      },
-                                    ],
-                                    "object": "text",
-                                  },
-                                ],
-                                "object": "block",
-                                "type": "table_content",
-                              },
-                            ],
-                            "object": "block",
-                            "type": "table_cell",
-                          },
-                          Object {
-                            "data": Object {
-                              "width": "15",
-                            },
-                            "nodes": Array [
-                              Object {
-                                "data": Object {},
-                                "nodes": Array [
-                                  Object {
-                                    "leaves": Array [
-                                      Object {
-                                        "marks": Array [],
-                                        "object": "leaf",
-                                        "text": "",
-                                      },
-                                    ],
-                                    "object": "text",
-                                  },
-                                ],
-                                "object": "block",
-                                "type": "table_content",
-                              },
-                            ],
-                            "object": "block",
-                            "type": "table_cell",
+                            "marks": Array [],
+                            "object": "leaf",
+                            "text": "",
                           },
                         ],
-                        "object": "block",
-                        "type": "table_row",
-                      },
-                      Object {
-                        "data": Object {},
-                        "nodes": Array [
-                          Object {
-                            "data": Object {
-                              "width": "15",
-                            },
-                            "nodes": Array [
-                              Object {
-                                "data": Object {},
-                                "nodes": Array [
-                                  Object {
-                                    "leaves": Array [
-                                      Object {
-                                        "marks": Array [],
-                                        "object": "leaf",
-                                        "text": "",
-                                      },
-                                    ],
-                                    "object": "text",
-                                  },
-                                ],
-                                "object": "block",
-                                "type": "table_content",
-                              },
-                            ],
-                            "object": "block",
-                            "type": "table_cell",
-                          },
-                          Object {
-                            "data": Object {
-                              "width": "15",
-                            },
-                            "nodes": Array [
-                              Object {
-                                "data": Object {},
-                                "nodes": Array [
-                                  Object {
-                                    "leaves": Array [
-                                      Object {
-                                        "marks": Array [],
-                                        "object": "leaf",
-                                        "text": "",
-                                      },
-                                    ],
-                                    "object": "text",
-                                  },
-                                ],
-                                "object": "block",
-                                "type": "table_content",
-                              },
-                            ],
-                            "object": "block",
-                            "type": "table_cell",
-                          },
-                        ],
-                        "object": "block",
-                        "type": "table_row",
+                        "object": "text",
                       },
                     ],
                     "object": "block",
-                    "type": "table",
+                    "type": "paragraph",
                   },
                   Object {
                     "data": Object {},
@@ -273,4 +307,4 @@ Object {
 }
 `;
 
-exports[`insert-table insert table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"><table><tbody><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td></tr><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td></tr></tbody></table></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`insert-table insert table 2`] = `"<p style=\\"margin:0\\"></p><table><tbody><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td></tr><tr><td style=\\"width:15px\\"></td><td style=\\"width:15px\\"></td></tr></tbody></table><p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"><p style=\\"margin:0\\"></p></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;

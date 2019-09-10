@@ -124,7 +124,7 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Compone
             style={{ borderRight: `solid 1px #000`, ...opts.tableStyle }}
             attributes={props.attributes}
           >
-            <tbody>{props.children}</tbody>
+            <tbody {...props.attributes}>{props.children}</tbody>
           </Table>
         );
       case opts.typeRow:

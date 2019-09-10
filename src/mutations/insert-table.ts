@@ -1,4 +1,4 @@
-import { Editor } from 'slate';
+import { Editor, Text, Block, BlockJSON } from 'slate';
 import { createTable, TableOption } from '../create-table';
 import { Option } from '../option';
 
@@ -7,5 +7,14 @@ export function insertTable(opts: Required<Option>, editor: Editor, columns = 2,
 
   if (!value.selection.start.key) return false;
   const table = createTable(opts, columns, rows, tableOption);
-  return editor.insertBlock(table);
+  const text = {
+    object: 'block',
+    type: 'paragraph',
+    nodes: [Text.create('').toJSON()],
+  } as BlockJSON;
+  return editor
+    .insertBlock(Block.fromJSON(text))
+    .moveToStartOfPreviousBlock()
+    .insertBlock(Block.fromJSON(text))
+    .insertBlock(table);
 }

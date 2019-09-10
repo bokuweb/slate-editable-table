@@ -134,31 +134,52 @@ export function EditTable(options: Option = defaultOptions) {
     const { document, selection } = value;
     const { start, isCollapsed } = selection;
 
+    if (!start || !start.key) return next();
+    const startNode = document.getDescendant(start.key);
+    if (!startNode) return next();
+    const previous = document.getPreviousText(startNode.key);
+    const prevBlock = previous ? document.getClosestBlock(previous.key) : null;
+
     if (event.key === 'Delete' || (event.ctrlKey && event.key === 'd')) {
+      const nextBock = document.getNextBlock(startNode.key);
       if (
-        selection.end.offset == value.startText.text.length &&
+        // HACK: For ctrl + d key short cut
+        selection.end.offset >= value.startText.text.length - 1 &&
         editor.value.startBlock.type !== opts.typeContent &&
-        editor.moveToStartOfNextBlock().value.startBlock.type === opts.typeContent
+        nextBock &&
+        nextBock.type === opts.typeContent
       ) {
         event.preventDefault();
-        editor.moveToEndOfPreviousBlock();
+        if (selection.end.offset === value.startText.text.length - 1) {
+          editor.deleteForward(1);
+        }
         return;
       }
     }
+
     if (event.key === 'Backspace' || (event.ctrlKey && event.key === 'h')) {
       if (
-        selection.start.offset == 0 &&
+        // HACK: For ctrl + h key short cut
+        selection.start.offset <= 1 &&
         editor.value.startBlock.type !== opts.typeContent &&
-        editor.moveToEndOfPreviousBlock().value.startBlock.type === opts.typeContent
+        prevBlock &&
+        prevBlock.type === opts.typeContent
       ) {
         event.preventDefault();
-        editor.moveToStartOfNextBlock();
+        if (selection.start.offset === 1) {
+          editor.deleteBackward();
+        }
         return;
       }
     }
 
     // When next block is table check keydown with table logic.
     if (!isSelectionInTable(editor)) {
+      // if (event.ctrlKey && event.key === 'h') {
+      //event.preventDefault();
+      // editor.deleteBackward();
+      //  return;
+      //}
       return next();
     }
     // editor.moveToEndOfPreviousBlock();
@@ -167,21 +188,16 @@ export function EditTable(options: Option = defaultOptions) {
       event.preventDefault();
       return;
     }
-    if (!start || !start.key) return next();
-    const startNode = document.getDescendant(start.key);
-    if (!startNode) return next();
 
-    if (
-      startNode.text === '' &&
-      value.startBlock.type === opts.typeCell &&
-      ((event.ctrlKey && event.key === 'd') || event.key === 'Delete')
-    ) {
-      return onDelete(event, editor, next);
-    }
+    // if (
+    //   startNode.text === '' &&
+    //   value.startBlock.type === opts.typeCell &&
+    //   ((event.ctrlKey && event.key === 'd') || event.key === 'Delete')
+    // ) {
+    //   return onDelete(event, editor, next);
+    // }
+
     if (isCollapsed && start.isAtStartOfNode(startNode)) {
-      const previous = document.getPreviousText(startNode.key);
-      if (!previous) return next();
-      const prevBlock = document.getClosestBlock(previous.key);
       if (!prevBlock) return next();
       if (prevBlock.type === opts.typeCell) {
         if (['Backspace', 'Delete', 'Enter'].includes(event.key) || (event.ctrlKey && event.key === 'h')) {
@@ -202,8 +218,6 @@ export function EditTable(options: Option = defaultOptions) {
     }
 
     if (event.ctrlKey && event.key === 'h') {
-      const { value } = editor;
-      const { selection } = value;
       const key = editor.value.focusBlock && editor.value.focusBlock.key;
       const cell = table.TableLayout.currentCell(editor, opts);
       if (!cell) return next();
