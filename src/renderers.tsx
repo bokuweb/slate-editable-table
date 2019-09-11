@@ -205,6 +205,7 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Compone
             style={{
               ...opts.cellStyle,
               borderBottom: `solid 1px #000`,
+              verticalAlign: 'baseline',
               width,
               backgroundColor: props.node.data.get('selectionColor'),
             }}
