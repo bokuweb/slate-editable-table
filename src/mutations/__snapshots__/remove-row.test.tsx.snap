@@ -29,7 +29,9 @@ Object {
             "data": Object {},
             "nodes": Array [
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -53,7 +55,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -91,4 +95,4 @@ Object {
 }
 `;
 
-exports[`remove-row remove row in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`remove-row remove row in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td></tr></tbody></table>"`;

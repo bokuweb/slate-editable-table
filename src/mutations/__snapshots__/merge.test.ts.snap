@@ -32,7 +32,7 @@ Object {
                 "data": Object {
                   "colspan": "2",
                   "rowspan": "1",
-                  "width": "0",
+                  "width": "400",
                 },
                 "nodes": Array [
                   Object {
@@ -81,7 +81,9 @@ Object {
             "data": Object {},
             "nodes": Array [
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -105,7 +107,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -143,7 +147,7 @@ Object {
 }
 `;
 
-exports[`merge merge 0 and 1 in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"1\\" style=\\"width:0px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`merge merge 0 and 1 in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"1\\" style=\\"width:400px\\"></td></tr><tr><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td></tr></tbody></table>"`;
 
 exports[`merge merge 0 and 2 in 2X2 table 1`] = `
 Object {
@@ -177,7 +181,7 @@ Object {
                 "data": Object {
                   "colspan": "1",
                   "rowspan": "2",
-                  "width": "0",
+                  "width": "200",
                 },
                 "nodes": Array [
                   Object {
@@ -219,7 +223,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -250,7 +256,9 @@ Object {
             "data": Object {},
             "nodes": Array [
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -288,7 +296,7 @@ Object {
 }
 `;
 
-exports[`merge merge 0 and 2 in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"1\\" rowspan=\\"2\\" style=\\"width:0px\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`merge merge 0 and 2 in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"1\\" rowspan=\\"2\\" style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:200px\\"></td></tr></tbody></table>"`;
 
 exports[`merge merge 2 column at 3X3 row/colspan2 table 1`] = `
 Object {
@@ -502,7 +510,7 @@ Object {
               Object {
                 "marks": Array [],
                 "object": "leaf",
-                "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+                "text": "Lorem ipsum...",
               },
             ],
             "object": "text",
@@ -518,7 +526,9 @@ Object {
             "data": Object {},
             "nodes": Array [
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -542,7 +552,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -569,7 +581,7 @@ Object {
                 "data": Object {
                   "colspan": "2",
                   "rowspan": "3",
-                  "width": "0",
+                  "width": "400",
                 },
                 "nodes": Array [
                   Object {
@@ -769,7 +781,7 @@ Object {
 }
 `;
 
-exports[`merge merge 2 column at 4X3 rowspan3 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td colSpan=\\"2\\" rowspan=\\"3\\" style=\\"width:0px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`merge merge 2 column at 4X3 rowspan3 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum...</p><table><tbody><tr><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td colSpan=\\"2\\" rowspan=\\"3\\" style=\\"width:400px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
 
 exports[`merge merge all in 2X2 table 1`] = `
 Object {
@@ -803,7 +815,7 @@ Object {
                 "data": Object {
                   "colspan": "2",
                   "rowspan": "1",
-                  "width": "0",
+                  "width": "400",
                 },
                 "nodes": Array [
                   Object {
@@ -893,4 +905,4 @@ Object {
 }
 `;
 
-exports[`merge merge all in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"1\\" style=\\"width:0px\\"></td></tr></tbody></table>"`;
+exports[`merge merge all in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"2\\" rowspan=\\"1\\" style=\\"width:400px\\"></td></tr></tbody></table>"`;
