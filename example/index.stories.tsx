@@ -4,7 +4,6 @@ import { ExampleEditor } from '.';
 
 import oneByOne from '../mocks/one-by-one';
 import twoByTwo from '../mocks/two-by-two';
-import twoByTwonested from '../mocks/two-by-two-nested';
 import threeByThree from '../mocks/three-by-three';
 import threeByThreeColRowspan2 from '../mocks/three-by-three-colspan-rowspan-2';
 import FourByThreeRowspan3 from '../mocks/four-by-three-rowspan-3';
@@ -13,7 +12,14 @@ import twoByTwoNested from '../mocks/two-by-two-nested';
 
 storiesOf('table', module)
   .add('Simple 1 x 1', () => {
-    return <ExampleEditor initialValue={oneByOne} onChange={({ value }) => {}} />;
+    return (
+      <ExampleEditor
+        initialValue={oneByOne}
+        onChange={({ value }) => {
+          console.log('aa', value);
+        }}
+      />
+    );
   })
   .add('Simple 2 x 2', () => {
     return <ExampleEditor initialValue={twoByTwo} onChange={({ value }) => {}} />;
