@@ -29,7 +29,9 @@ Object {
             "data": Object {},
             "nodes": Array [
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -80,7 +82,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -111,7 +115,9 @@ Object {
             "data": Object {},
             "nodes": Array [
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -162,7 +168,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -200,7 +208,7 @@ Object {
 }
 `;
 
-exports[`insert-right insert column at the left end of the 2x2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`insert-right insert column at the left end of the 2x2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td><td style=\\"width:200px\\"></td></tr></tbody></table>"`;
 
 exports[`insert-right insert column at the left end of the 3x3 table 1`] = `
 Object {
@@ -475,7 +483,9 @@ Object {
             "data": Object {},
             "nodes": Array [
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -499,7 +509,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -557,7 +569,9 @@ Object {
             "data": Object {},
             "nodes": Array [
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -581,7 +595,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -646,7 +662,7 @@ Object {
 }
 `;
 
-exports[`insert-right insert column at the right end of the 2x2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td></tr><tr><td style=\\"width:auto\\"></td><td style=\\"width:auto\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td></tr></tbody></table>"`;
+exports[`insert-right insert column at the right end of the 2x2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td></tr><tr><td style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td><td rowspan=\\"1\\" style=\\"width:15px\\"></td></tr></tbody></table>"`;
 
 exports[`insert-right insert column at the right end of the 3x3 table 1`] = `
 Object {

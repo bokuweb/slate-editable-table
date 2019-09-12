@@ -23,9 +23,7 @@ import { removeTable } from './mutations/remove-table';
 import { splitCell } from './mutations/split-cell';
 
 import { ComponentStore } from './store';
-
 import { createRenderers, TableHandler } from './renderers';
-
 import { createSchema } from './schema';
 
 export interface EditTableCommands {
@@ -126,9 +124,6 @@ export function EditTable(options: Option = defaultOptions) {
     event.preventDefault();
   }
 
-  /**
-   * User is pressing a key in the editor
-   */
   function onKeyDown(event: any, editor: Editor, next: () => any): any {
     const { value } = editor;
     const { document, selection } = value;
@@ -175,27 +170,13 @@ export function EditTable(options: Option = defaultOptions) {
 
     // When next block is table check keydown with table logic.
     if (!isSelectionInTable(editor)) {
-      // if (event.ctrlKey && event.key === 'h') {
-      //event.preventDefault();
-      // editor.deleteBackward();
-      //  return;
-      //}
       return next();
     }
-    // editor.moveToEndOfPreviousBlock();
     // INFO: It is needed to prevent replace some <td /> s when some cells selected.
     if (value.startBlock !== value.endBlock) {
       event.preventDefault();
       return;
     }
-
-    // if (
-    //   startNode.text === '' &&
-    //   value.startBlock.type === opts.typeCell &&
-    //   ((event.ctrlKey && event.key === 'd') || event.key === 'Delete')
-    // ) {
-    //   return onDelete(event, editor, next);
-    // }
 
     if (isCollapsed && start.isAtStartOfNode(startNode)) {
       if (!prevBlock) return next();
@@ -253,11 +234,10 @@ export function EditTable(options: Option = defaultOptions) {
   }
 
   const renderer = createRenderers(opts, ref, store);
-  const { schema /*, normalizeNode */ } = createSchema(opts);
+  const { schema } = createSchema(opts);
 
   return {
     schema,
-    // normalizeNode,
     onKeyDown,
     onBlur,
     // For old version

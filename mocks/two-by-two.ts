@@ -19,6 +19,9 @@ export default {
               {
                 object: 'block',
                 key: '0',
+                data: {
+                  width: '200',
+                },
                 type: 'table_cell',
                 nodes: [
                   {
@@ -31,6 +34,9 @@ export default {
               {
                 object: 'block',
                 key: '1',
+                data: {
+                  width: '200',
+                },
                 type: 'table_cell',
                 nodes: [
                   {
@@ -49,6 +55,9 @@ export default {
               {
                 object: 'block',
                 key: '2',
+                data: {
+                  width: '200',
+                },
                 type: 'table_cell',
                 nodes: [
                   {
@@ -61,6 +70,9 @@ export default {
               {
                 object: 'block',
                 key: '3',
+                data: {
+                  width: '200',
+                },
                 type: 'table_cell',
                 nodes: [
                   {

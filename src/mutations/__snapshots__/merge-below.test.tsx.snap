@@ -32,7 +32,7 @@ Object {
                 "data": Object {
                   "colspan": "1",
                   "rowspan": "2",
-                  "width": "0",
+                  "width": "200",
                 },
                 "nodes": Array [
                   Object {
@@ -74,7 +74,9 @@ Object {
                 "type": "table_cell",
               },
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -105,7 +107,9 @@ Object {
             "data": Object {},
             "nodes": Array [
               Object {
-                "data": Object {},
+                "data": Object {
+                  "width": "200",
+                },
                 "nodes": Array [
                   Object {
                     "data": Object {},
@@ -143,4 +147,4 @@ Object {
 }
 `;
 
-exports[`merge-below merge below in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"1\\" rowspan=\\"2\\" style=\\"width:0px\\"></td><td style=\\"width:auto\\"></td></tr><tr><td style=\\"width:auto\\"></td></tr></tbody></table>"`;
+exports[`merge-below merge below in 2X2 table 2`] = `"<p style=\\"margin:0\\">Lorem ipsum ...</p><table><tbody><tr><td colSpan=\\"1\\" rowspan=\\"2\\" style=\\"width:200px\\"></td><td style=\\"width:200px\\"></td></tr><tr><td style=\\"width:200px\\"></td></tr></tbody></table>"`;
