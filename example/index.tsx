@@ -148,6 +148,14 @@ export class ExampleEditor extends React.Component<Props> {
     this.editor.disableResizing();
   };
 
+  redo = () => {
+    this.editor.redo();
+  };
+
+  undo = () => {
+    this.editor.undo();
+  };
+
   render() {
     return (
       <>
@@ -165,6 +173,8 @@ export class ExampleEditor extends React.Component<Props> {
         <button onMouseDown={this.removeTable}>Remove Table</button>
         <button onMouseDown={this.disableResizing}>disable resizing</button>
         <button onMouseDown={this.enableResizing}>enable resizing</button>
+        <button onMouseDown={this.redo}>redo</button>
+        <button onMouseDown={this.undo}>undo</button>
         <Editor
           ref={e => {
             if (hasTablePlugin(e)) {
