@@ -46,6 +46,13 @@ export const useResizableTable = (props: ResizableProps) => {
   };
 
   React.useEffect(() => {
+    if (!props.disableResizing) return;
+    document.querySelectorAll(handlerSelector).forEach(el => {
+      el.parentNode && el.parentNode.removeChild(el);
+    });
+  }, [props.disableResizing]);
+
+  React.useEffect(() => {
     if (!ref.current) return;
     const size = createSize();
     if (size) {
@@ -313,6 +320,7 @@ function createDiv(height: number | string, offset: number) {
   div.style.height = height + 'px';
   div.dataset.resizeHandle = 'true';
   div.style.zIndex = '1';
+  div.style.backgroundColor = 'red';
   div.contentEditable = 'false';
   return div;
 }
