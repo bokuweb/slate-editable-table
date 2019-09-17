@@ -60,10 +60,22 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
       [props.editor],
     );
 
+    const onResizeStart = React.useCallback(
+      (e: Event) => {
+        e.stopPropagation();
+        props.editor.blur();
+        removeSelection(props.editor);
+        props.store.setAnchorCellBlock(null);
+        props.store.setFocusCellBlock(null);
+      },
+      [props.editor],
+    );
+
     const { ref, update } = useResizableTable({
       disableResizing,
       maxWidth: props.maxWidth,
       onResize,
+      onResizeStart,
       onInit,
       onUpdate,
       onHandleHover: props.onHandleMouseOver,
