@@ -101,6 +101,7 @@ export function mergeCells(editor: Editor, anchorKey: string, focusKey: string, 
     contentNodes.forEach(node => {
       const newLeftTopCell = editor.value.document.getNode(leftTopCell.key);
       if (Block.isBlock(newLeftTopCell)) {
+        if (node.type !== 'table' && node.nodes.size === 1 && node.getText().trim() === '') return;
         editor = editor.moveToEndOfNode(newLeftTopCell).insertBlock(node);
       }
     });
