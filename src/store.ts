@@ -25,8 +25,22 @@ export class ComponentStore {
   getAnchorCellBlock = () => this.anchorCellBlock;
   setFocusCellBlock = (b: Block | null) => (this.focusCellBlock = b);
   getFocusCellBlock = () => this.focusCellBlock;
-  setCellSelecting = () => (this.isCellSelecting = true);
-  clearCellSelecting = () => (this.isCellSelecting = false);
+  setCellSelecting = (editor: Editor) => {
+    this.isCellSelecting = true;
+    // Disable resizing when cell selection started
+    const emitters = this.resizeDisableEmitterMap.get(editor) || [];
+    emitters.forEach(e => {
+      e(true);
+    });
+  };
+  clearCellSelecting = (editor: Editor) => {
+    this.isCellSelecting = false;
+    const v = this.resizeDisableMap.get(editor);
+    const emitters = this.resizeDisableEmitterMap.get(editor) || [];
+    emitters.forEach(e => {
+      e(!!v);
+    });
+  };
   getCellSelecting = () => this.isCellSelecting;
 
   dispose = () => {

@@ -46,6 +46,13 @@ export const useResizableTable = (props: ResizableProps) => {
   };
 
   React.useEffect(() => {
+    if (!props.disableResizing) return;
+    document.querySelectorAll(handlerSelector).forEach(el => {
+      el.parentNode && el.parentNode.removeChild(el);
+    });
+  }, [props.disableResizing]);
+
+  React.useEffect(() => {
     if (!ref.current) return;
     const size = createSize();
     if (size) {
@@ -96,6 +103,7 @@ export const useResizableTable = (props: ResizableProps) => {
               pageX = e.pageX;
               document.addEventListener('mousemove', onMouseMove);
               document.addEventListener('mouseup', onMouseUp);
+              props.onResizeStart && props.onResizeStart(e);
             };
 
             const onMouseMove = (e: MouseEvent) => {
@@ -245,22 +253,40 @@ function removeHandles(table: HTMLTableElement, target: HTMLElement) {
 }
 
 function getBoundaries(table: HTMLTableElement): number[] {
-  const boundaryMap = Array.from(table.querySelectorAll('th, td')).reduce(
-    (acc, el) => {
-      if (!el.parentNode) return acc;
-      const xs = acc.m.get(el.parentNode) || [];
-      const w = (el as HTMLElement).offsetWidth;
-      const x = xs.length ? xs[xs.length - 1] + w : w;
-      xs.push(x);
-      acc.m.set(el.parentNode, xs);
-      acc.x[x] = true;
-      return acc;
-    },
-    { m: new Map<Node, number[]>(), x: {} as { [key: string]: boolean } },
-  );
-  return Object.keys(boundaryMap.x)
-    .map(x => Number(x))
-    .sort((a, b) => a - b);
+  const rows = Array.from(table.querySelectorAll('tr'));
+  const layout: number[][] = [];
+
+  for (let y = 0; y < rows.length; y++) {
+    const row = rows[y];
+    if (!layout[y]) layout[y] = [];
+    for (let x = 0; x < row.children.length; x++) {
+      const cell = row.children[x] as HTMLTableCellElement;
+      if (!cell) continue;
+      let offset = 0;
+      while (true) {
+        if (!layout[y][x + offset]) {
+          layout[y][x + offset] = cell.offsetWidth;
+          break;
+        }
+        offset++;
+      }
+      for (let r = 1; r < (cell.rowSpan || 1); r++) {
+        if (!layout[y + r]) layout[y + r] = [];
+        layout[y + r][x] = cell.offsetWidth;
+      }
+    }
+  }
+
+  const dict: { [k: string]: boolean } = {};
+  layout.forEach(row => {
+    let x = 0;
+    row.forEach(width => {
+      dict[width + x] = true;
+      x += width;
+    });
+  });
+
+  return Object.keys(dict).map(Number);
 }
 
 function getRows(table: HTMLTableElement): HTMLElement[] {
