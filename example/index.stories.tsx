@@ -12,14 +12,7 @@ import twoByTwoNested from '../mocks/two-by-two-nested';
 
 storiesOf('table', module)
   .add('Simple 1 x 1', () => {
-    return (
-      <ExampleEditor
-        initialValue={oneByOne}
-        onChange={({ value }) => {
-          console.log('aa', value);
-        }}
-      />
-    );
+    return <ExampleEditor initialValue={oneByOne} onChange={({ value }) => {}} />;
   })
   .add('Simple 2 x 2', () => {
     return <ExampleEditor initialValue={twoByTwo} onChange={({ value }) => {}} />;
