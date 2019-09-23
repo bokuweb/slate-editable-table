@@ -39,7 +39,6 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
   (props, tableRef) => {
     const [disableResizing, forceUpdate] = React.useState(false);
     const maxWidth = typeof props.maxWidth === 'undefined' ? 'auto' : props.maxWidth + 'px';
-
     const onInit = React.useCallback(
       (values: ResizeValue) => {
         props.onInit(props.editor, values);
@@ -62,9 +61,21 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
       [props.editor],
     );
 
+    const onResizeStart = React.useCallback(
+      (e: Event) => {
+        e.stopPropagation();
+        props.editor.blur();
+        removeSelection(props.editor);
+        props.store.setAnchorCellBlock(null);
+        props.store.setFocusCellBlock(null);
+      },
+      [props.editor],
+    );
+
     const { ref, update } = useResizableTable({
       disableResizing,
       maxWidth: props.maxWidth,
+      onResizeStart,
       // onResize,
       onResizeStop,
       onInit,
@@ -138,7 +149,7 @@ type CellProps = {
 const Cell = React.memo((props: CellProps) => {
   const width = typeof props.node.data.get('width') === 'undefined' ? 'auto' : props.node.data.get('width') + 'px';
   const onMouseUp = React.useCallback((e: Event) => {
-    props.store.clearCellSelecting();
+    props.store.clearCellSelecting(props.editor);
     window.removeEventListener('mouseup', onMouseUp);
   }, []);
   const onWindowClick = React.useCallback(
@@ -168,7 +179,7 @@ const Cell = React.memo((props: CellProps) => {
         props.store.setAnchorCellBlock(null);
         props.store.setFocusCellBlock(null);
         removeSelection(props.editor);
-        props.store.setCellSelecting();
+        props.store.setCellSelecting(props.editor);
         const anchorCellBlock = table.findCellBlockByElement(props.editor, e.target, props.opts);
         props.store.setAnchorCellBlock(anchorCellBlock);
         window.addEventListener('mouseup', onMouseUp);
@@ -201,7 +212,10 @@ const Cell = React.memo((props: CellProps) => {
               if (blocks[cell.key]) {
                 props.editor.setNodeByKey(cell.key, {
                   type: cell.block.type,
-                  data: { ...cell.block.data.toObject(), selectionColor: props.opts.selectionColor },
+                  data: {
+                    ...cell.block.data.toObject(),
+                    selectionColor: props.opts.selectionColor,
+                  },
                 });
               } else {
                 props.editor.setNodeByKey(cell.key, {

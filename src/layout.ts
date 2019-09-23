@@ -329,13 +329,28 @@ export function findClosestKey(el: HTMLElement): string | null {
 export function findCellBlockByElement(editor: Editor, el: HTMLElement, opts = defaultOptions): Block | null {
   const { value } = editor;
   const key = findClosestKey(el);
-  if (!key) {
+  if (typeof key === 'undefined' || key === null) {
     return null;
   }
-  return value.document.getClosest(key, p => {
+  const found = value.document.getClosest(key, p => {
     if (!Block.isBlock(p)) return false;
+    if (p.type === opts.typeRow) {
+      return true;
+    }
     return p.type === opts.typeCell;
   }) as Block;
+
+  if (found.type === opts.typeCell) {
+    return found;
+  }
+
+  if (found.type === opts.typeRow) {
+    return found.nodes.find(cell => {
+      if (!Block.isBlock(cell)) return false;
+      return cell.key === key;
+    }) as Block | null;
+  }
+  return null;
 }
 
 export function findLeftTopPosition(anchor: Cell, focus: Cell) {
