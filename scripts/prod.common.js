@@ -7,7 +7,7 @@ export default {
   plugins: [
     typescript({
       tsconfig: 'tsconfig.json',
-      useTsconfigDeclarationDir: true,
+      // useTsconfigDeclarationDir: true,
     }),
     replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
   ],

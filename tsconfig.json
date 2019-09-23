@@ -6,9 +6,9 @@
     "jsx": "react",
     "strict": true,
     "moduleResolution": "node",
-    "emitDeclarationOnly": true,
     "declaration": true,
-    "declarationDir": "decls"
+    "declarationDir": "decls",
+    "outDir": "build"
   },
   "include": ["src"],
   "exclude": ["node_modules", "mocks"]      
