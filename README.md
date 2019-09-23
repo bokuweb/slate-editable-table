@@ -29,7 +29,7 @@ WIP
 
 ### CodeSandbox
 
-WIP
+[Example](https://codesandbox.io/s/infallible-cdn-8fvhk?fontsize=14)
 
 ## Install
 
