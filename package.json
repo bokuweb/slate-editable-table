@@ -22,7 +22,7 @@
     "build": "npm-run-all --serial build:prod:*",
     "build-storybook": "build-storybook --quiet --loglevel silent",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "prepare": "npm-run-all --serial build tsc copy-decs"
+    "prepublishOnly": "npm-run-all --serial build tsc copy-decs"
   },
   "resolutions": {
     "**/set-value": "2.0.1",
