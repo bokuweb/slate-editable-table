@@ -170,7 +170,7 @@ export const useResizableTable = (props: ResizableProps) => {
       table.removeEventListener('mouseover', onTableMouseOver);
       table.removeEventListener('mouseout', onTableMouseOut);
     };
-  }, [props.disableResizing]);
+  }, [props.disableResizing, ref.current]);
   return { ref, update };
 };
 

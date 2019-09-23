@@ -14,8 +14,8 @@ jobs:
           name: Install dependencies
           command:  |
             yarn install --frozen-lockfile
-            # yarn add slate@0.47.4 slate-react@0.22.4 slate-html-serializer@0.8.9
-            yarn add slate@0.45.1 slate-react@0.21.20
+            yarn add slate@0.47.4 slate-react@0.22.4 slate-html-serializer@0.8.9
+            # yarn add slate@0.45.1 slate-react@0.21.20
       - run:
           name: Lint
           command: yarn run lint

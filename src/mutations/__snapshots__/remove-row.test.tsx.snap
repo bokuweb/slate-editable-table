@@ -9,14 +9,9 @@ Object {
         "data": Object {},
         "nodes": Array [
           Object {
-            "leaves": Array [
-              Object {
-                "marks": Array [],
-                "object": "leaf",
-                "text": "Lorem ipsum ...",
-              },
-            ],
+            "marks": Array [],
             "object": "text",
+            "text": "Lorem ipsum ...",
           },
         ],
         "object": "block",
@@ -37,14 +32,9 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "leaves": Array [
-                          Object {
-                            "marks": Array [],
-                            "object": "leaf",
-                            "text": "2",
-                          },
-                        ],
+                        "marks": Array [],
                         "object": "text",
+                        "text": "2",
                       },
                     ],
                     "object": "block",
@@ -63,14 +53,9 @@ Object {
                     "data": Object {},
                     "nodes": Array [
                       Object {
-                        "leaves": Array [
-                          Object {
-                            "marks": Array [],
-                            "object": "leaf",
-                            "text": "3",
-                          },
-                        ],
+                        "marks": Array [],
                         "object": "text",
+                        "text": "3",
                       },
                     ],
                     "object": "block",
