@@ -191,20 +191,23 @@ const Cell = React.memo((props: CellProps) => {
         props.store.setFocusCellBlock(focusCellBlock);
         // HACK: Add ::selection style when greater than 1 cells selected.
         addSelectionStyle();
+
         const blocks = table.createSelectedBlockMap(props.editor, anchorCellBlock.key, focusCellBlock.key, props.opts);
-        t.table.forEach(row => {
-          row.forEach(cell => {
-            if (blocks[cell.key]) {
-              props.editor.setNodeByKey(cell.key, {
-                type: cell.block.type,
-                data: { ...cell.block.data.toObject(), selectionColor: props.opts.selectionColor },
-              });
-            } else {
-              props.editor.setNodeByKey(cell.key, {
-                type: cell.block.type,
-                data: { ...cell.block.data.toObject(), selectionColor: null },
-              });
-            }
+        props.editor.withoutSaving(() => {
+          t.table.forEach(row => {
+            row.forEach(cell => {
+              if (blocks[cell.key]) {
+                props.editor.setNodeByKey(cell.key, {
+                  type: cell.block.type,
+                  data: { ...cell.block.data.toObject(), selectionColor: props.opts.selectionColor },
+                });
+              } else {
+                props.editor.setNodeByKey(cell.key, {
+                  type: cell.block.type,
+                  data: { ...cell.block.data.toObject(), selectionColor: null },
+                });
+              }
+            });
           });
         });
       }}

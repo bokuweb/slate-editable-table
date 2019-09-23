@@ -44,5 +44,5 @@ export function createHtml(v: Value, opts = defaultOptions) {
     },
   ];
   const h = new Html({ rules });
-  return h.serialize(v);
+  return h.serialize(v as any);
 }

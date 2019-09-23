@@ -3,27 +3,29 @@ import { Editor, Block } from 'slate';
 const insertStyleId = '__slate__table__id';
 
 export function removeSelection(editor: Editor) {
-  const editors = document.querySelectorAll('[data-slate-editor]');
-  Array.from(editors).forEach(e => {
-    const tables = e.querySelectorAll('table');
-    tables.forEach(table => {
-      const { key } = table.dataset;
-      if (!key) return;
-      const tableBlock = editor.value.document.getNode(key);
-      if (!Block.isBlock(tableBlock)) return;
-      tableBlock.nodes.forEach(row => {
-        if (!Block.isBlock(row)) return;
-        row.nodes.forEach(cell => {
-          if (!Block.isBlock(cell)) return;
-          editor.setNodeByKey(cell.key, {
-            type: cell.type,
-            data: { ...cell.data.toObject(), selectionColor: null },
+  editor.withoutSaving(() => {
+    const editors = document.querySelectorAll('[data-slate-editor]');
+    Array.from(editors).forEach(e => {
+      const tables = e.querySelectorAll('table');
+      tables.forEach(table => {
+        const { key } = table.dataset;
+        if (!key) return;
+        const tableBlock = editor.value.document.getNode(key);
+        if (!Block.isBlock(tableBlock)) return;
+        tableBlock.nodes.forEach(row => {
+          if (!Block.isBlock(row)) return;
+          row.nodes.forEach(cell => {
+            if (!Block.isBlock(cell)) return;
+            editor.setNodeByKey(cell.key, {
+              type: cell.type,
+              data: { ...cell.data.toObject(), selectionColor: null },
+            });
           });
         });
       });
     });
+    removeSelectionStyle();
   });
-  removeSelectionStyle();
 }
 
 export function removeSelectionStyle() {
