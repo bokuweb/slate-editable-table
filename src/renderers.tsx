@@ -90,7 +90,7 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
     }, []);
 
     React.useEffect(() => {
-      ref.current = props.attributes.ref.current;
+      ref.current = props.attributes && props.attributes.ref && props.attributes.ref.current;
       update();
     }, [props.attributes.ref.current]);
 
