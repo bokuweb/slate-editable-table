@@ -109,14 +109,14 @@ export const useResizableTable = (props: ResizableProps) => {
             const onMouseMove = (e: MouseEvent) => {
               if (!isResizing) return;
               let diffX = e.pageX - pageX;
-              const resizedValues = createResizedValues(rows, boundary, diffX);
+              const resizedValues = updateCellWidths(rows, boundary, diffX);
               props.onResize && props.onResize(e, resizedValues);
             };
 
             const onMouseUp = (e: MouseEvent) => {
               isResizing = false;
               var diffX = e.pageX - pageX;
-              const resizedValues = createResizedValues(rows, boundary, diffX);
+              const resizedValues = updateCellWidths(rows, boundary, diffX);
               props.onResizeStop && props.onResizeStop(e, resizedValues);
               pageX = 0;
               removeHandles(table, e.relatedTarget as HTMLElement);
@@ -174,7 +174,7 @@ export const useResizableTable = (props: ResizableProps) => {
   return { ref, update };
 };
 
-function createResizedValues(rows: Row[], boundary: number, diffX: number): ResizeValue {
+function updateCellWidths(rows: Row[], boundary: number, diffX: number): ResizeValue {
   return (rows || []).reduce(
     (acc, row) => {
       let hasCurrent = false;
@@ -185,6 +185,7 @@ function createResizedValues(rows: Row[], boundary: number, diffX: number): Resi
         // If col merged and move inner slider, keep width.
         if (cell.colspan >= 2 && boundary < cell.x + cell.width && boundary > cell.x) {
           acc[cell.ref.dataset.key] = cell.width;
+          cell.ref.style.width = `${cell.width}px`;
           return acc;
         }
 
@@ -192,15 +193,18 @@ function createResizedValues(rows: Row[], boundary: number, diffX: number): Resi
           if (!hasCurrent) {
             hasCurrent = true;
             acc[cell.ref.dataset.key] = cell.width + diffX;
+            cell.ref.style.width = `${cell.width + diffX}px`;
             return acc;
           }
         }
         if (hasCurrent && !hasNext) {
           hasNext = true;
           acc[cell.ref.dataset.key] = cell.width - diffX;
+          cell.ref.style.width = `${cell.width - diffX}px`;
           return acc;
         }
         acc[cell.ref.dataset.key] = cell.width;
+        cell.ref.style.width = `${cell.width}px`;
         return acc;
       });
       return acc;

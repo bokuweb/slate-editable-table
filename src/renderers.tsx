@@ -26,7 +26,8 @@ type TableProps = {
   editor: Editor;
   onInit: (editor: Editor, data: ResizeValue) => void;
   onUpdate: (editor: Editor, data: ResizeValue) => void;
-  onResize: (editor: Editor, data: ResizeValue) => void;
+  onResize?: (editor: Editor, data: ResizeValue) => void;
+  onResizeStop: (editor: Editor, data: ResizeValue) => void;
   onHandleMouseOver?: () => void;
 };
 
@@ -52,10 +53,10 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
       [props.editor],
     );
 
-    const onResize = React.useCallback(
+    const onResizeStop = React.useCallback(
       (e: Event, values: ResizeValue) => {
         props.editor.blur();
-        props.onResize(props.editor, values);
+        props.onResizeStop(props.editor, values);
       },
       [props.editor],
     );
@@ -74,8 +75,9 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
     const { ref, update } = useResizableTable({
       disableResizing,
       maxWidth: props.maxWidth,
-      onResize,
       onResizeStart,
+      // onResize,
+      onResizeStop,
       onInit,
       onUpdate,
       onHandleHover: props.onHandleMouseOver,
@@ -202,20 +204,26 @@ const Cell = React.memo((props: CellProps) => {
         props.store.setFocusCellBlock(focusCellBlock);
         // HACK: Add ::selection style when greater than 1 cells selected.
         addSelectionStyle();
+
         const blocks = table.createSelectedBlockMap(props.editor, anchorCellBlock.key, focusCellBlock.key, props.opts);
-        t.table.forEach(row => {
-          row.forEach(cell => {
-            if (blocks[cell.key]) {
-              props.editor.setNodeByKey(cell.key, {
-                type: cell.block.type,
-                data: { ...cell.block.data.toObject(), selectionColor: props.opts.selectionColor },
-              });
-            } else {
-              props.editor.setNodeByKey(cell.key, {
-                type: cell.block.type,
-                data: { ...cell.block.data.toObject(), selectionColor: null },
-              });
-            }
+        props.editor.withoutSaving(() => {
+          t.table.forEach(row => {
+            row.forEach(cell => {
+              if (blocks[cell.key]) {
+                props.editor.setNodeByKey(cell.key, {
+                  type: cell.block.type,
+                  data: {
+                    ...cell.block.data.toObject(),
+                    selectionColor: props.opts.selectionColor,
+                  },
+                });
+              } else {
+                props.editor.setNodeByKey(cell.key, {
+                  type: cell.block.type,
+                  data: { ...cell.block.data.toObject(), selectionColor: null },
+                });
+              }
+            });
           });
         });
       }}
@@ -250,7 +258,7 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Compone
             store={store}
             onInit={updateWidth}
             onUpdate={updateWidth}
-            onResize={updateWidth}
+            onResizeStop={updateWidth}
             maxWidth={maxWidth}
             style={opts.tableStyle}
             attributes={props.attributes}

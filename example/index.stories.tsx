@@ -28,7 +28,14 @@ storiesOf('table', module)
     return <ExampleEditor initialValue={threeByThree} onChange={({ value }) => {}} />;
   })
   .add('Merged 3 x 3 colspan/rowspan=2', () => {
-    return <ExampleEditor initialValue={threeByThreeColRowspan2} onChange={({ value }) => {}} />;
+    return (
+      <ExampleEditor
+        initialValue={threeByThreeColRowspan2}
+        onChange={({ value }) => {
+          console.log('ssss', value.toJSON());
+        }}
+      />
+    );
   })
   .add('Merged 4 x 3 rowspan3', () => {
     return <ExampleEditor initialValue={FourByThreeRowspan3} onChange={({ value }) => {}} />;

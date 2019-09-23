@@ -157,6 +157,10 @@ export class ExampleEditor extends React.Component<Props> {
   };
 
   render() {
+    const { value } = this.state;
+    const undos = value.data.get('undos');
+    const redos = value.data.get('redos');
+    console.log('undos', undos, redos);
     return (
       <>
         <button onMouseDown={this.insertTable}>Insert Table</button>
