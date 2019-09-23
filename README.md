@@ -27,10 +27,6 @@ WIP
 
 [Storybook](https://jolly-fermi-6a0c28.netlify.com/)
 
-### CodeSandbox
-
-[![Edit infallible-cdn-8fvhk](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/infallible-cdn-8fvhk?fontsize=14)
-
 ## Install
 
 - use npm
