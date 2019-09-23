@@ -19,7 +19,7 @@
 
 ## Screenshot
 
-WIP
+<img src="https://github.com/bokuweb/slate-editable-table/blob/master/example/screenshot.gif?raw=true" />
 
 ## Live Demo
 
