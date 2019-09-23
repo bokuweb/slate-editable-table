@@ -1,0 +1,26 @@
+name: Node CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: bokuweb/node-go-with-browser:latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: install
+      run: |
+        yarn install --frozen-lockfile
+        # yarn add slate@0.47.4 slate-react@0.22.4 slate-html-serializer@0.8.9
+        yarn add slate@0.45.1 slate-react@0.21.20
+    - name: Lint
+      run: yarn run lint
+    - name: Tsc
+      run: yarn run tsc    
+    - name: format
+      run:  yarn -s format:ci -l
+    - name: Test
+      run: yarn run test    
+      env:
+        CI: true
