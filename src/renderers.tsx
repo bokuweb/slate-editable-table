@@ -90,9 +90,11 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
     }, []);
 
     React.useEffect(() => {
-      ref.current = props.attributes && props.attributes.ref && props.attributes.ref.current;
+      if (!ref.current) {
+        ref.current = props.attributes && props.attributes.ref && props.attributes.ref.current;
+      }
       update();
-    }, [props.attributes.ref.current]);
+    }, [props.attributes]);
 
     React.useImperativeHandle(tableRef, () => ({
       update: () => {
@@ -105,7 +107,12 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
     }, []);
 
     return (
-      <table style={{ ...props.style, ...tableStyle, maxWidth }} {...props.attributes} onDragStart={onDragStart}>
+      <table
+        ref={ref}
+        style={{ ...props.style, ...tableStyle, maxWidth }}
+        {...props.attributes}
+        onDragStart={onDragStart}
+      >
         {props.children}
       </table>
     );
