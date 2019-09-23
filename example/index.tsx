@@ -194,9 +194,6 @@ export class ExampleEditor extends React.Component<Props> {
           onChange={this.onChange}
           onSelect={this.onSelect}
           onPaste={this.onDropOrPaste}
-          // renderBlock={this.renderBlock}
-          renderNode={this.renderNode}
-          renderMark={this.renderMark}
         />
       </>
     );

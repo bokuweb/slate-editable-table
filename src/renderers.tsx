@@ -94,7 +94,7 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
         ref.current = props.attributes && props.attributes.ref && props.attributes.ref.current;
       }
       update();
-    }, [props.attributes]);
+    }, []);
 
     React.useImperativeHandle(tableRef, () => ({
       update: () => {
