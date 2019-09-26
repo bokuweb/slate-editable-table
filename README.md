@@ -1,6 +1,7 @@
 # slate-editable-table
 
 [![CircleCI](https://circleci.com/gh/bokuweb/slate-editable-table/tree/master.svg?style=svg)](https://circleci.com/gh/bokuweb/slate-editable-table/tree/master) [![Netlify Status](https://api.netlify.com/api/v1/badges/38cf0525-13bf-4e03-827b-5cd3d9d452a3/deploy-status)](https://app.netlify.com/sites/jolly-fermi-6a0c28/deploys)
+[![GitHub Actions Status](https://github.com/bokuweb/slate-editable-table/workflows/Continuous%20Integration/badge.svg)](https://github.com/bokuweb/slate-editable-table/actions)
 
 :pen: An editable table plugin for Slate.js
 
@@ -12,6 +13,7 @@
   * [Storybook](#storybook)
 * [Install](#install)
 * [Usage](#usage)
+* [Commands](#commands)
 * [Test](#test)
 * [Changelog](#changelog)
 * [License](#license)
@@ -43,8 +45,148 @@ yarn add slate-editable-table
 
 ## Usage
 
-Please see https://github.com/bokuweb/slate-editable-table/blob/master/example/index.tsx
+``` typescript
+import { Editor } from 'slate-react';
+import { ValueJSON, Value } from 'slate';
 
+import React from 'react';
+import { EditTable, EditTableCommands, hasTablePlugin } from '../src/';
+
+const tablePlugin = EditTable();
+
+const plugins = [tablePlugin];
+
+export type Props = {
+  initialValue: ValueJSON;
+  onChange: ({ value: Value }) => void;
+};
+
+export class ExampleEditor extends React.Component<Props> {
+  editor!: Editor & EditTableCommands;
+  state: {
+    value: Value;
+  };
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      value: Value.fromJSON(props.initialValue),
+    };
+  }
+
+  onChange = ({ value }) => {
+    this.setState({ value });
+    this.props.onChange({ value });
+  };
+
+  removeTable = () => {
+    this.editor.removeTable();
+  };
+
+  insertTable = () => {
+    this.editor.insertTable(3, 3, { columnWidth: 200, maxWidth: 500 });
+  };
+
+  insertLeft = () => {
+    this.editor.insertLeft();
+  };
+
+  insertRight = () => {
+    this.editor.insertRight();
+  };
+
+  insertAbove = () => {
+    this.editor.insertAbove();
+  };
+
+  insertBelow = () => {
+    this.editor.insertBelow();
+  };
+
+  removeColumn = () => {
+    this.editor.removeColumn();
+  };
+
+  removeRow = () => {
+    this.editor.removeRow();
+  };
+
+  mergeSelection = () => {
+    this.editor.mergeSelection();
+  };
+
+  splitCell = () => {
+    this.editor.splitCell();
+  };
+
+  enableResizing = () => {
+    this.editor.enableResizing();
+  };
+
+  disableResizing = () => {
+    this.editor.disableResizing();
+  };
+
+  render() {
+    return (
+      <>
+        <button onMouseDown={this.insertTable}>Insert Table</button>
+        <button onMouseDown={this.insertAbove}>Insert Above</button>
+        <button onMouseDown={this.insertBelow}>Insert Below</button>
+        <button onMouseDown={this.insertLeft}>Insert Left</button>
+        <button onMouseDown={this.insertRight}>Insert Right</button>
+        <button onMouseDown={this.mergeSelection}>merge selection</button>
+        <button onMouseDown={this.splitCell}>split cell</button>
+        <button onMouseDown={this.removeColumn}>Remove Column</button>
+        <button onMouseDown={this.removeRow}>Remove Row</button>
+        <button onMouseDown={this.removeTable}>Remove Table</button>
+        <button onMouseDown={this.disableResizing}>disable resizing</button>
+        <button onMouseDown={this.enableResizing}>enable resizing</button>
+        <Editor
+          ref={e => {
+            if (hasTablePlugin(e)) {
+              this.editor = e;
+            }
+          }}
+          plugins={plugins}
+          placeholder="Enter some text..."
+          value={this.state.value}
+          onChange={this.onChange}
+        />
+      </>
+    );
+  }
+}
+```
+
+Please see also https://github.com/bokuweb/slate-editable-table/blob/master/example/index.tsx
+
+## Commands
+
+
+| Command           | Description                                                       |
+|:------------------|:------------------------------------------------------------------|
+| `insertTable`     | create and insert new table                                       |
+| `removeTable`     | remove table                                                      |
+| `insertLeft`      | insert new column to left of current anchor cell                  |
+| `insertRight`     | insert new column to right of current anchor cell                 |
+| `insertAbove`     | insert new row to above of current anchor cell                    |
+| `insertBelow`     | insert new row to below of current anchor cell                    |
+| `removeColumn`    | remove selected column                                            |
+| `removeRow`       | remove selected row                                               |
+| `mergeSelection`  | merge current selection                                           |
+| `splitCell`       | split current cell                                                |
+| `enableResizing`  | enable cell resizing                                              |
+| `enableResizing`  | disable cell resizing                                             |
+
+## Query
+
+| Query                    | Description                                                       |
+|:-------------------------|:------------------------------------------------------------------|
+| `isSelectionInTable`     | If selection is in current table, return true                     |
+| `canSelectedCellsMerge`  | If selection is able to merge, return true                        |
+| `findCurrentTable`       | find current table block                                          |
+      
 
 ## Test
 
