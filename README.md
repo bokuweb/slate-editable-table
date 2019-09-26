@@ -50,7 +50,7 @@ import { Editor } from 'slate-react';
 import { ValueJSON, Value } from 'slate';
 
 import React from 'react';
-import { EditTable, EditTableCommands, hasTablePlugin } from '../src/';
+import { EditTable, EditTableCommands, hasTablePlugin } from 'slate-editable-table';
 
 const tablePlugin = EditTable();
 
