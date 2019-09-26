@@ -79,55 +79,20 @@ export class ExampleEditor extends React.Component<Props> {
     this.props.onChange({ value });
   };
 
-  removeTable = () => {
-    this.editor.removeTable();
-  };
+  removeTable = () => this.editor.removeTable();
+  insertTable = () => this.editor.insertTable(3, 3, { columnWidth: 200, maxWidth: 500 });
+  insertLeft = () => this.editor.insertLeft();
+  insertRight = () => this.editor.insertRight();
+  insertAbove = () => this.editor.insertAbove();
+  insertBelow = () => this.editor.insertBelow();
+  removeColumn = () => this.editor.removeColumn();
+  removeRow = () => this.editor.removeRow();
+  mergeSelection = () => this.editor.mergeSelection();
+  splitCell = () => this.editor.splitCell();
+  enableResizing = () => this.editor.enableResizing();
+  disableResizing = () => this.editor.disableResizing();
 
-  insertTable = () => {
-    this.editor.insertTable(3, 3, { columnWidth: 200, maxWidth: 500 });
-  };
-
-  insertLeft = () => {
-    this.editor.insertLeft();
-  };
-
-  insertRight = () => {
-    this.editor.insertRight();
-  };
-
-  insertAbove = () => {
-    this.editor.insertAbove();
-  };
-
-  insertBelow = () => {
-    this.editor.insertBelow();
-  };
-
-  removeColumn = () => {
-    this.editor.removeColumn();
-  };
-
-  removeRow = () => {
-    this.editor.removeRow();
-  };
-
-  mergeSelection = () => {
-    this.editor.mergeSelection();
-  };
-
-  splitCell = () => {
-    this.editor.splitCell();
-  };
-
-  enableResizing = () => {
-    this.editor.enableResizing();
-  };
-
-  disableResizing = () => {
-    this.editor.disableResizing();
-  };
-
-  render() {
+render() {
     return (
       <>
         <button onMouseDown={this.insertTable}>Insert Table</button>
