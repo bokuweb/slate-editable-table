@@ -1,6 +1,5 @@
 import { Editor } from 'slate-react';
-import { Editor as CoreEditor, ValueJSON, Value } from 'slate';
-import { RenderBlockProps } from 'slate-react';
+import { ValueJSON, Value } from 'slate';
 
 import React from 'react';
 import { EditTable, EditTableCommands, hasTablePlugin } from '../src/';
@@ -27,117 +26,57 @@ export class ExampleEditor extends React.Component<Props> {
     };
   }
 
-  renderNode = (props: RenderBlockProps, editor: CoreEditor, next: () => any): any => {
-    const { attributes, children, node } = props;
-    switch (node.type) {
-      case 'paragraph':
-        return (
-          <div {...attributes} style={{ textAlign: node.data.get('align') }}>
-            {children}
-          </div>
-        );
-      default:
-        next();
-    }
-  };
-
-  renderBlock = (props: RenderBlockProps, editor: CoreEditor, next: () => any): any => {
-    const { attributes, children, node } = props;
-    switch (node.type) {
-      case 'paragraph':
-        return (
-          <div {...attributes} style={{ textAlign: node.data.get('align') }}>
-            {children}
-          </div>
-        );
-      default:
-        next();
-    }
-  };
-
-  renderMark = (props, editor, next) => {
-    return next();
-  };
-
-  onBackspace = (event, editor, next) => {
-    next();
-  };
-
-  onDelete = (event, editor, next) => {
-    next();
-  };
-
-  onDropOrPaste = (event, editor, next) => {
-    next();
-  };
-
-  onDrop = (event, editor, next) => {
-    next();
-  };
-
   onChange = ({ value }) => {
     this.setState({ value });
     this.props.onChange({ value });
   };
 
-  onKeyDown = (event, editor, next) => {
-    next();
-  };
-
-  onSelect = (event, editor, next) => {
-    next();
-  };
-
-  onBlur = (event, editor, next) => {
-    next();
-  };
-
   removeTable = () => {
-    this.onChange(this.editor.removeTable());
+    this.editor.removeTable();
   };
 
   insertTable = () => {
-    this.onChange(this.editor.insertTable(3, 3, { columnWidth: 200, maxWidth: 500 }));
+    this.editor.insertTable(3, 3, { columnWidth: 200, maxWidth: 500 });
   };
 
   insertLeft = () => {
-    this.onChange(this.editor.insertLeft());
+    this.editor.insertLeft();
   };
 
   insertRight = () => {
-    this.onChange(this.editor.insertRight());
+    this.editor.insertRight();
   };
 
   insertAbove = () => {
-    this.onChange(this.editor.insertAbove());
+    this.editor.insertAbove();
   };
 
   insertBelow = () => {
-    this.onChange(this.editor.insertBelow());
+    this.editor.insertBelow();
   };
 
   removeColumn = () => {
-    this.onChange(this.editor.removeColumn());
+    this.editor.removeColumn();
   };
 
   removeRow = () => {
-    this.onChange(this.editor.removeRow());
+    this.editor.removeRow();
   };
 
   mergeRight = () => {
-    this.onChange(this.editor.mergeRight());
+    this.editor.mergeRight();
   };
 
   mergeBelow = () => {
-    this.onChange(this.editor.mergeBelow());
+    this.editor.mergeBelow();
   };
 
   mergeSelection = () => {
-    this.onChange(this.editor.mergeSelection());
+    this.editor.mergeSelection();
   };
 
   splitCell = () => {
-    this.onChange(this.editor.splitCell());
+    this.editor.splitCell();
   };
 
   enableResizing = () => {
@@ -157,10 +96,6 @@ export class ExampleEditor extends React.Component<Props> {
   };
 
   render() {
-    const { value } = this.state;
-    const undos = value.data.get('undos');
-    const redos = value.data.get('redos');
-    console.log('undos', undos, redos);
     return (
       <>
         <button onMouseDown={this.insertTable}>Insert Table</button>
@@ -188,12 +123,7 @@ export class ExampleEditor extends React.Component<Props> {
           plugins={plugins}
           placeholder="Enter some text..."
           value={this.state.value}
-          onKeyDown={this.onKeyDown}
-          onDrop={this.onDrop}
-          onBlur={this.onBlur}
           onChange={this.onChange}
-          onSelect={this.onSelect}
-          onPaste={this.onDropOrPaste}
         />
       </>
     );
