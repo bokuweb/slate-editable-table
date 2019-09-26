@@ -159,6 +159,12 @@ Please see also https://github.com/bokuweb/slate-editable-table/blob/master/exam
 npm t
 ```
 
+## TODO
+
+- [ ] support mobile
+- [ ] vertical resizing
+- [ ] custom renderer
+
 ## Contribute
 
 If you have a feature request, please add it as an issue or make a pull request.
