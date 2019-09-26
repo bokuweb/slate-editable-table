@@ -10,13 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
-        with:
-          node-version: 12
+      with:
+        node-version: 12
     - name: install
       run: |
         yarn install --frozen-lockfile
-        # yarn add slate@0.47.4 slate-react@0.22.4 slate-html-serializer@0.8.9
-        yarn add slate@0.45.1 slate-react@0.21.20
+        yarn add slate@0.47.4 slate-react@0.22.4 slate-html-serializer@0.8.9
     - name: Lint
       run: yarn run lint
     - name: Tsc

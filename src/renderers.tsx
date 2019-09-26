@@ -14,7 +14,6 @@ export type Props = {
 
 const tableStyle = {
   borderSpacing: 0,
-  borderRight: `solid 1px #000`,
   Layout: 'fixed' as const,
   wordBreak: 'break-word' as const,
 };
@@ -239,7 +238,6 @@ const Cell = React.memo((props: CellProps) => {
       style={{
         ...props.opts.cellStyle,
         width,
-        borderBottom: `solid 1px #000`,
         verticalAlign: 'baseline',
         backgroundColor: props.node.data.get('selectionColor'),
       }}
