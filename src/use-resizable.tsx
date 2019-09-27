@@ -91,6 +91,7 @@ export const useResizableTable = (props: ResizableProps) => {
             const div = createDiv(table.offsetHeight, boundary - range.start);
             el.appendChild(div);
             let pageX = 0;
+            let resizedValues: ResizeValue = {};
             let rows: Row[] = [];
 
             const onMouseDown = (e: Event) => {
@@ -109,14 +110,14 @@ export const useResizableTable = (props: ResizableProps) => {
             const onMouseMove = (e: MouseEvent) => {
               if (!isResizing) return;
               let diffX = e.pageX - pageX;
-              const resizedValues = updateCellWidths(rows, boundary, diffX);
+              resizedValues = updateCellWidths(rows, boundary, diffX, resizedValues);
               props.onResize && props.onResize(e, resizedValues);
             };
 
             const onMouseUp = (e: MouseEvent) => {
               isResizing = false;
-              var diffX = e.pageX - pageX;
-              const resizedValues = updateCellWidths(rows, boundary, diffX);
+              const diffX = e.pageX - pageX;
+              resizedValues = updateCellWidths(rows, boundary, diffX, resizedValues);
               props.onResizeStop && props.onResizeStop(e, resizedValues);
               pageX = 0;
               removeHandles(table, e.relatedTarget as HTMLElement);
@@ -174,8 +175,8 @@ export const useResizableTable = (props: ResizableProps) => {
   return { ref, update };
 };
 
-function updateCellWidths(rows: Row[], boundary: number, diffX: number): ResizeValue {
-  return (rows || []).reduce(
+function updateCellWidths(rows: Row[], boundary: number, diffX: number, prev: ResizeValue): ResizeValue {
+  const { value } = (rows || []).reduce(
     (acc, row) => {
       let hasCurrent = false;
       let hasNext = false;
@@ -184,7 +185,7 @@ function updateCellWidths(rows: Row[], boundary: number, diffX: number): ResizeV
 
         // If col merged and move inner slider, keep width.
         if (cell.colspan >= 2 && boundary < cell.x + cell.width && boundary > cell.x) {
-          acc[cell.ref.dataset.key] = cell.width;
+          acc.value[cell.ref.dataset.key] = cell.width;
           cell.ref.style.width = `${cell.width}px`;
           return acc;
         }
@@ -192,25 +193,35 @@ function updateCellWidths(rows: Row[], boundary: number, diffX: number): ResizeV
         if (cell.x < boundary && cell.x + cell.width >= boundary) {
           if (!hasCurrent) {
             hasCurrent = true;
-            acc[cell.ref.dataset.key] = cell.width + diffX;
-            cell.ref.style.width = `${cell.width + diffX}px`;
+            // FIXME: pass minimumWidth option
+            cell.ref.style.width = `${Math.max(cell.width + diffX, 32)}px`;
+            acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
+            acc.saturated = cell.width + diffX <= 32;
+            acc.adjust = prev[cell.ref.dataset.key] !== 32 ? 32 - cell.ref.offsetWidth : 0;
             return acc;
           }
         }
+
         if (hasCurrent && !hasNext) {
           hasNext = true;
-          acc[cell.ref.dataset.key] = cell.width - diffX;
-          cell.ref.style.width = `${cell.width - diffX}px`;
+          if (!acc.saturated) {
+            cell.ref.style.width = `${Math.max(cell.width - diffX, 32)}px`;
+            acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
+          } else {
+            cell.ref.style.width = `${prev[cell.ref.dataset.key] - acc.adjust}px`;
+            acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
+          }
           return acc;
         }
-        acc[cell.ref.dataset.key] = cell.width;
-        cell.ref.style.width = `${cell.width}px`;
+        cell.ref.style.width = `${cell.ref.offsetWidth}px`;
+        acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
         return acc;
       });
       return acc;
     },
-    {} as ResizeValue,
+    { value: {}, saturated: false, adjust: 0 } as { value: ResizeValue; saturated: boolean; adjust: number },
   );
+  return value;
 }
 
 function createRowData(table: HTMLTableElement) {
@@ -333,7 +344,7 @@ function getRangeXOf(cell: HTMLElement): { start: number; end: number } | null {
 }
 
 function createDiv(height: number | string, offset: number) {
-  var div = document.createElement('div');
+  const div = document.createElement('div');
   div.style.top = '0';
   div.style.left = offset - 10 + 'px';
   div.style.width = '10px';
