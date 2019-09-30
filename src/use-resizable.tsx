@@ -29,6 +29,8 @@ export type ResizeValue = {
 
 const handlerSelector = '[data-resize-handle]';
 
+const MIN_CELL_WIDTH = 32;
+
 export const useResizableTable = (props: ResizableProps) => {
   const ref = React.useRef<HTMLTableElement | null>(null);
   const createSize = () => {
@@ -110,14 +112,14 @@ export const useResizableTable = (props: ResizableProps) => {
             const onMouseMove = (e: MouseEvent) => {
               if (!isResizing) return;
               let diffX = e.pageX - pageX;
-              resizedValues = updateCellWidths(rows, boundary, diffX, resizedValues);
+              resizedValues = updateCellWidths(rows, boundary, diffX);
               props.onResize && props.onResize(e, resizedValues);
             };
 
             const onMouseUp = (e: MouseEvent) => {
               isResizing = false;
               const diffX = e.pageX - pageX;
-              resizedValues = updateCellWidths(rows, boundary, diffX, resizedValues);
+              resizedValues = updateCellWidths(rows, boundary, diffX);
               props.onResizeStop && props.onResizeStop(e, resizedValues);
               pageX = 0;
               removeHandles(table, e.relatedTarget as HTMLElement);
@@ -175,14 +177,40 @@ export const useResizableTable = (props: ResizableProps) => {
   return { ref, update };
 };
 
-function updateCellWidths(rows: Row[], boundary: number, diffX: number, prev: ResizeValue): ResizeValue {
+function updateCellWidths(rows: Row[], boundary: number, diffX: number): ResizeValue {
+  // Find target cells
+  let targets: { rowIndex: number; colIndex: number; colspan: number; width: number }[] = [];
+  rows.forEach((row, rowIndex) => {
+    row.children.forEach((cell, colIndex) => {
+      if (!cell.ref.dataset || !cell.ref.dataset.key) return;
+      if (cell.x < boundary && cell.x + cell.width >= boundary) {
+        targets.push({ rowIndex, colIndex, colspan: cell.colspan, width: cell.width });
+      }
+    });
+  });
+
+  let adjust = 0;
+  // saturated or not?
+  const saturated = targets.reduce((acc, target) => {
+    const p = rows[target.rowIndex].children[target.colIndex];
+    if (!p) return acc;
+    if (acc) return acc;
+    if (p.ref.offsetWidth !== MIN_CELL_WIDTH && p.width + diffX < MIN_CELL_WIDTH) {
+      adjust = MIN_CELL_WIDTH - (p.width + diffX);
+      return false;
+    }
+    adjust = 0;
+    return p.width + diffX <= MIN_CELL_WIDTH;
+  }, false);
+
   const { value } = (rows || []).reduce(
-    (acc, row) => {
+    (acc, row, rowIndex) => {
       let hasCurrent = false;
       let hasNext = false;
       row.children.forEach(cell => {
         if (!cell.ref.dataset || !cell.ref.dataset.key) return acc;
-
+        // If saturated disable resizing
+        if (saturated) return;
         // If col merged and move inner slider, keep width.
         if (cell.colspan >= 2 && boundary < cell.x + cell.width && boundary > cell.x) {
           acc.value[cell.ref.dataset.key] = cell.width;
@@ -193,33 +221,23 @@ function updateCellWidths(rows: Row[], boundary: number, diffX: number, prev: Re
         if (cell.x < boundary && cell.x + cell.width >= boundary) {
           if (!hasCurrent) {
             hasCurrent = true;
-            // FIXME: pass minimumWidth option
-            cell.ref.style.width = `${Math.max(cell.width + diffX, 32)}px`;
+            cell.ref.style.width = `${Math.max(cell.width + diffX, MIN_CELL_WIDTH)}px`;
             acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
-            acc.saturated = cell.width + diffX <= 32;
-            acc.adjust = prev[cell.ref.dataset.key] !== 32 ? 32 - cell.ref.offsetWidth : 0;
             return acc;
           }
         }
-
         if (hasCurrent && !hasNext) {
           hasNext = true;
-          if (!acc.saturated) {
-            cell.ref.style.width = `${Math.max(cell.width - diffX, 32)}px`;
-            acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
-          } else {
-            cell.ref.style.width = `${prev[cell.ref.dataset.key] - acc.adjust}px`;
-            acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
-          }
+          cell.ref.style.width = `${Math.max(cell.width - diffX - adjust, MIN_CELL_WIDTH)}px`;
+          acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
           return acc;
         }
-        cell.ref.style.width = `${cell.ref.offsetWidth}px`;
         acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
         return acc;
       });
       return acc;
     },
-    { value: {}, saturated: false, adjust: 0 } as { value: ResizeValue; saturated: boolean; adjust: number },
+    { value: {} } as { value: ResizeValue },
   );
   return value;
 }
