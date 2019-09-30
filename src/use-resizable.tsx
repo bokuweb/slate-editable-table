@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 export type ResizableProps = {
+  minimumCellWidth: number;
   maxWidth?: string;
   disableResizing?: boolean;
   onInit?: (v: ResizeValue) => void;
@@ -28,8 +29,6 @@ export type ResizeValue = {
 };
 
 const handlerSelector = '[data-resize-handle]';
-
-const MIN_CELL_WIDTH = 32;
 
 export const useResizableTable = (props: ResizableProps) => {
   const ref = React.useRef<HTMLTableElement | null>(null);
@@ -112,14 +111,14 @@ export const useResizableTable = (props: ResizableProps) => {
             const onMouseMove = (e: MouseEvent) => {
               if (!isResizing) return;
               let diffX = e.pageX - pageX;
-              resizedValues = updateCellWidths(rows, boundary, diffX);
+              resizedValues = updateCellWidths(rows, boundary, diffX, props.minimumCellWidth);
               props.onResize && props.onResize(e, resizedValues);
             };
 
             const onMouseUp = (e: MouseEvent) => {
               isResizing = false;
               const diffX = e.pageX - pageX;
-              resizedValues = updateCellWidths(rows, boundary, diffX);
+              resizedValues = updateCellWidths(rows, boundary, diffX, props.minimumCellWidth);
               props.onResizeStop && props.onResizeStop(e, resizedValues);
               pageX = 0;
               removeHandles(table, e.relatedTarget as HTMLElement);
@@ -177,7 +176,7 @@ export const useResizableTable = (props: ResizableProps) => {
   return { ref, update };
 };
 
-function updateCellWidths(rows: Row[], boundary: number, diffX: number): ResizeValue {
+function updateCellWidths(rows: Row[], boundary: number, diffX: number, minimumWidth: number): ResizeValue {
   // Find target cells
   let targets: { rowIndex: number; colIndex: number; colspan: number; width: number }[] = [];
   rows.forEach((row, rowIndex) => {
@@ -195,12 +194,12 @@ function updateCellWidths(rows: Row[], boundary: number, diffX: number): ResizeV
     const p = rows[target.rowIndex].children[target.colIndex];
     if (!p) return acc;
     if (acc) return acc;
-    if (p.ref.offsetWidth !== MIN_CELL_WIDTH && p.width + diffX < MIN_CELL_WIDTH) {
-      adjust = MIN_CELL_WIDTH - (p.width + diffX);
+    if (p.ref.offsetWidth !== minimumWidth && p.width + diffX < minimumWidth) {
+      adjust = minimumWidth - (p.width + diffX);
       return false;
     }
     adjust = 0;
-    return p.width + diffX <= MIN_CELL_WIDTH;
+    return p.width + diffX <= minimumWidth;
   }, false);
 
   const { value } = (rows || []).reduce(
@@ -221,14 +220,14 @@ function updateCellWidths(rows: Row[], boundary: number, diffX: number): ResizeV
         if (cell.x < boundary && cell.x + cell.width >= boundary) {
           if (!hasCurrent) {
             hasCurrent = true;
-            cell.ref.style.width = `${Math.max(cell.width + diffX, MIN_CELL_WIDTH)}px`;
+            cell.ref.style.width = `${Math.max(cell.width + diffX, minimumWidth)}px`;
             acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
             return acc;
           }
         }
         if (hasCurrent && !hasNext) {
           hasNext = true;
-          cell.ref.style.width = `${Math.max(cell.width - diffX - adjust, MIN_CELL_WIDTH)}px`;
+          cell.ref.style.width = `${Math.max(cell.width - diffX - adjust, minimumWidth)}px`;
           acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
           return acc;
         }
