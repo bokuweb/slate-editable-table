@@ -2,7 +2,6 @@ import { Editor, Block } from 'slate';
 import * as React from 'react';
 
 import * as table from './layout';
-import { removeSelection } from './selection';
 import { canMerge } from './mutations/merge';
 import { TableOption } from './create-table';
 import { removeRow } from './mutations/remove-row';
@@ -228,18 +227,12 @@ export function EditTable(options: Option = defaultOptions) {
     }
   }
 
-  function onBlur(event: any, editor: any, next: () => void) {
-    removeSelection(editor);
-    next();
-  }
-
   const renderer = createRenderers(opts, ref, store);
   const { schema } = createSchema(opts);
 
   return {
     schema,
     onKeyDown,
-    onBlur,
     // For old version
     renderNode: renderer,
     // For slate-react@0.22.0~

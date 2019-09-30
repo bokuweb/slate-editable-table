@@ -194,6 +194,7 @@ const Cell = React.memo((props: CellProps) => {
         window.addEventListener('click', onWindowClick);
       }}
       onMouseOver={e => {
+        e.stopPropagation();
         const anchorCellBlock = props.store.getAnchorCellBlock();
         if (anchorCellBlock === null) return;
         if (!(e.target instanceof HTMLElement)) return;
