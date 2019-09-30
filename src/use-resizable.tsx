@@ -29,6 +29,8 @@ export type ResizeValue = {
 
 const handlerSelector = '[data-resize-handle]';
 
+const MIN_CELL_WIDTH = 32;
+
 export const useResizableTable = (props: ResizableProps) => {
   const ref = React.useRef<HTMLTableElement | null>(null);
   const createSize = () => {
@@ -91,6 +93,7 @@ export const useResizableTable = (props: ResizableProps) => {
             const div = createDiv(table.offsetHeight, boundary - range.start);
             el.appendChild(div);
             let pageX = 0;
+            let resizedValues: ResizeValue = {};
             let rows: Row[] = [];
 
             const onMouseDown = (e: Event) => {
@@ -109,14 +112,14 @@ export const useResizableTable = (props: ResizableProps) => {
             const onMouseMove = (e: MouseEvent) => {
               if (!isResizing) return;
               let diffX = e.pageX - pageX;
-              const resizedValues = updateCellWidths(rows, boundary, diffX);
+              resizedValues = updateCellWidths(rows, boundary, diffX);
               props.onResize && props.onResize(e, resizedValues);
             };
 
             const onMouseUp = (e: MouseEvent) => {
               isResizing = false;
-              var diffX = e.pageX - pageX;
-              const resizedValues = updateCellWidths(rows, boundary, diffX);
+              const diffX = e.pageX - pageX;
+              resizedValues = updateCellWidths(rows, boundary, diffX);
               props.onResizeStop && props.onResizeStop(e, resizedValues);
               pageX = 0;
               removeHandles(table, e.relatedTarget as HTMLElement);
@@ -175,16 +178,42 @@ export const useResizableTable = (props: ResizableProps) => {
 };
 
 function updateCellWidths(rows: Row[], boundary: number, diffX: number): ResizeValue {
-  return (rows || []).reduce(
-    (acc, row) => {
+  // Find target cells
+  let targets: { rowIndex: number; colIndex: number; colspan: number; width: number }[] = [];
+  rows.forEach((row, rowIndex) => {
+    row.children.forEach((cell, colIndex) => {
+      if (!cell.ref.dataset || !cell.ref.dataset.key) return;
+      if (cell.x < boundary && cell.x + cell.width >= boundary) {
+        targets.push({ rowIndex, colIndex, colspan: cell.colspan, width: cell.width });
+      }
+    });
+  });
+
+  let adjust = 0;
+  // saturated or not?
+  const saturated = targets.reduce((acc, target) => {
+    const p = rows[target.rowIndex].children[target.colIndex];
+    if (!p) return acc;
+    if (acc) return acc;
+    if (p.ref.offsetWidth !== MIN_CELL_WIDTH && p.width + diffX < MIN_CELL_WIDTH) {
+      adjust = MIN_CELL_WIDTH - (p.width + diffX);
+      return false;
+    }
+    adjust = 0;
+    return p.width + diffX <= MIN_CELL_WIDTH;
+  }, false);
+
+  const { value } = (rows || []).reduce(
+    (acc, row, rowIndex) => {
       let hasCurrent = false;
       let hasNext = false;
       row.children.forEach(cell => {
         if (!cell.ref.dataset || !cell.ref.dataset.key) return acc;
-
+        // If saturated disable resizing
+        if (saturated) return;
         // If col merged and move inner slider, keep width.
         if (cell.colspan >= 2 && boundary < cell.x + cell.width && boundary > cell.x) {
-          acc[cell.ref.dataset.key] = cell.width;
+          acc.value[cell.ref.dataset.key] = cell.width;
           cell.ref.style.width = `${cell.width}px`;
           return acc;
         }
@@ -192,25 +221,25 @@ function updateCellWidths(rows: Row[], boundary: number, diffX: number): ResizeV
         if (cell.x < boundary && cell.x + cell.width >= boundary) {
           if (!hasCurrent) {
             hasCurrent = true;
-            acc[cell.ref.dataset.key] = cell.width + diffX;
-            cell.ref.style.width = `${cell.width + diffX}px`;
+            cell.ref.style.width = `${Math.max(cell.width + diffX, MIN_CELL_WIDTH)}px`;
+            acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
             return acc;
           }
         }
         if (hasCurrent && !hasNext) {
           hasNext = true;
-          acc[cell.ref.dataset.key] = cell.width - diffX;
-          cell.ref.style.width = `${cell.width - diffX}px`;
+          cell.ref.style.width = `${Math.max(cell.width - diffX - adjust, MIN_CELL_WIDTH)}px`;
+          acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
           return acc;
         }
-        acc[cell.ref.dataset.key] = cell.width;
-        cell.ref.style.width = `${cell.width}px`;
+        acc.value[cell.ref.dataset.key] = cell.ref.offsetWidth;
         return acc;
       });
       return acc;
     },
-    {} as ResizeValue,
+    { value: {} } as { value: ResizeValue },
   );
+  return value;
 }
 
 function createRowData(table: HTMLTableElement) {
@@ -333,7 +362,7 @@ function getRangeXOf(cell: HTMLElement): { start: number; end: number } | null {
 }
 
 function createDiv(height: number | string, offset: number) {
-  var div = document.createElement('div');
+  const div = document.createElement('div');
   div.style.top = '0';
   div.style.left = offset - 10 + 'px';
   div.style.width = '10px';

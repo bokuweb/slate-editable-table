@@ -238,6 +238,7 @@ const Cell = React.memo((props: CellProps) => {
       style={{
         ...props.opts.cellStyle,
         width,
+        minWidth: '32px',
         verticalAlign: 'baseline',
         backgroundColor: props.node.data.get('selectionColor'),
       }}
