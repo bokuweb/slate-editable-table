@@ -30,6 +30,7 @@ export type ResizeValue = {
 
 const handlerSelector = '[data-resize-handle]';
 
+
 export const useResizableTable = (props: ResizableProps) => {
   const ref = React.useRef<HTMLTableElement | null>(null);
   const createSize = () => {
