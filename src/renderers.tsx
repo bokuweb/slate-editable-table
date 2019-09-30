@@ -21,6 +21,7 @@ const tableStyle = {
 type TableProps = {
   children: React.ReactNode;
   maxWidth?: string;
+  minimumCellWidth: number;
   store: ComponentStore;
   editor: Editor;
   onInit: (editor: Editor, data: ResizeValue) => void;
@@ -74,6 +75,7 @@ export const InnerTable = React.forwardRef<TableHandler, TableProps & { attribut
     const { ref, update } = useResizableTable({
       disableResizing,
       maxWidth: props.maxWidth,
+      minimumCellWidth: props.minimumCellWidth,
       onResizeStart,
       // onResize,
       onResizeStop,
@@ -238,7 +240,7 @@ const Cell = React.memo((props: CellProps) => {
       style={{
         ...props.opts.cellStyle,
         width,
-        minWidth: '32px',
+        minWidth: `${props.opts.minimumCellWidth}px`,
         verticalAlign: 'baseline',
         backgroundColor: props.node.data.get('selectionColor'),
       }}
@@ -266,6 +268,7 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Compone
             onUpdate={updateWidth}
             onResizeStop={updateWidth}
             maxWidth={maxWidth}
+            minimumCellWidth={opts.minimumCellWidth}
             style={opts.tableStyle}
             attributes={props.attributes}
           >
