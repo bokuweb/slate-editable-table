@@ -285,14 +285,7 @@ export function createRenderers(opts: Required<Option>, ref: any, store: Compone
       case opts.typeCell:
         const style = props.node.data.get('style') || {};
         return (
-          <Cell
-            editor={editor}
-            store={store}
-            node={props.node}
-            attributes={props.attributes}
-            opts={opts}
-            style={...style}
-          >
+          <Cell editor={editor} store={store} node={props.node} attributes={props.attributes} opts={opts} style={style}>
             {props.children}
           </Cell>
         );
