@@ -156,6 +156,7 @@ type CellProps = {
 
 const Cell = React.memo((props: CellProps) => {
   const width = typeof props.node.data.get('width') === 'undefined' ? 'auto' : props.node.data.get('width') + 'px';
+  const style: any = props.node.data.get('style') || {};
   const onMouseUp = React.useCallback((e: Event) => {
     props.store.clearCellSelecting(props.editor);
     window.removeEventListener('mouseup', onMouseUp);
@@ -244,6 +245,7 @@ const Cell = React.memo((props: CellProps) => {
         minWidth: `${props.opts.minimumCellWidth}px`,
         verticalAlign: 'baseline',
         backgroundColor: props.node.data.get('selectionColor'),
+        ...style,
       }}
     >
       {props.children}
