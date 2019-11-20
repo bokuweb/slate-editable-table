@@ -180,6 +180,18 @@ const Cell = React.memo((props: CellProps) => {
     };
   }, [onMouseUp, onWindowClick]);
 
+  const tdStyles = {
+    ...props.opts.cellStyle,
+    width,
+    minWidth: `${props.opts.minimumCellWidth}px`,
+    verticalAlign: 'baseline',
+    ...style,
+  };
+
+  if (props.node.data.get('selectionColor')) {
+    tdStyles.backgroundColor = props.node.data.get('selectionColor');
+  }
+
   return (
     <td
       {...props.attributes}
@@ -239,14 +251,7 @@ const Cell = React.memo((props: CellProps) => {
       }}
       colSpan={props.node.data.get('colspan')}
       rowSpan={props.node.data.get('rowspan')}
-      style={{
-        ...props.opts.cellStyle,
-        width,
-        minWidth: `${props.opts.minimumCellWidth}px`,
-        verticalAlign: 'baseline',
-        backgroundColor: props.node.data.get('selectionColor'),
-        ...style,
-      }}
+      style={tdStyles}
     >
       {props.children}
     </td>
