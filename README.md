@@ -1,4 +1,4 @@
-## :rotating_light: :rotating_light: :rotating_light: This Plugin Support `slate`: <= 0.4. This is because there is a huge change in slatejs 0.5 and this plugin can not follow it. :rotating_light: :rotating_light: :rotating_light:
+## :rotating_light: :rotating_light: :rotating_light: This Plugin Support `slate`: <= 0.4x. This is because there is a huge change in slatejs 0.50 and this plugin can not follow it. :rotating_light: :rotating_light: :rotating_light:
 
 
 # slate-editable-table
